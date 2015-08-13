@@ -1,0 +1,84 @@
+<% provide(:title, 'Products') %>
+
+<br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Products from <%= ENV["LABACRONYM"]%></h1>
+  </div>
+
+  <div class="panel-body">
+    Multiple tables, one for each product category
+    <!-- Table -->
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Category1</th>
+        <% if user_signed_in? && current_user.admin? %>
+            <th colspan="3"></th>
+        <% else %>
+            <th colspan="1"></th>
+        <% end %>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @products.each do |product| %>
+          <tr>
+            <td>Citation</td>
+            <td><%= link_to 'Show', product %></td>
+            <% if user_signed_in? && current_user.admin? %>
+                <td><%= link_to 'Edit', edit_product_path(product) %></td>
+                <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+    <% if user_signed_in? %>
+        <% if current_user.admin? %>
+            <%= link_to 'New Product', new_product_path %>
+        <% end %>
+    <% end %>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Url</th>
+      <th>Ispublic</th>
+      <th>Islabproduct</th>
+      <th>Miscattributes</th>
+      <th>Product category</th>
+      <th>Main research area</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.title %></td>
+        <td><%= product.description %></td>
+        <td><%= product.year %></td>
+        <td><%= product.month %></td>
+        <td><%= product.url %></td>
+        <td><%= product.ispublic %></td>
+        <td><%= product.islabproduct %></td>
+        <td><%= product.miscattributes %></td>
+        <td><%= product.product_category %></td>
+        <td><%= product.main_research_area %></td>
+        <td><%= link_to 'Show', product %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

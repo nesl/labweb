@@ -1,0 +1,62 @@
+<% provide(:title, 'People') %>
+<br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">People @ <%= ENV["LABACRONYM"]%></h1>
+  </div>
+
+  <div class="panel-body">
+
+  <% eval(ENV["PEOPLE_DISPLAY_ORDER"]).each do |person_category| %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= person_category %></th>
+        </tr>
+      </thead>
+    </table>
+  <% end %>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Position</th>
+      <% if user_signed_in? && current_user.admin? %>
+          <th colspan="1"></th>
+      <% else %>
+          <th colspan="1"></th>
+      <% end %>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @people.each do |person| %>
+        <tr>
+          <td><%= person.lastname %></td>
+          <td><%= person.firstname %></td>
+          <td><%= person.person_category.name %></td>
+          <td><%= link_to '[ Details', person %>
+          <% if user_signed_in? && current_user.admin? %>
+              <%= link_to ', Edit', edit_person_path(person) %>
+              <%= link_to ', Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+          ]
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="panel-footer">
+    <% if user_signed_in? %>
+        <% if current_user.admin? %>
+            <%= link_to 'New Person', new_person_path %>
+        <% end %>
+    <% end %>
+  </div>
+</div>
+

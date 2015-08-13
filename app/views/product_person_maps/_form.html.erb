@@ -1,0 +1,29 @@
+<%= form_for(@product_person_map) do |f| %>
+  <% if @product_person_map.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product_person_map.errors.count, "error") %> prohibited this product_person_map from being saved:</h2>
+
+      <ul>
+      <% @product_person_map.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :product_id %><br>
+    <%= f.text_field :product_id %>
+  </div>
+  <div class="field">
+    <%= f.label :person_id %><br>
+    <%= f.text_field :person_id %>
+  </div>
+  <div class="field">
+    <%= f.label :rank %><br>
+    <%= f.number_field :rank %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

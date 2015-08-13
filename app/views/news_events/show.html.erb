@@ -1,0 +1,18 @@
+
+<p>
+  <strong>Title:</strong>
+  <%= @news_event.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @news_event.description %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @news_event.date %>
+</p>
+
+<%= link_to 'Edit', edit_news_event_path(@news_event) %> |
+<%= link_to 'Back', news_events_path %>

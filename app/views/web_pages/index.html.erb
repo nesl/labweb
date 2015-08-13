@@ -1,0 +1,33 @@
+<h1>Listing web_pages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pagetitle</th>
+      <th>Bartitle</th>
+      <th>Body</th>
+      <th>Ispublic</th>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @web_pages.each do |web_page| %>
+      <tr>
+        <td><%= web_page.pagetitle %></td>
+        <td><%= web_page.bartitle %></td>
+        <td><%= web_page.body %></td>
+        <td><%= web_page.ispublic %></td>
+        <td><%= web_page.url %></td>
+        <td><%= link_to 'Show', web_page %></td>
+        <td><%= link_to 'Edit', edit_web_page_path(web_page) %></td>
+        <td><%= link_to 'Destroy', web_page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Web page', new_web_page_path %>

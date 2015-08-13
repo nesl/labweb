@@ -1,0 +1,33 @@
+
+<p>
+  <strong>Department:</strong>
+  <%= @course.department %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @course.number %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @course.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @course.description %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @course.url %>
+</p>
+
+<p>
+  <strong>Crosslistings:</strong>
+  <%= @course.crosslistings %>
+</p>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>

@@ -1,0 +1,73 @@
+# config/application.local.yml
+
+defaults: &defaults
+  LABNAME: "Networked and Embedded Systems Laboratory"
+  LABACRONYM: "NESL"
+  LABURL: "http://nesl.ee.ucla.edu"
+  LABMAILADDRESS: "UCLA<br>EE Department<br>420 Westwood Plaza<br>MC# 951594<br>Los Angeles, CA 90095-1594<br>ATTN: 56-125KK, EEIV<br>C/O: Fe Asuncion"
+  LABFAX: "310-825-7928"
+  LABLOCATION: "1762 Boelter Hall<br>UCLA Main Campus"
+  UNIVNAME: "University of California, Los Angeles"
+  UNIVACRONYM: "UCLA"
+  UNIVURL: "http://www.ucla.edu"
+  BOOTSTRAP_VERSION: "3.3.5"
+  META_DESCRIPTION: "This is website for NESL @ UCLA generated using LabWeb app"
+  META_AUTHOR: "Mani Srivastava"
+  META_KEYWORDS: "CS, EE, Embedded Systems, Cyber-Physical Systems, Mobile Computing, Wireless Networking, Ubiquitous Computing, Pervasive Computing"
+  MAINTAINER_LAST: "Srivastava"
+  MAINTAINER_FIRST: "Mani"
+  YEARONE: "1985"
+  PEOPLE_DISPLAY_ORDER: '[
+    "Faculty",
+    "Staff",
+    "Administrative Staff",
+    "Technical Staff",
+    "Post Doc",
+    "PhD Student",
+    "MS Student",
+    "UG Student",
+    "Student",
+    "Visiting Faculty",
+    "Visiting Researcher",
+    "Visiting PhD Student",
+    "Visiting MS Student",
+    "Visiting UG Student",
+    "Visiting K12 Student",
+    "Visitor",
+    "PhD Intern",
+    "MS Intern",
+    "UG Intern",
+    "K12 Intern",
+    "Intern",
+    "Collaborator",
+    "Former Collaborator",
+    "Former Faculty",
+    "Former Administrative Staff",
+    "Former Technical Staff",
+    "Former Staff",
+    "Former Post Doc",
+    "Alum PhD Student",
+    "Alum MS Student",
+    "Alum UG Student",
+    "Alum",
+    "Former Visiting Faculty",
+    "Former Visiting Researcher",
+    "Former Visiting PhD Student",
+    "Former Visiting MS Student",
+    "Former Visiting UG Student",
+    "Former Visiting K12 Student",
+    "Former Visitor",
+    "Former PhD Intern",
+    "Former MS Intern",
+    "Former UG Intern",
+    "Former K12 Intern",
+    "Former Intern",
+    "Coauthor",
+    "Other"
+  ]'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults

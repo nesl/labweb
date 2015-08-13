@@ -1,0 +1,23 @@
+
+<p>
+  <strong>Year:</strong>
+  <%= @course_offering.year %>
+</p>
+
+<p>
+  <strong>Quarter:</strong>
+  <%= @course_offering.quarter %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @course_offering.url %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @course_offering.course %>
+</p>
+
+<%= link_to 'Edit', edit_course_offering_path(@course_offering) %> |
+<%= link_to 'Back', course_offerings_path %>

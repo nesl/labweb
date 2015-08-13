@@ -1,0 +1,23 @@
+<%# add navigation links to this file %>
+<ul class="nav navbar-nav ">
+    <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
+    <li class="<%= 'active' if current_page?(people_path) %>"><%= link_to "People", people_path %></li>
+    <li class="<%= 'active' if current_page?(projects_path) %>"><%= link_to "Projects", projects_path %></li>
+    <li class="<%= 'active' if current_page?(documents_path) %>"><%= link_to "Documents", documents_path %></li>
+    <li class="<%= 'active' if current_page?(products_path) %>"><%= link_to "Products", products_path %></li>
+    <li class="<%= 'active' if current_page?(courses_path) %>"><%= link_to "Courses", courses_path %></li>
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+          <li class="<%= 'active' if current_page?(users_path) %>"><%= link_to "Users", users_path %></li>
+      <% end %>
+    <% end %>
+</ul>
+<ul class="nav navbar-nav pull-right">
+    <% if user_signed_in? %>
+      <li class="<%= 'active' if current_page?(edit_user_registration_path) %>"><%= link_to "Account", edit_user_registration_path %></li>
+      <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+    <% else %>
+      <li><a href="<%= new_user_session_path %>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    <% end %>
+</ul>
+

@@ -6,6 +6,14 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+if File.exists?(File.expand_path('../application.local.yml', __FILE__))
+  config = YAML.load(File.read(File.expand_path('../application.local.yml', __FILE__)))
+  config.merge! config.fetch(Rails.env, {})
+  config.each do |key, value|
+    ENV[key] ||= value.to_s unless value.kind_of? Hash
+  end
+end
+
 module Labweb
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

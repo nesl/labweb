@@ -1,0 +1,29 @@
+<h1>Listing document_person_maps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Document</th>
+      <th>Person</th>
+      <th>Rank</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @document_person_maps.each do |document_person_map| %>
+      <tr>
+        <td><%= document_person_map.document %></td>
+        <td><%= document_person_map.person %></td>
+        <td><%= document_person_map.rank %></td>
+        <td><%= link_to 'Show', document_person_map %></td>
+        <td><%= link_to 'Edit', edit_document_person_map_path(document_person_map) %></td>
+        <td><%= link_to 'Destroy', document_person_map, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Document person map', new_document_person_map_path %>

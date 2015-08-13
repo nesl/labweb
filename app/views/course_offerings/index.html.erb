@@ -1,0 +1,49 @@
+<% provide(:title, 'Course Offerings') %>
+
+<br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Course Offerings from <%= ENV["LABACRONYM"]%></h1>
+  </div>
+
+  <div class="panel-body">
+    <!-- Table -->
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Quarter</th>
+        <th>Course</th>
+        <% if user_signed_in? && current_user.admin? %>
+            <th colspan="3"></th>
+        <% else %>
+            <th colspan="1"></th>
+        <% end %>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @course_offerings.each do |course_offering| %>
+          <tr>
+            <td><%= course_offering.year %> <%= course_offering.quarter %></td>
+            <td><%= course_offering.course.title %></td>
+            <td><%= link_to 'Show', course_offering %></td>
+            <% if user_signed_in? && current_user.admin? %>
+                <td><%= link_to 'Edit', edit_course_offering_path(course) %></td>
+                <td><%= link_to 'Destroy', course_offering, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="panel-footer">
+    <% if user_signed_in? %>
+        <% if current_user.admin? %>
+            <%= link_to 'New Course Offering', new_course_offering_path %>
+        <% end %>
+    <% end %>
+  </div>
+</div>

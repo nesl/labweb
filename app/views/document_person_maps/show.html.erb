@@ -1,0 +1,18 @@
+
+<p>
+  <strong>Document:</strong>
+  <%= @document_person_map.document %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @document_person_map.person %>
+</p>
+
+<p>
+  <strong>Rank:</strong>
+  <%= @document_person_map.rank %>
+</p>
+
+<%= link_to 'Edit', edit_document_person_map_path(@document_person_map) %> |
+<%= link_to 'Back', document_person_maps_path %>

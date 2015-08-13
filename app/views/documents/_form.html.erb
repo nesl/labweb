@@ -1,0 +1,145 @@
+<%= form_for(@document) do |f| %>
+  <% if @document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+      <ul>
+      <% @document.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tryear %><br>
+    <%= f.number_field :tryear %>
+  </div>
+  <div class="field">
+    <%= f.label :trmonth %><br>
+    <%= f.number_field :trmonth %>
+  </div>
+  <div class="field">
+    <%= f.label :trnumber %><br>
+    <%= f.number_field :trnumber %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :abstract %><br>
+    <%= f.text_area :abstract %>
+  </div>
+  <div class="field">
+    <%= f.label :filename %><br>
+    <%= f.text_field :filename %>
+  </div>
+  <div class="field">
+    <%= f.label :file %><br>
+    <%= f.text_field :file %>
+  </div>
+  <div class="field">
+    <%= f.label :urlpdfpaper %><br>
+    <%= f.text_field :urlpdfpaper %>
+  </div>
+  <div class="field">
+    <%= f.label :urlsrcpaper %><br>
+    <%= f.text_field :urlsrcpaper %>
+  </div>
+  <div class="field">
+    <%= f.label :urlpdfpresentation %><br>
+    <%= f.text_field :urlpdfpresentation %>
+  </div>
+  <div class="field">
+    <%= f.label :urlsrcpresentation %><br>
+    <%= f.text_field :urlsrcpresentation %>
+  </div>
+  <div class="field">
+    <%= f.label :urlavmedia %><br>
+    <%= f.text_field :urlavmedia %>
+  </div>
+  <div class="field">
+    <%= f.label :urldoi %><br>
+    <%= f.text_field :urldoi %>
+  </div>
+  <div class="field">
+    <%= f.label :urlpublisher %><br>
+    <%= f.text_field :urlpublisher %>
+  </div>
+  <div class="field">
+    <%= f.label :urlgooglescholar %><br>
+    <%= f.text_field :urlgooglescholar %>
+  </div>
+  <div class="field">
+    <%= f.label :urlciteseer %><br>
+    <%= f.text_field :urlciteseer %>
+  </div>
+  <div class="field">
+    <%= f.label :pubin %><br>
+    <%= f.text_field :pubin %>
+  </div>
+  <div class="field">
+    <%= f.label :pubvol %><br>
+    <%= f.text_field :pubvol %>
+  </div>
+  <div class="field">
+    <%= f.label :pubnum %><br>
+    <%= f.text_field :pubnum %>
+  </div>
+  <div class="field">
+    <%= f.label :pubnum_end %><br>
+    <%= f.text_field :pubnum_end %>
+  </div>
+  <div class="field">
+    <%= f.label :pubpagefirst %><br>
+    <%= f.text_field :pubpagefirst %>
+  </div>
+  <div class="field">
+    <%= f.label :pubpagelast %><br>
+    <%= f.text_field :pubpagelast %>
+  </div>
+  <div class="field">
+    <%= f.label :pubpagecount %><br>
+    <%= f.text_field :pubpagecount %>
+  </div>
+  <div class="field">
+    <%= f.label :pubdate %><br>
+    <%= f.date_select :pubdate %>
+  </div>
+  <div class="field">
+    <%= f.label :pubdate_end %><br>
+    <%= f.date_select :pubdate_end %>
+  </div>
+  <div class="field">
+    <%= f.label :pubplace %><br>
+    <%= f.text_field :pubplace %>
+  </div>
+  <div class="field">
+    <%= f.label :publisher %><br>
+    <%= f.text_field :publisher %>
+  </div>
+  <div class="field">
+    <%= f.label :ispublic %><br>
+    <%= f.check_box :ispublic %>
+  </div>
+  <div class="field">
+    <%= f.label :islabdocument %><br>
+    <%= f.check_box :islabdocument %>
+  </div>
+  <div class="field">
+    <%= f.label :miscattributes %><br>
+    <%= f.text_field :miscattributes %>
+  </div>
+  <div class="field">
+    <%= f.label :document_category_id %><br>
+    <%= f.text_field :document_category_id %>
+  </div>
+  <div class="field">
+    <%= f.label :main_research_area_id %><br>
+    <%= f.text_field :main_research_area_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

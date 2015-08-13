@@ -1,0 +1,81 @@
+<%= form_for(@grant) do |f| %>
+  <% if @grant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@grant.errors.count, "error") %> prohibited this grant from being saved:</h2>
+
+      <ul>
+      <% @grant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :isactive %><br>
+    <%= f.check_box :isactive %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br>
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :startdate %><br>
+    <%= f.date_select :startdate %>
+  </div>
+  <div class="field">
+    <%= f.label :enddate %><br>
+    <%= f.date_select :enddate %>
+  </div>
+  <div class="field">
+    <%= f.label :totalawardamount %><br>
+    <%= f.number_field :totalawardamount %>
+  </div>
+  <div class="field">
+    <%= f.label :fundingagencyname %><br>
+    <%= f.text_field :fundingagencyname %>
+  </div>
+  <div class="field">
+    <%= f.label :awardnumber %><br>
+    <%= f.text_field :awardnumber %>
+  </div>
+  <div class="field">
+    <%= f.label :fundingagencyurl %><br>
+    <%= f.text_field :fundingagencyurl %>
+  </div>
+  <div class="field">
+    <%= f.label :fundingagencylogourl %><br>
+    <%= f.text_field :fundingagencylogourl %>
+  </div>
+  <div class="field">
+    <%= f.label :fundingagencygranturl %><br>
+    <%= f.text_field :fundingagencygranturl %>
+  </div>
+  <div class="field">
+    <%= f.label :programname %><br>
+    <%= f.text_field :programname %>
+  </div>
+  <div class="field">
+    <%= f.label :programurl %><br>
+    <%= f.text_field :programurl %>
+  </div>
+  <div class="field">
+    <%= f.label :miscattributes %><br>
+    <%= f.text_field :miscattributes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

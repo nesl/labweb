@@ -43,3 +43,9 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'bootstrap-sass'
+
+gem 'devise'
+gem 'pundit'
+gem 'simple_form'
+gem 'thin'

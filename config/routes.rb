@@ -1,9 +1,48 @@
 Rails.application.routes.draw do
+  get '/home'    => 'web_pages#show', id: 1
+  get '/privacy'    => 'web_pages#show', id: 2
+  get '/terms'    => 'web_pages#show', id: 3
+  get '/about'    => 'web_pages#show', id: 4
+
+  devise_for :users
+  resources :users
+
+  resources :product_person_maps
+
+  resources :document_person_maps
+
+  resources :web_pages
+
+  resources :grants
+
+  resources :projects
+
+  resources :courses
+
+  resources :course_offerings
+
+  resources :news_events
+
+  resources :products
+
+  resources :product_categories
+
+  resources :documents
+
+  resources :document_categories
+
+  resources :people
+
+  resources :person_categories
+
+  resources :research_areas
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root 'web_pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

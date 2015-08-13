@@ -1,0 +1,13 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @person_category.name %>
+</p>
+
+<p>
+  <strong>Relationship distance:</strong>
+  <%= @person_category.relationship_distance %>
+</p>
+
+<%= link_to 'Edit', edit_person_category_path(@person_category) %> |
+<%= link_to 'Back', person_categories_path %>

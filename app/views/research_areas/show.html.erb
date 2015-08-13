@@ -1,0 +1,13 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @research_area.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @research_area.description %>
+</p>
+
+<%= link_to 'Edit', edit_research_area_path(@research_area) %> |
+<%= link_to 'Back', research_areas_path %>
