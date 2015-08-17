@@ -1,4 +1,5 @@
 class Document < ActiveRecord::Base
+  include ActionView::Helpers::UrlHelper
   belongs_to :document_category
   has_many :document_person_maps
   has_many :people, :through => :document_person_maps
@@ -35,6 +36,11 @@ class Document < ActiveRecord::Base
 
   def self.find_all_in_priorityrange_sorted_by_date(min_priority=0,max_priority=1,count=5)
     Document.find_by_sql "SELECT d.* FROM documents d, documentcategories dc WHERE d.documentcategory_id = dc.id AND dc.priority >= #{min_priority} AND dc.priority <= #{max_priority} ORDER BY pubdate DESC LIMIT #{count}"
+  end
+  
+  def citation()
+    ans = "\"#{title},\" #{pubin}, #{pubdate}."
+    return ans
   end
 
 end

@@ -25,7 +25,7 @@
       <tbody>
       <% @documents.each do |document| %>
           <tr>
-            <td>Citation</td>
+            <td><%= document.citation() %></td>
             <td><%= link_to 'Show', document %></td>
             <% if user_signed_in? && current_user.admin? %>
                 <td><%= link_to 'Edit', edit_document_path(document) %></td>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/privacy'    => 'web_pages#show', id: 2
   get '/terms'    => 'web_pages#show', id: 3
   get '/about'    => 'web_pages#show', id: 4
+  get '/interest'    => 'web_pages#show', id: 5
 
   devise_for :users
   resources :users

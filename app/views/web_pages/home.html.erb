@@ -1,30 +1,64 @@
 <% provide(:title, 'Welcome') %>
 
 <% provide(:jumbotron,(@web_page.body +
-        '<p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>').html_safe)%>
+        '<br><a class="btn btn-primary btn-sm" href="' + about_path + '"role="button">Learn more &raquo;</a>').html_safe)%>
 
 <div class="container">
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-3">
       <h2>News</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#" role="button">View more &raquo;</a></p>
+	  <% @recent_news.each do |n| %>
+	  <p> 
+		  &bull; <%=n.title%> (<%=n.date%>) [<%= link_to "Details", n %>]
+	  </p>
+	  <% end %>
+      <p><a class="btn btn-default" href="<%= news_events_path %>" role="button">View more &raquo;</a></p>
     </div>
     <div class="col-md-6">
-      <h2>Publications</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#" role="button">View more &raquo;</a></p>
+      <h2>Recent Papers</h2>
+	  <% @recent_pubs.each do |d| %>
+	  <p>
+		  &bull; <%= d.citation() %>
+		  <% if d.urlpdfpaper then %> [<%= link_to "manuscript", d.urlpdfpaper%>] <% end %>
+		  <% if d.urlpdfpresentation then %> [<%= link_to "slides", d.urlpdfpresentation%>] <% end %>
+	  </p>
+	  <% end %>
+  	  <p><a class="btn btn-default" href="<%= documents_path %>" role="button">View more &raquo;</a></p>
     </div>
     <div class="col-md-3">
-      <h2>Dashboard</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#" role="button">View more &raquo;</a></p>
+      <h2>Projects</h2>
+	  <% @select_projects.each do |p| %>
+      <p>
+		  &bull; <%= p.name %> [<%= link_to "Details", p %>]
+	  </p>
+	  <% end %>
+      <p><a class="btn btn-default" href="<%= projects_path %>" role="button">View more &raquo;</a></p>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
-        <br>
-        <p>Research funded by</p>
+    <div class="col-md-3">
     </div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-3">
+	</div>
+  </div>
+  <div class="row">
+	<div class="col-md-3">
+		<h2>Dashboard</h2>
+	</div>
+    <div class="col-md-6">
+		<h2>Interested in <%= ENV["LABACRONYM"] %>?</h2>
+		<p>&bull; <%= link_to "Prospective M.S. or Ph.D. students", "/interest#newgrad" %>
+		<p>&bull; <%= link_to "Graduate students  at #{ENV["UNIVACRONYM"]}", "/interest#currgrad" %>
+		<p>&bull; <%= link_to "Undergraduate students at #{ENV["UNIVACRONYM"]}", "/interest#currugrad" %>
+		<p>&bull; <%= link_to "Prospective Post-doctoral Scholars", "/interest#postdocs" %>
+		<p>&bull; <%= link_to "Industrial Visitors", "/interest#industryvisitors" %>
+		<p>&bull; <%= link_to "Visiting Faculty", "/interest#visitingfaculty" %>
+		<p>&bull; <%= link_to "Interns from outside #{ENV["UNIVACRONYM"]}", "/interest#interns" %>
+    </div>
+	<div class="col-md-3">
+		<h2>Funding</h2>
+	</div>
   </div>

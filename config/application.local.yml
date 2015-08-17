@@ -10,6 +10,7 @@ defaults: &defaults
   UNIVNAME: "University of California, Los Angeles"
   UNIVACRONYM: "UCLA"
   UNIVURL: "http://www.ucla.edu"
+  CURRENT_FUNDING_AGENCIES: "ARL, NIH, and NSF"
   BOOTSTRAP_VERSION: "3.3.5"
   META_DESCRIPTION: "This is website for NESL @ UCLA generated using LabWeb app"
   META_AUTHOR: "Mani Srivastava"
@@ -17,6 +18,10 @@ defaults: &defaults
   MAINTAINER_LAST: "Srivastava"
   MAINTAINER_FIRST: "Mani"
   YEARONE: "1985"
+  RECENT_NEWS_COUNT: 3,
+  RECENT_DOCS_COUNT: 4,
+  RECENT_PROJS_COUNT: 5,
+  LABDASHBOARDURL: "",
   PEOPLE_DISPLAY_ORDER: '[
     "Faculty",
     "Staff",

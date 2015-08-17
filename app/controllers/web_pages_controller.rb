@@ -9,6 +9,9 @@ class WebPagesController < ApplicationController
 
   def home
     @web_page = WebPage.find(1)
+    @recent_pubs = Document.order(pubdate: :desc).first(ENV["RECENT_DOCS_COUNT"])
+    @recent_news = NewsEvent.order(date: :desc).first(ENV["RECENT_NEWS_COUNT"])
+    @select_projects = Project.where("isactive=true").order(id: :desc).first(ENV["RECENT_PROJS_COUNT"])
   end
 
   # GET /web_pages/1
