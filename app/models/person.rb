@@ -16,9 +16,9 @@ class Person < ActiveRecord::Base
             message: ": Person's degree year does not seem right"}
   validates :url, :urlphoto, :urldepartment, :urlorganization,
             allow_nil: true, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
-  validates :email, allow_nil: true, format: {with: Configuration::RE_EMAIL, message: ": Person's email is in wrong format"}
-  validates :phonework, allow_nil: true, format: {with: Configuration::RE_PHONE, message: ": Person's phone (Work) is in wrong format"}
-  validates :phonehome, allow_nil: true, format: {with: Configuration::RE_PHONE, message: ": Person's phone (Home) is in wrong format"}
-  validates :phonecell, allow_nil: true, format: {with: Configuration::RE_PHONE, message: ": Person's phone (Mobile) is in wrong format"}
-  validates :fax, allow_nil: true, format: {with: Configuration::RE_PHONE, message: ": Person's fax is in wrong format"}
+  validates :email, allow_nil: true, format: {with: Labweb::RE_EMAIL, message: ": Person's email is in wrong format"}
+  validates :phonework, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's phone (Work) is in wrong format"}
+  validates :phonehome, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's phone (Home) is in wrong format"}
+  validates :phonecell, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's phone (Mobile) is in wrong format"}
+  validates :fax, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's fax is in wrong format"}
 end

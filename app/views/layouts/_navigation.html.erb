@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<%=root_path%>"><img class="logo" src="/assets/logo.png" alt="<%=ENV["LABACRONYM"]%>"></a>
+      <a class="navbar-brand" href="<%=root_path%>"><%=image_tag("logo.png", class: "logo", alt: ENV["LABACRONYM"])%></a>
     </div>
     <div class="collapse navbar-collapse">
       <%= render 'layouts/navigation_links' %>

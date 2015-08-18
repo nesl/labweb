@@ -76,3 +76,6 @@ development:
 
 test:
   <<: *defaults
+
+production:
+  <<: *defaults
