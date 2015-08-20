@@ -1,0 +1,16 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.logo {
+	height:30px
+}
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+	width: 70%;
+	margin: auto;
+}
+
+.jumbotron > p {
+	
+}
+

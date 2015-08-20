@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  itemtype: MyString
+  caption: MyString
+  sourceurl: MyString
+  description: MyText
+  gotourl: MyString
+  position: 1
+
+two:
+  itemtype: MyString
+  caption: MyString
+  sourceurl: MyString
+  description: MyText
+  gotourl: MyString
+  position: 1

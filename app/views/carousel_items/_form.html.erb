@@ -1,0 +1,16 @@
+<%= simple_form_for(@carousel_item) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :itemtype %>
+    <%= f.input :caption %>
+    <%= f.input :sourceurl %>
+    <%= f.input :description %>
+    <%= f.input :gotourl %>
+    <%= f.input :position %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

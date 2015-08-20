@@ -11,11 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826225813) do
+ActiveRecord::Schema.define(version: 20150819083101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "carousel_items", force: :cascade do |t|
+    t.string   "itemtype"
+    t.string   "caption"
+    t.string   "sourceurl"
+    t.text     "description"
+    t.string   "gotourl"
+    t.integer  "position"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "course_offerings", force: :cascade do |t|
     t.integer  "year",       limit: 2, null: false

@@ -1,131 +1,54 @@
 <% provide(:title, 'Documents') %>
 
 <br>
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">
-    <h1 class="panel-title">Documents from <%= ENV["LABACRONYM"]%></h1>
-  </div>
+<div class="row">
+	<div class ="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+		<ul class =" nav nav-pills nav-stacked affix">
+			<% @document_categories.order(:name).each_with_index do |item, index| %>
+				<li <% if index==0 %> class="active"<% end %>><a href ="# <%= index %>"><%= item.name %></a></li>
+			<% end %>
+			</ul >
+	</div>
+	<div class ="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+		<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">
+	    <h1 class="panel-title">Documents from <%= ENV["LABACRONYM"]%></h1>
+	  </div>
 
-  <div class="panel-body">
-    Multiple tables, one for each document category
-    <!-- Table -->
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Category1</th>
-        <% if user_signed_in? && current_user.admin? %>
-            <th colspan="3"></th>
-        <% else %>
-            <th colspan="1"></th>
-        <% end %>
-      </tr>
-      </thead>
+	  <div class="panel-body">
+	    <% @document_categories.order(:name).each_with_index do |item, index| %>
+		    <!-- Table -->
+		    <table class="table table-condensed">
+		      <thead>
+		      <tr>
+		        <th class="col-md-6"><%= item.name %></th>
+		      </tr>
+		      </thead>
 
-      <tbody>
-      <% @documents.each do |document| %>
-          <tr>
-            <td><%= document.citation() %></td>
-            <td><%= link_to 'Show', document %></td>
-            <% if user_signed_in? && current_user.admin? %>
-                <td><%= link_to 'Edit', edit_document_path(document) %></td>
-                <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="panel-footer">
-    <% if user_signed_in? %>
-        <% if current_user.admin? %>
-            <%= link_to 'New Document', new_document_path %>
-        <% end %>
-    <% end %>
-  </div>
+		      <tbody>
+		      <% @documents.each do |document| %>
+		          <tr>
+		            <td><%= document.citation() %><br>
+		            [<%= link_to 'Show', document %>
+		            <% if user_signed_in? && current_user.admin? %>
+		                , <%= link_to 'Edit', edit_document_path(document) %>
+		                , <%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %>
+		            <% end %>
+		            ]</td>
+		          </tr>
+		      <% end %>
+		      </tbody>
+		    </table>
+		<% end %>
+	  </div>
+	  <div class="panel-footer">
+	    <% if user_signed_in? %>
+	        <% if current_user.admin? %>
+	            <%= link_to 'New Document', new_document_path %>
+	        <% end %>
+	    <% end %>
+	  </div>
+	</div>
+	</div>
 </div>
-
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Tryear</th>
-      <th>Trmonth</th>
-      <th>Trnumber</th>
-      <th>Title</th>
-      <th>Abstract</th>
-      <th>Filename</th>
-      <th>File</th>
-      <th>Urlpdfpaper</th>
-      <th>Urlsrcpaper</th>
-      <th>Urlpdfpresentation</th>
-      <th>Urlsrcpresentation</th>
-      <th>Urlavmedia</th>
-      <th>Urldoi</th>
-      <th>Urlpublisher</th>
-      <th>Urlgooglescholar</th>
-      <th>Urlciteseer</th>
-      <th>Pubin</th>
-      <th>Pubvol</th>
-      <th>Pubnum</th>
-      <th>Pubnum end</th>
-      <th>Pubpagefirst</th>
-      <th>Pubpagelast</th>
-      <th>Pubpagecount</th>
-      <th>Pubdate</th>
-      <th>Pubdate end</th>
-      <th>Pubplace</th>
-      <th>Publisher</th>
-      <th>Ispublic</th>
-      <th>Islabdocument</th>
-      <th>Miscattributes</th>
-      <th>Document category</th>
-      <th>Main research area</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @documents.each do |document| %>
-      <tr>
-        <td><%= document.tryear %></td>
-        <td><%= document.trmonth %></td>
-        <td><%= document.trnumber %></td>
-        <td><%= document.title %></td>
-        <td><%= document.abstract %></td>
-        <td><%= document.filename %></td>
-        <td><%= document.file %></td>
-        <td><%= document.urlpdfpaper %></td>
-        <td><%= document.urlsrcpaper %></td>
-        <td><%= document.urlpdfpresentation %></td>
-        <td><%= document.urlsrcpresentation %></td>
-        <td><%= document.urlavmedia %></td>
-        <td><%= document.urldoi %></td>
-        <td><%= document.urlpublisher %></td>
-        <td><%= document.urlgooglescholar %></td>
-        <td><%= document.urlciteseer %></td>
-        <td><%= document.pubin %></td>
-        <td><%= document.pubvol %></td>
-        <td><%= document.pubnum %></td>
-        <td><%= document.pubnum_end %></td>
-        <td><%= document.pubpagefirst %></td>
-        <td><%= document.pubpagelast %></td>
-        <td><%= document.pubpagecount %></td>
-        <td><%= document.pubdate %></td>
-        <td><%= document.pubdate_end %></td>
-        <td><%= document.pubplace %></td>
-        <td><%= document.publisher %></td>
-        <td><%= document.ispublic %></td>
-        <td><%= document.islabdocument %></td>
-        <td><%= document.miscattributes %></td>
-        <td><%= document.document_category %></td>
-        <td><%= document.main_research_area %></td>
-        <td><%= link_to 'Show', document %></td>
-        <td><%= link_to 'Edit', edit_document_path(document) %></td>
-        <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-

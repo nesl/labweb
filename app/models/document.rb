@@ -38,9 +38,22 @@ class Document < ActiveRecord::Base
     Document.find_by_sql "SELECT d.* FROM documents d, documentcategories dc WHERE d.documentcategory_id = dc.id AND dc.priority >= #{min_priority} AND dc.priority <= #{max_priority} ORDER BY pubdate DESC LIMIT #{count}"
   end
   
-  def citation()
-    ans = "\"#{title},\" #{pubin}, #{pubdate}."
+  def citation
+    ans = "#{authors_string}. \"#{title},\" #{pubin}, #{Date::MONTHNAMES[pubdate.month]} #{pubdate.year}."
     return ans
   end
+  
+  def authors_list
+    answer = []
+    document_person_maps.each {|m| answer[m.rank-1] = m.person}
+    answer.select {|a| a}
+  end
+  
+  def authors_string
+      author_string = authors_list.map {|m| "#{m.firstname} #{m.lastname}" if m}.join(", ")
+      last_comma_index = author_string.rindex(',')
+      author_string.insert(last_comma_index+1, " and ") if last_comma_index
+      return author_string
+    end
 
 end

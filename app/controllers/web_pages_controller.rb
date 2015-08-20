@@ -8,7 +8,8 @@ class WebPagesController < ApplicationController
   end
 
   def home
-    @web_page = WebPage.find(1)
+    @overview = WebPage.where("pagetitle='Overview'").first
+    @carousel_items = CarouselItem.where("position > 0")
     @recent_pubs = Document.order(pubdate: :desc).first(ENV["RECENT_DOCS_COUNT"])
     @recent_news = NewsEvent.order(date: :desc).first(ENV["RECENT_NEWS_COUNT"])
     @select_projects = Project.where("isactive=true").order(id: :desc).first(ENV["RECENT_PROJS_COUNT"])
@@ -67,6 +68,26 @@ class WebPagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def findone
+    where_condition = {}
+    params.each { |key, value| where_condition[key] = value if ["pagetitle","bartitle","id"].member?(key) }
+    @web_page = WebPage.where(where_condition).first
+    respond_to do |format|
+        format.html { render :template => "web_pages/show" }
+        format.json { render json: @web_page}
+    end
+  end
+  
+  def findall
+    where_condition = {}
+    params.each { |key, value| where_condition[key] = value if ["pagetitle","bartitle","id"].member?(key) }
+    @web_pages = WebPage.where(where_condition)
+    respond_to do |format|
+        format.html { render :template => "web_pages/index" }
+        format.json { render json: @web_pages}
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -78,4 +99,6 @@ class WebPagesController < ApplicationController
     def web_page_params
       params.require(:web_page).permit(:pagetitle, :bartitle, :body, :ispublic, :url)
     end
+    
+    
 end

@@ -5,6 +5,7 @@ class DocumentsController < ApplicationController
   # GET /documents.json
   def index
     @documents = Document.all
+    @document_categories = DocumentCategory.all
   end
 
   # GET /documents/1

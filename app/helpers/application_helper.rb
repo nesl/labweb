@@ -8,4 +8,9 @@ module ApplicationHelper
       "#{page_title} | #{ENV["LABNAME"]}"
     end
   end
+  
+  def find_webpage_by_title(title)
+    title.present? ? WebPage.where("pagetitle = ?",title).first : nil
+  end
+  
 end

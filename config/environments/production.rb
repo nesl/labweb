@@ -74,7 +74,7 @@ Rails.application.configure do
       user_name: Rails.application.secrets.email_provider_username,
       password: Rails.application.secrets.email_provider_password
   }
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => ENV["DEFAULT_URL_HOSTPORT"].presence || 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?

@@ -1,7 +1,16 @@
 <% provide(:title, 'Welcome') %>
 
-<% provide(:jumbotron,(@web_page.body +
-        '<br><a class="btn btn-primary btn-sm" href="' + about_path + '"role="button">Learn more &raquo;</a>').html_safe)%>
+<% 
+   if @carousel_items.length > 0 then
+	 provide(:carousel,"test")
+   end
+%>
+
+<% if @overview then
+	provide(:jumbotron,('<div><p>' + @overview.body + '</p></div>' +
+        '<a class="btn btn-primary btn-md" href="' + about_path + '"role="button">Learn more &raquo;</a>').html_safe)
+   end
+%>
 
 <div class="container">
   <!-- Example row of columns -->

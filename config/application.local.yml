@@ -21,7 +21,10 @@ defaults: &defaults
   RECENT_NEWS_COUNT: 3
   RECENT_DOCS_COUNT: 4
   RECENT_PROJS_COUNT: 5
-  LABDASHBOARDURL: ""
+  LAB_CAROUSEL_URL: "http://carousel.nesl.info"
+  LAB_DASHBOARD_URL: "http://dashboard.nesl.info"
+  MAILER_SENDER: "nesl.ucla@gmail.com"
+  DEFAULT_URL_HOSTPORT: "localhost:3000"
   PEOPLE_DISPLAY_ORDER: '[
     "Faculty",
     "Staff",

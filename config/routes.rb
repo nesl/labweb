@@ -1,17 +1,26 @@
 Rails.application.routes.draw do
-  get '/home'    => 'web_pages#show', id: 1
-  get '/privacy'    => 'web_pages#show', id: 2
-  get '/terms'    => 'web_pages#show', id: 3
-  get '/about'    => 'web_pages#show', id: 4
-  get '/interest'    => 'web_pages#show', id: 5
+  resources :carousel_items
+  get '/overview'    => 'web_pages#findone', pagetitle: "Overview"
+  get '/privacy'    => 'web_pages#findone', pagetitle: "Privacy"
+  get '/terms'    => 'web_pages#findone', pagetitle: "Terms"
+  get '/about'    => 'web_pages#findone', pagetitle: "About"
+  get '/joining'    => 'web_pages#findone', pagetitle: "Joining"
 
   devise_for :users
   resources :users
+
 
   resources :product_person_maps
 
   resources :document_person_maps
 
+  resources :web_pages do
+    collection do
+      get 'findone'
+      get 'findall'
+    end
+  end
+  
   resources :web_pages
 
   resources :grants

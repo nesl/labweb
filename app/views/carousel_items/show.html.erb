@@ -1,0 +1,33 @@
+
+<p>
+  <strong>Itemtype:</strong>
+  <%= @carousel_item.itemtype %>
+</p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @carousel_item.caption %>
+</p>
+
+<p>
+  <strong>Sourceurl:</strong>
+  <%= @carousel_item.sourceurl %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @carousel_item.description %>
+</p>
+
+<p>
+  <strong>Gotourl:</strong>
+  <%= @carousel_item.gotourl %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @carousel_item.position %>
+</p>
+
+<%= link_to 'Edit', edit_carousel_item_path(@carousel_item) %> |
+<%= link_to 'Back', carousel_items_path %>
