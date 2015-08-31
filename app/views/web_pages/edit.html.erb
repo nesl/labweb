@@ -1,6 +1,18 @@
-<h1>Editing web_page</h1>
+<% provide(:title, 'Web Page') %>
 
-<%= render 'form' %>
+<br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Editing Web Page</h1>
+  </div>
 
-<%= link_to 'Show', @web_page %> |
-<%= link_to 'Back', web_pages_path %>
+  <div class="panel-body">
+    <%= render 'form' %>
+  </div>
+
+  <div class="panel-footer">
+	<%= link_to 'Show', @web_page %> |
+	<%= link_to 'Back', web_pages_path %>
+  </div>
+</div>

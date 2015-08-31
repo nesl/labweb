@@ -1,163 +1,216 @@
-
+<div class="bheader">
+	<%= link_to_unless(@document.urlpdfpaper.nil?, @document.title) %>
+	<span class="category">[<%= @document.document_category.name %>]</span>
+</div>
 <p>
-  <strong>Tryear:</strong>
-  <%= @document.tryear %>
+	<%= @document.citation() %>
 </p>
 
+<% if @document.tryear.present? && @document.trmonth.present? && @document.trnumber.present? %>
 <p>
-  <strong>Trmonth:</strong>
-  <%= @document.trmonth %>
+  <strong><%= ENV["LABACRONYM"]%> Technical Report #:</strong>
+  <%= "#{@document.tryear}-#{@document.trmonth}-#{@document.trnumber}" %>
 </p>
+<% end %>
 
-<p>
-  <strong>Trnumber:</strong>
-  <%= @document.trnumber %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @document.title %>
-</p>
-
+<% if @document.abstract.present? %>
 <p>
   <strong>Abstract:</strong>
   <%= @document.abstract %>
 </p>
+<% end %>
 
+<% if @document.filename.present? %>
 <p>
   <strong>Filename:</strong>
   <%= @document.filename %>
 </p>
+<% end %>
 
+<% if @document.file.present? %>
 <p>
   <strong>File:</strong>
   <%= @document.file %>
 </p>
+<% end %>
 
+<% if @document.urlpdfpaper.present? %>
 <p>
-  <strong>Urlpdfpaper:</strong>
-  <%= @document.urlpdfpaper %>
+  <strong>Paper (PDF):</strong>
+  <%= link_to @document.urlpdfpaper %>
 </p>
+<% end %>
 
+<% if @document.urlsrcpaper.present? %>
 <p>
-  <strong>Urlsrcpaper:</strong>
-  <%= @document.urlsrcpaper %>
+  <strong>Paper (Source):</strong>
+  <%= link_to @document.urlsrcpaper %>
 </p>
+<% end %>
 
+<% if @document.urlpdfpresentation.present? %>
 <p>
-  <strong>Urlpdfpresentation:</strong>
-  <%= @document.urlpdfpresentation %>
+  <strong>Presentation (PDF):</strong>
+  <%= link_to @document.urlpdfpresentation %>
 </p>
+<% end %>
 
+<% if @document.urlsrcpresentation.present? %>
 <p>
-  <strong>Urlsrcpresentation:</strong>
-  <%= @document.urlsrcpresentation %>
+  <strong>Presentation (Source):</strong>
+  <%= link_to @document.urlsrcpresentation %>
 </p>
+<% end %>
 
+<% if @document.urlavmedia.present? %>
 <p>
-  <strong>Urlavmedia:</strong>
-  <%= @document.urlavmedia %>
+  <strong>Media:</strong>
+  <%= link_to @document.urlavmedia %>
 </p>
+<% end %>
 
+<% if @document.urldoi.present? %>
 <p>
-  <strong>Urldoi:</strong>
-  <%= @document.urldoi %>
+  <strong>DOI:</strong>
+  <%= link_to @document.urldoi %>
 </p>
+<% end %>
 
+<% if @document.urlpublisher.present? %>
 <p>
-  <strong>Urlpublisher:</strong>
-  <%= @document.urlpublisher %>
+  <strong>Publisher:</strong>
+  <%= link_to @document.urlpublisher %>
 </p>
+<% end %>
 
+<% if @document.urlgooglescholar.present? %>
 <p>
-  <strong>Urlgooglescholar:</strong>
-  <%= @document.urlgooglescholar %>
+  <strong>Google Scholar:</strong>
+  <%= link_to @document.urlgooglescholar %>
 </p>
+<% end %>
 
+<% if @document.urlciteseer.present? %>
 <p>
-  <strong>Urlciteseer:</strong>
-  <%= @document.urlciteseer %>
+  <strong>Citeseer:</strong>
+  <%= link_to @document.urlciteseer %>
 </p>
+<% end %>
 
+<% if @document.pubin.present? %>
 <p>
-  <strong>Pubin:</strong>
+  <strong>Publication Forum:</strong>
   <%= @document.pubin %>
 </p>
+<% end %>
 
+<% if @document.pubvol.present? %>
 <p>
-  <strong>Pubvol:</strong>
+  <strong>Volume:</strong>
   <%= @document.pubvol %>
 </p>
+<% end %>
 
+<% if @document.pubnum.present? %>
 <p>
-  <strong>Pubnum:</strong>
+  <strong>Number:</strong>
   <%= @document.pubnum %>
 </p>
+<% end %>
 
+<% if @document.pubnum_end.present? %>
 <p>
-  <strong>Pubnum end:</strong>
+  <strong>Number (End):</strong>
   <%= @document.pubnum_end %>
 </p>
+<% end %>
 
+<% if @document.pubpagefirst.present? %>
 <p>
-  <strong>Pubpagefirst:</strong>
+  <strong>Page:</strong>
   <%= @document.pubpagefirst %>
 </p>
+<% end %>
 
+<% if @document.pubpagelast.present? %>
 <p>
-  <strong>Pubpagelast:</strong>
+  <strong>Page (End):</strong>
   <%= @document.pubpagelast %>
 </p>
+<% end %>
 
+<% if @document.pubpagecount.present? && @document.pubpagecount!="0" %>
 <p>
-  <strong>Pubpagecount:</strong>
+  <strong>Page (Count):</strong>
   <%= @document.pubpagecount %>
 </p>
+<% end %>
 
+<% if @document.pubdate.present? %>
 <p>
-  <strong>Pubdate:</strong>
+  <strong>Date:</strong>
   <%= @document.pubdate %>
 </p>
+<% end %>
 
+<% if @document.pubdate_end.present? %>
 <p>
-  <strong>Pubdate end:</strong>
+  <strong>Date (End):</strong>
   <%= @document.pubdate_end %>
 </p>
+<% end %>
 
+<% if @document.pubplace.present? %>
 <p>
-  <strong>Pubplace:</strong>
+  <strong>Place:</strong>
   <%= @document.pubplace %>
 </p>
+<% end %>
 
+<% if @document.publisher.present? %>
 <p>
   <strong>Publisher:</strong>
   <%= @document.publisher %>
 </p>
+<% end %>
 
+<% if @document.ispublic.present? %>
 <p>
-  <strong>Ispublic:</strong>
-  <%= @document.ispublic %>
+  <strong>Public Document?:</strong>
+  <%= @document.ispublic ? "Yes" : "No" %>
 </p>
+<% end %>
 
+<% if @document.islabdocument.present? %>
 <p>
-  <strong>Islabdocument:</strong>
-  <%= @document.islabdocument %>
+  <strong><%= ENV["LABACRONYM"] %> Document?:</strong>
+  <%= @document.islabdocument ? "Yes" : "No" %>
 </p>
+<% end %>
 
+<% if @document.miscattributes.present? %>
 <p>
-  <strong>Miscattributes:</strong>
+  <strong>Other Attributes:</strong>
   <%= @document.miscattributes %>
 </p>
+<% end %>
 
+<% if @document.document_category.present? %>
 <p>
   <strong>Document category:</strong>
   <%= @document.document_category %>
 </p>
+<% end %>
 
+<% if @document.main_research_area.present? %>
 <p>
-  <strong>Main research area:</strong>
+  <strong>Primary Research Area:</strong>
   <%= @document.main_research_area %>
 </p>
+<% end %>
 
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Delete', document_path(@document), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', documents_path %>

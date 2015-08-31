@@ -6,6 +6,14 @@ class DocumentsController < ApplicationController
   def index
     @documents = Document.all
     @document_categories = DocumentCategory.all
+    person_id = nil
+    params.each {|key, value| person_id = value if key=="person_id"}    
+    if person_id.present? 
+      @person = Person.find(person_id)
+      # @documents = @documents.select {|d| d.people.member?(@person)}
+    else
+      @person = nil
+    end
   end
 
   # GET /documents/1

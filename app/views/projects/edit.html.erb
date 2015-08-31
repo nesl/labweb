@@ -1,6 +1,18 @@
-<h1>Editing project</h1>
+<% provide(:title, 'Project') %>
 
-<%= render 'form' %>
+<br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Editing Project</h1>
+  </div>
 
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+  <div class="panel-body">
+    <%= render 'form' %>
+  </div>
+
+  <div class="panel-footer">
+	<%= link_to 'Show', @project %> |
+	<%= link_to 'Back', projects_path %>
+  </div>
+</div>

@@ -15,7 +15,7 @@ class Person < ActiveRecord::Base
             greater_than: 1970, less_than: 2070,
             message: ": Person's degree year does not seem right"}
   validates :url, :urlphoto, :urldepartment, :urlorganization,
-            allow_nil: true, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
+            allow_nil: true, allow_blank: true, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
   validates :email, allow_nil: true, format: {with: Labweb::RE_EMAIL, message: ": Person's email is in wrong format"}
   validates :phonework, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's phone (Work) is in wrong format"}
   validates :phonehome, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's phone (Home) is in wrong format"}

@@ -10,36 +10,55 @@
       </ul>
     </div>
   <% end %>
-
+  <table class="table-condensed lw-table">
+  <tbody>
+  <tr><td>
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.label :name, "Short Name" %><br>
+    <%= f.text_field :name, size: 20 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.label :title, "Title" %><br>
+    <%= f.text_field :title,  size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.label :description, "Synopsis" %><br>
+    <%= f.text_area :description, size: "100x10" %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :isactive %><br>
+    <%= f.label :isactive, "Is this project active?" %>&nbsp;&nbsp;
     <%= f.check_box :isactive %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.label :url, "Project Home Page URL" %><br>
+    <%= f.text_field :url,  size: 100  %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :miscattributes %><br>
-    <%= f.text_field :miscattributes %>
+    <%= f.label :miscattributes, "Miscellaneous Attributes (e.g 'a=>1,b=>2')" %><br>
+    <%= f.text_field :miscattributes,  size: 100  %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :main_research_area_id %><br>
-    <%= f.text_field :main_research_area_id %>
+    <%= f.label :main_research_area_id, "Main Research Area:" %>&nbsp;&nbsp;
+	<%= f.select("main_research_area_id", ResearchArea.all.collect{|ra| [ ra.name, ra.id ] }, {include_blank: 'None'})%>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="actions">
     <%= f.submit %>
   </div>
+  </td></tr>
+  </tbody>
+  </table>
 <% end %>

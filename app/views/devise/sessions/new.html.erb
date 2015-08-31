@@ -3,7 +3,7 @@
       <h3>Sign in</h3>
       <%= devise_error_messages! %>
       <div class="form-group">
-        <%- if devise_mapping.registerable? %>
+        <%- if false && devise_mapping.registerable? %>
             <%= link_to 'Sign up', new_registration_path(resource_name), class: 'right'  %>
         <% end -%>
         <%= f.label :email %>

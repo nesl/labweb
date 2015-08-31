@@ -1,62 +1,53 @@
 <% provide(:title, 'People') %>
-<br>
-<div class="panel panel-default">
+
+<div class="panel panel-default lw-content-without-second-nav">
   <!-- Default panel contents -->
   <div class="panel-heading">
     <h1 class="panel-title">People @ <%= ENV["LABACRONYM"]%></h1>
   </div>
 
   <div class="panel-body">
-
-  <% eval(ENV["PEOPLE_DISPLAY_ORDER"]).each do |person_category| %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th><%= person_category %></th>
-        </tr>
-      </thead>
-    </table>
-  <% end %>
-
-  <!-- Table -->
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Last Name</th>
-      <th>First Name</th>
-      <th>Position</th>
-      <% if user_signed_in? && current_user.admin? %>
-          <th colspan="1"></th>
-      <% else %>
-          <th colspan="1"></th>
-      <% end %>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @people.each do |person| %>
-        <tr>
-          <td><%= person.lastname %></td>
-          <td><%= person.firstname %></td>
-          <td><%= person.person_category.name %></td>
-          <td><%= link_to '[ Details', person %>
-          <% if user_signed_in? && current_user.admin? %>
-              <%= link_to ', Edit', edit_person_path(person) %>
-              <%= link_to ', Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-          ]
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
-  </div>
-
-  <div class="panel-footer">
-    <% if user_signed_in? %>
-        <% if current_user.admin? %>
-            <%= link_to 'New Person', new_person_path %>
-        <% end %>
-    <% end %>
+	  <table class="table-condensed lw-table">
+	  <% @person_categories.each_with_index do |person_category, index| %>
+	      <tbody>
+	          <tr>
+	            <th 
+			      <%if user_signed_in? && current_user.admin? %>colspan="2"<%end%>
+			    ><%= person_category %></th>
+	          </tr>
+			  <% @people.select{|x| x.person_category.name==person_category}.sort{|a,b| a.firstname <=> b.firstname}.each do |person| %>
+			  <tr>
+	            <td>
+					<ul style="list-style-type:none">
+						<li><%= link_to "#{person.firstname} #{person.lastname}", person %><li>
+					</ul>
+				</td>
+					<% if user_signed_in? && current_user.admin? %>
+					<td>
+						<ul style="list-style-type:none">
+						<li>
+		                [
+						<%= link_to 'Details', person %>,
+						<%= link_to 'Edit', edit_person_path(person) %>,
+						<%= link_to 'Delete', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+						]
+					    </li>
+					    </ul>
+		            <% end %>
+			  </tr>
+			  <% end %>
+		  </tbody>
+	  <% end %>
+	  </table>
   </div>
 </div>
+
+<% if user_signed_in? %>
+    <% if current_user.admin? %>
+	    <div class="panel-footer">
+        <%= link_to 'New Person', new_person_path %>
+		</div>
+    <% end %>
+<% end %>
+
 

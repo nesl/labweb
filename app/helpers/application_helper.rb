@@ -13,4 +13,12 @@ module ApplicationHelper
     title.present? ? WebPage.where("pagetitle = ?",title).first : nil
   end
   
+  def url_exists?(url_string)
+    url = URI.parse(url_string)
+    req = Net::HTTP.new(url.host, url.port)
+    req.use_ssl = (url.scheme == "https")
+    res = req.request_head(url.path)
+    res.code == "200"  
+  end
+  
 end

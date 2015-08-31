@@ -20,7 +20,7 @@ module Labweb
   RE_MIDDLEINITIAL = /\A[A-Z]?\z/
   RE_PHONE = /\A([-+()0-9\s]+)?\z/
   RE_URL = /\A((http|https):\/\/\S+)?\z/
-  RE_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  RE_EMAIL = /(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z)|(\A((http|https):\/\/\S+)?\z)/i
   RE_YEAR = /\A(\d{4})?\z/
   RE_MONTH = /\A(0?[1-9])|(1[0-2])\z/
   class Application < Rails::Application

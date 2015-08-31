@@ -5,6 +5,32 @@
 	height:30px
 }
 
+.lw-content {
+	
+}
+
+.lw-content-without-second-nav {
+	position: relative;
+	top: 10px;
+}
+
+.lw-second-navbar {
+	position: fixed;
+    top: 50px;
+	background-color: #FFFFFF;
+	border-bottom: none;
+	margin-top: 3px;
+}
+
+.lw-content-with-second-nav {
+	position: relative;
+	top: 60px;
+}
+
+.lw-table th {
+	
+}
+
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {
 	width: 70%;
 	margin: auto;
@@ -14,3 +40,117 @@
 	
 }
 
+a.anchorwithoffset {
+	display: block;
+	position: relative;
+	top: -120px;
+	visibility: hidden;
+}
+
+@media (max-width: 992px) {
+    .affix {
+        position: static;
+    }
+}
+
+.bheader {
+  font-weight: bold;
+  background-color: #327AB7;
+  color: #ffffff;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-bottom: #143556 4px solid;
+  padding:5px;
+  padding-left:10px;
+  font-size:14px;
+}
+
+.bheader a {
+    text-decoration:none;
+    color:#FFF;
+}
+
+.bheader .category {
+	float:right
+}
+
+/* side navs */
+
+.lw-content-with-second-nav-sidenav  {
+  position: fixed;
+  top: 80px;
+  margin: 30px 0 0;
+  padding: 0;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+.lw-content-with-second-nav-sidenav  > li > a {
+  display: block;
+  margin: 0 0 -1px;
+  padding: 8px 14px;
+  border: 1px solid #e5e5e5;
+}
+.lw-content-with-second-nav-sidenav  > li:first-child > a {
+  -webkit-border-radius: 6px 6px 0 0;
+     -moz-border-radius: 6px 6px 0 0;
+          border-radius: 6px 6px 0 0;
+}
+.lw-content-with-second-nav-sidenav  > li:last-child > a {
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+}
+.lw-content-with-second-nav-sidenav  > .active > a {
+  position: relative;
+  z-index: 2;
+  padding: 9px 15px;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
+
+/* Chevrons */
+
+.lw-content-with-second-nav-sidenav  .glyphicon {
+  float: right;
+  margin-top: 2px;
+  margin-right: -6px;
+  opacity: .25;
+}
+
+.lw-content-with-second-nav-sidenav  > li > a:hover {
+  background-color: #f5f5f5;
+}
+/*
+
+.lw-content-sidenav  a:hover .icon-chevron-right {
+  opacity: .5;
+}
+.lw-content-sidenav  .active .icon-chevron-right,
+.lw-content-sidenav  .active a:hover .icon-chevron-right {
+  background-image: url(../img/glyphicons-halflings-white.png);
+  opacity: 1;
+}
+*/
+
+.lw-content-with-second-nav-sidenav .affix {
+  position: relative;
+  top: 100px;
+}
+
+.lw-content-with-second-nav-sidenav .affix-bottom {
+  position: absolute;
+  top: auto;
+  bottom: 270px;
+}
+
+.lw-content-with-second-nav-panel {
+  top: 0px;
+}

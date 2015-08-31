@@ -1,243 +1,122 @@
+<div class="row bheader">
+	<%= "#{@person.firstname} #{@person.middleinitial}. #{@person.lastname}" %>
+	<%= "(#{@person.webname})" if @person.webname.present? %>
+	<span class="category">[<%= @person.person_category.name %>]</span>
+</div>
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @person.lastname %>
-</p>
+<div class="row">
+	<div class="col-xs-3">
+		<% if @person.urlphoto.present? && url_exists?(@person.urlphoto) %>
+		  <%= image_tag(@person.urlphoto, :alt => "image", :width => "162") %>
+		<% else %>
+		  <%= image_tag(ENV["DEFAULT_MUGSHOT"], :alt => "image", :width => "162") %>
+		<% end %>
+		<br><br>
+		<%= render partial: 'layouts/section', locals: {heading: nil, content: @person.organization, url: @person.urlorganization, content_boldfont: true} %>
+		<%= render partial: 'layouts/section', locals: {heading: nil, content: @person.department, url: @person.urldepartment, content_boldfont: true } %>
+		<%= render partial: 'layouts/section', locals: {heading: "Office", content: @person.addressoffice} %>
+		<%= render partial: 'layouts/section', locals: {heading: "Lab", content: @person.addresslab} %>
+		<%= render partial: 'layouts/section', locals: {heading: "Mail", content: @person.addressmail, content_newline: true} %>
+		<p><strong>Email:</strong><br>
+		<% if @person.email.present? && @person.email[0..3]=="http"%>
+		  <%= image_tag(@person.email, :alt => "rss feed") %>
+		<% else %>
+		  <%= @person.email %>
+	    <% end %>
+	    </p>
+		<%= render partial: 'layouts/section', locals: {heading: "Tel [work]", content: @person.phonework, content_newline: true} %>
+		<%= render partial: 'layouts/section', locals: {heading: "Tel [mobile]", content: @person.phonecell, content_newline: true} %>
+		<%= render partial: 'layouts/section', locals: {heading: "Tel [home]", content: @person.phonehome, content_newline: true} %>
+		<%= render partial: 'layouts/section', locals: {heading: "Fax [work]", content: @person.fax, content_newline: true} %>
+		<% if !@person.url.blank?%>
+		  <%= link_to "Web Page", @person.url %>
+		<% end %>
 
-<p>
-  <strong>Firstname:</strong>
-  <%= @person.firstname %>
-</p>
+		
+	</div>
+	<div class="col-xs-9">
+		<%= render partial: 'layouts/section', locals: {heading: "Biography", content: @person.biography} %> 
+		<% if @person.bs_year.present? || @person.ms_year.present? || @person.phd_title.present? %>
+		  <p><strong>Education: </strong>
+			  <ul>
+				  <% if @person.bs_year.present? %>
+				    <li>
+						<%= @person.bs_title %> in <%= @person.bs_field %>, <%= @person.bs_school %>, <%= @person.bs_year %>.
+						<% if @person.bs_in_lab.present? && @person.bs_in_lab %>
+						  <br>(done at <%= ENV["LABACRONYM"] %>)
+						<% end %>
+					</li>
+				  <% end %>
+				  <% if @person.ms_year.present? %>
+				    <li>
+						<%= @person.ms_title %> in <%= @person.ms_field %>, <%= @person.ms_school %>, <%= @person.ms_year %>.
+						<% if @person.ms_thesis.present? %>
+						  <br>Thesis: <%= @person.ms_thesis%>
+						<% end %>
+						<% if @person.ms_in_lab.present? && @person.ms_in_lab %>
+						  <br>(done at <%= ENV["LABACRONYM"] %>)
+						<% end %>
+					</li>
+				  <% end %>
+				  <% if @person.phd_year.present? %>
+				    <li>
+						<%= @person.phd_title %> in <%= @person.phd_field %>, <%= @person.phd_school %>, <%= @person.phd_year %>.
+						<% if @person.phd_thesis.present? %>
+						  <br>Thesis: <%= @person.phd_thesis%>
+						<% end %>
+						<% if @person.phd_in_lab.present? && @person.phd_in_lab %>
+						  <br>(done at <%= ENV["LABACRONYM"] %>)
+						<% end %>
+					</li>
+				  <% end %>
+			  </ul>
+		  </p>
+		<% else %>
+		  <%= render partial: 'layouts/section', locals: {heading: "Education", content: @person.education} %> 
+		<% end %>
+		
+		<%= render partial: 'layouts/section', locals: {heading: "Experience", content: @person.professionalexperience} %> 
+		<%= render partial: 'layouts/section', locals: {heading: "Service", content: @person.professionalservice} %> 
+		<%= render partial: 'layouts/section', locals: {heading: "Research Interests", content: @person.researchinterests} %> 
+		<p><strong>Recent Publications: </strong>
+			<ul>
+				<% @person.documents.order(pubdate: :desc)[0..9].each do |document| %>
+				  <li><%= document.citation() %></li>
+				<% end %>
+			</ul>
+			<ul style="list-style-type:none">
+			    <li><%= link_to "More Publications...", documents_path %></li>
+		    </ul>
+		</p>		
+		<%= render partial: 'layouts/section', locals: {heading: "Other Publications", content: @person.otherpublications} %> 
+		<%= render partial: 'layouts/section', locals: {heading: "Patents", content: @person.patents} %> 
+		<%= render partial: 'layouts/section', locals: {heading: "Awards", content: @person.awards} %> 
+		<%= render partial: 'layouts/section', locals: {heading: "Skills", content: @person.skills} %> 
+		<%= render partial: 'layouts/section', locals: {heading: "Secretary", content: @person.secretary} %> 
+        
+		<% if @person.miscattributes.present? %>
+          <% @person.miscattributes.each do |key, value| %>
+		    <%= render partial: 'layouts/section', locals: {heading: @key, content: @value} %>
+		  <% end %>
+		<% end %>	
+	</div>
+	
+</div>
 
-<p>
-  <strong>Middleinitial:</strong>
-  <%= @person.middleinitial %>
-</p>
+<div class="row">
+<div class="col-xs-12">
 
-<p>
-  <strong>Webname:</strong>
-  <%= @person.webname %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @person.email %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @person.url %>
-</p>
-
-<p>
-  <strong>Urlphoto:</strong>
-  <%= @person.urlphoto %>
-</p>
-
-<p>
-  <strong>Phonework:</strong>
-  <%= @person.phonework %>
-</p>
-
-<p>
-  <strong>Phonehome:</strong>
-  <%= @person.phonehome %>
-</p>
-
-<p>
-  <strong>Phonecell:</strong>
-  <%= @person.phonecell %>
-</p>
-
-<p>
-  <strong>Fax:</strong>
-  <%= @person.fax %>
-</p>
-
-<p>
-  <strong>Addressoffice:</strong>
-  <%= @person.addressoffice %>
-</p>
-
-<p>
-  <strong>Addresslab:</strong>
-  <%= @person.addresslab %>
-</p>
-
-<p>
-  <strong>Addressmail:</strong>
-  <%= @person.addressmail %>
-</p>
-
-<p>
-  <strong>Department:</strong>
-  <%= @person.department %>
-</p>
-
-<p>
-  <strong>Urldepartment:</strong>
-  <%= @person.urldepartment %>
-</p>
-
-<p>
-  <strong>Organization:</strong>
-  <%= @person.organization %>
-</p>
-
-<p>
-  <strong>Urlorganization:</strong>
-  <%= @person.urlorganization %>
-</p>
-
-<p>
-  <strong>Biography:</strong>
-  <%= @person.biography %>
-</p>
-
-<p>
-  <strong>Researchinterests:</strong>
-  <%= @person.researchinterests %>
-</p>
-
-<p>
-  <strong>Education:</strong>
-  <%= @person.education %>
-</p>
-
-<p>
-  <strong>Professionalexperience:</strong>
-  <%= @person.professionalexperience %>
-</p>
-
-<p>
-  <strong>Professionalservice:</strong>
-  <%= @person.professionalservice %>
-</p>
-
-<p>
-  <strong>Otherpublications:</strong>
-  <%= @person.otherpublications %>
-</p>
-
-<p>
-  <strong>Patents:</strong>
-  <%= @person.patents %>
-</p>
-
-<p>
-  <strong>Awards:</strong>
-  <%= @person.awards %>
-</p>
-
-<p>
-  <strong>Skills:</strong>
-  <%= @person.skills %>
-</p>
-
-<p>
-  <strong>Interests:</strong>
-  <%= @person.interests %>
-</p>
-
-<p>
-  <strong>Secretary:</strong>
-  <%= @person.secretary %>
-</p>
-
-<p>
-  <strong>Bs year:</strong>
-  <%= @person.bs_year %>
-</p>
-
-<p>
-  <strong>Bs title:</strong>
-  <%= @person.bs_title %>
-</p>
-
-<p>
-  <strong>Bs school:</strong>
-  <%= @person.bs_school %>
-</p>
-
-<p>
-  <strong>Bs field:</strong>
-  <%= @person.bs_field %>
-</p>
-
-<p>
-  <strong>Bs in lab:</strong>
-  <%= @person.bs_in_lab %>
-</p>
-
-<p>
-  <strong>Ms year:</strong>
-  <%= @person.ms_year %>
-</p>
-
-<p>
-  <strong>Ms title:</strong>
-  <%= @person.ms_title %>
-</p>
-
-<p>
-  <strong>Ms school:</strong>
-  <%= @person.ms_school %>
-</p>
-
-<p>
-  <strong>Ms field:</strong>
-  <%= @person.ms_field %>
-</p>
-
-<p>
-  <strong>Ms thesis:</strong>
-  <%= @person.ms_thesis %>
-</p>
-
-<p>
-  <strong>Ms in lab:</strong>
-  <%= @person.ms_in_lab %>
-</p>
-
-<p>
-  <strong>Phd year:</strong>
-  <%= @person.phd_year %>
-</p>
-
-<p>
-  <strong>Phd title:</strong>
-  <%= @person.phd_title %>
-</p>
-
-<p>
-  <strong>Phd school:</strong>
-  <%= @person.phd_school %>
-</p>
-
-<p>
-  <strong>Phd field:</strong>
-  <%= @person.phd_field %>
-</p>
-
-<p>
-  <strong>Phd thesis:</strong>
-  <%= @person.phd_thesis %>
-</p>
-
-<p>
-  <strong>Phd in lab:</strong>
-  <%= @person.phd_in_lab %>
-</p>
-
-<p>
-  <strong>Miscattributes:</strong>
-  <%= @person.miscattributes %>
-</p>
-
-<p>
-  <strong>Person category:</strong>
-  <%= @person.person_category %>
-</p>
-
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Delete', person_path(@person), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', people_path %>
+
+
+
+</div>
+</div>
+
+
+
+

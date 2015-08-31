@@ -1,38 +1,21 @@
+<div class="row bheader">
+	Project: <%= @project.name%>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @project.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-
-<p>
-  <strong>Isactive:</strong>
-  <%= @project.isactive %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @project.url %>
-</p>
-
-<p>
-  <strong>Miscattributes:</strong>
-  <%= @project.miscattributes %>
-</p>
-
-<p>
-  <strong>Main research area:</strong>
-  <%= @project.main_research_area %>
-</p>
+	<%= render partial: 'layouts/section', locals: {heading: "Name", content: @project.name} %>
+	<%= render partial: 'layouts/section', locals: {heading: "TItle", content: @project.title} %>
+	<%= render partial: 'layouts/section', locals: {heading: "Description", content: @project.description} %>
+	<%= render partial: 'layouts/section', locals: {heading: "Status", content: @project.isactive ? "Active Project":"Inactive Project"} %>
+	<%= render partial: 'layouts/section', locals: {heading: "Main Research Area", content: @project.main_research_area.name} %>
+	<% if @project.miscattributes.present? %>
+      <% @project.miscattributes.each do |key, value| %>
+	    <%= render partial: 'layouts/section', locals: {heading: @key, content: @value} %>
+	  <% end %>
+	<% end %>
+	<% if @project.url.present? %>
+	  <%= link_to "Web Page", @project.url %>
+	<% end %>
+	<br>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

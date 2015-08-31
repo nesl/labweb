@@ -1,0 +1,12 @@
+<% if (defined? content) && content.present? %>
+  <p><strong><%= heading+":" if heading.present?%> </strong>
+  <%= "<br>".html_safe if (defined? content_newline) && content_newline.present? %>
+  <% if (defined? content_boldfont) && content_boldfont %><strong><% end %>
+  <% if (defined? url) && url.present? %>
+	<%= link_to content, url %>
+  <% else %>
+	<%= content.html_safe %>
+  <% end %>
+  <% if (defined? content_boldfont) && content_boldfont %></strong><% end %>
+  </p>
+<% end %>

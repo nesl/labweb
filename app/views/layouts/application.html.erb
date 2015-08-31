@@ -17,44 +17,51 @@
   <a href="#Top"></a>
 </head>
 
-<body>
+<body <% if content_for?(:scrollspytag) %> data-spy="scroll" data-target="#<%= yield :scrollspytag %>" <% end %>>
 
 <%= render 'layouts/header' %>
 
 <% if current_page?(root_path) %>
     <% if content_for?(:carousel) %>
 	    <div class="carousel">
-		  <%= yield :carousel %>
+		    <div class="container-fluid">
+				<%= yield :carousel %>
+			</div>
 		</div>
 	<% end %>
     <% if content_for?(:jumbotron) %>
         <div class="jumbotron">
-          <div class="container">
-            <%= yield :jumbotron %>
-          </div>
+			<div class="container-fluid">
+              <%= yield :jumbotron %>
+			</div>
         </div>
     <% end %>
 <% end %>
-<div class="container">
 
 <% if flash[:notice] || flash[:alert] %>
-<div class="row">
-  <div class="col-md-12">
-    <% if flash[:notice] %>
-        <div id="notice"><%= flash[:notice] %></div>
-    <% end %>
-    <% if flash[:alert] %>
-        <div id="alert"><%= flash[:alert] %></div>
-    <% end %>
-  </div>
-</div>
+    <div class="container lw-alerts">
+		<div class="row">
+		  <div class="col-md-12">
+		    <% if flash[:notice] %>
+		        <div id="notice"><%= flash[:notice] %></div>
+		    <% end %>
+		    <% if flash[:alert] %>
+		        <div id="alert"><%= flash[:alert] %></div>
+		    <% end %>
+		  </div>
+		</div>
+	</div>
 <% end %>
 
-<%= yield %>
+<div class="container lw-content">
+    <%= yield %>
+</div>
 
+<div class="container lw-content">
 <%= render 'layouts/footer' %>
+<div class="container lw-content">
+
 <%= debug(params) if Rails.env.development? %>
-</div> <!-- /container -->
 
 </body>
 

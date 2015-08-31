@@ -18,6 +18,7 @@ defaults: &defaults
   MAINTAINER_LAST: "Srivastava"
   MAINTAINER_FIRST: "Mani"
   YEARONE: "1985"
+  DEFAULT_MUGSHOT: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/800px-Smiley.svg.png"
   RECENT_NEWS_COUNT: 3
   RECENT_DOCS_COUNT: 4
   RECENT_PROJS_COUNT: 5
@@ -47,13 +48,13 @@ defaults: &defaults
     "UG Intern",
     "K12 Intern",
     "Intern",
-    "Collaborator",
-    "Former Collaborator",
-    "Former Faculty",
-    "Former Administrative Staff",
-    "Former Technical Staff",
-    "Former Staff",
-    "Former Post Doc",
+    "-Collaborator",
+    "-Former Collaborator",
+    "-Former Faculty",
+    "-Former Administrative Staff",
+    "-Former Technical Staff",
+    "-Former Staff",
+    "-Former Post Doc",
     "Alum PhD Student",
     "Alum MS Student",
     "Alum UG Student",
@@ -70,9 +71,9 @@ defaults: &defaults
     "Former UG Intern",
     "Former K12 Intern",
     "Former Intern",
-    "Coauthor",
-    "Other"
-  ]'
+    "-Coauthor",
+    "-Other"
+]'
 
 development:
   <<: *defaults

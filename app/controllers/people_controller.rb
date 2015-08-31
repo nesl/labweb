@@ -5,6 +5,32 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
+    @person_categories = PersonCategory.all.map{|x| x.name}.select{ |x| 
+      @people.select{ |p|
+        p.person_category.name==x
+      }.length>0
+    }
+    display_order_raw = eval(ENV["PEOPLE_DISPLAY_ORDER"])
+    display_order_all = display_order_raw.map{|x| x[0]!='-'? x : x[1..-1]}
+    @person_categories.sort!{ |a,b|
+      a_index = display_order_all.find_index(a)
+      b_index = display_order_all.find_index(b)
+      a_index = display_order_raw.length+1 unless a_index.present?
+      b_index = display_order_raw.length+1 unless b_index.present?
+      a_index<=>b_index
+    }
+            
+    filter = true    
+    params.each { |key, value| filter = false if key=="all" }
+    
+    if filter 
+      display_order_filtered = display_order_raw.select{|x| x if x[0]!='-'}
+      @person_categories = @person_categories.select { |x| display_order_filtered.member?(x)}
+      @people = Person.all.select{|p| p.person_category.name}
+    end
+    
+    #byebug
+    
   end
 
   # GET /people/1
