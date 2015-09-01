@@ -1,13 +1,8 @@
+<div class="row bheader">
+	Research Area: <%= @research_area.name%>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @research_area.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @research_area.description %>
-</p>
+	<%= render partial: 'layouts/section', locals: {heading: "Description", content: @research_area.description.presence || "No description available"} %>
 
 <%= link_to 'Edit', edit_research_area_path(@research_area) %> |
 <%= link_to 'Back', research_areas_path %>

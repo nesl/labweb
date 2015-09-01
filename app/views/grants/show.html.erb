@@ -1,83 +1,55 @@
+<div class="row bheader">
+	Grant: <%= @grant.name%>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @grant.name %>
-</p>
+<%= render partial: 'layouts/section', locals: {heading: "Title", content: @grant.title} %>
+<%= render partial: 'layouts/section', locals: {heading: "Description", content: @grant.description} %>
+<%= render partial: 'layouts/section', locals: {heading: "Status", content: @grant.isactive ? "Active Grant":"Inactive Grant"} %>
+<%= render partial: 'layouts/section', locals: {heading: "Start Date", content: @grant.startdate.inspect} %>
+<%= render partial: 'layouts/section', locals: {heading: "End Date", content: @grant.enddate.inspect} %>
+<%= render partial: 'layouts/section', locals: {heading: "Award Amount", content: @grant.totalawardamount} %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @grant.title %>
-</p>
+<% if @grant.fundingagencyurl.present? %>
+  <%= render partial: 'layouts/section', locals: {heading: "Funding Agencty", content: @grant.fundingagencyname, url: @grant.fundingagencyurl} %>
+<% else %>
+  <%= render partial: 'layouts/section', locals: {heading: "Funding Agencty", content: @grant.fundingagencyname} %>
+<% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @grant.description %>
-</p>
+<% if @grant.fundingagencylogourl.present? && url_exists?(@@grant.fundingagencylogourl) %>
+  <%= image_tag(@grant.fundingagencylogourl, :alt => "image", :height => "40") %>
+<% end %>
 
-<p>
-  <strong>Isactive:</strong>
-  <%= @grant.isactive %>
-</p>
 
-<p>
-  <strong>Url:</strong>
-  <%= @grant.url %>
-</p>
+<% if @grant.fundingagencygranturl.present? %>
+  <%= render partial: 'layouts/section', locals: {heading: "Award #", content: @grant.awardnumber, url: @grant.fundingagencygranturl} %>
+<% else %>
+  <%= render partial: 'layouts/section', locals: {heading: "Award #", content: @grant.awardnumber} %>
+<% end %>
 
-<p>
-  <strong>Startdate:</strong>
-  <%= @grant.startdate %>
-</p>
+<% if @grant.programurl.present? %>
+  <%= render partial: 'layouts/section', locals: {heading: "Program", content: @grant.programname, url: @grant.programurl} %>
+<% else %>
+  <%= render partial: 'layouts/section', locals: {heading: "Program", content: @grant.programname} %>
+<% end %>
 
-<p>
-  <strong>Enddate:</strong>
-  <%= @grant.enddate %>
-</p>
+<% if @grant.miscattributes.present? %>
+  <% @grant.miscattributes.each do |key, value| %>
+    <%= render partial: 'layouts/section', locals: {heading: @key, content: @value} %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Totalawardamount:</strong>
-  <%= @grant.totalawardamount %>
-</p>
+<% if @grant.projects.length>0 %>
+<strong>Projects:</strong>
+<ul>
+	<% @grant.projects.each do |p| %>
+	  <li><%= link_to p.name, project_path(p) %></li>
+	<% end %>
+</ul>
+<% end %>
 
-<p>
-  <strong>Fundingagencyname:</strong>
-  <%= @grant.fundingagencyname %>
-</p>
-
-<p>
-  <strong>Awardnumber:</strong>
-  <%= @grant.awardnumber %>
-</p>
-
-<p>
-  <strong>Fundingagencyurl:</strong>
-  <%= @grant.fundingagencyurl %>
-</p>
-
-<p>
-  <strong>Fundingagencylogourl:</strong>
-  <%= @grant.fundingagencylogourl %>
-</p>
-
-<p>
-  <strong>Fundingagencygranturl:</strong>
-  <%= @grant.fundingagencygranturl %>
-</p>
-
-<p>
-  <strong>Programname:</strong>
-  <%= @grant.programname %>
-</p>
-
-<p>
-  <strong>Programurl:</strong>
-  <%= @grant.programurl %>
-</p>
-
-<p>
-  <strong>Miscattributes:</strong>
-  <%= @grant.miscattributes %>
-</p>
+<% if @grant.url.present? %>
+  <%= link_to "Web Page", @grant.url %>
+<% end %>
 
 <%= link_to 'Edit', edit_grant_path(@grant) %> |
 <%= link_to 'Back', grants_path %>

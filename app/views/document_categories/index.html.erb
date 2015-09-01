@@ -1,42 +1,41 @@
 <% provide(:title, 'Document Categories') %>
 
-<br>
-<div class="panel panel-default">
+<div class="panel panel-default lw-content-without-second-nav">
   <!-- Default panel contents -->
   <div class="panel-heading">
     <h1 class="panel-title">Document Categories @ <%= ENV["LABACRONYM"]%></h1>
   </div>
-
+  
   <div class="panel-body">
-    <!-- Table -->
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th colspan="1"></th>
-      </tr>
-      </thead>
+	  <table class="table-condensed lw-table">
+		  <tbody>
+			  <% @document_categories.each do |document_category| %>
+			    <tr>
+					<td><%= document_category.name %></td>
+					<td>
+						<% if user_signed_in? && current_user.admin? %>
+						  &nbsp;&nbsp;&nbsp;&nbsp;[
+						  <%= link_to "Details,", document_category %>
+						  <%= link_to "Edit,", edit_document_category_path(document_category) %>
+						  <%= link_to 'Delete', document_category, method: :delete, data: { confirm: 'Are you sure?' } %>
+						  ]
+						<% else %>
+						  [
+						  <%= link_to "Details", document_category %>
+						  ]
+						<% end %>
+				    </td>
+			  <% end %>
+		  </tbody>
+	  </table>
+  </div>
 
-      <tbody>
-      <% @document_categories.each do |document_category| %>
-          <tr>
-            <td><%=document_category.name%></td>
-            <td><%= link_to '[ Details', document_category %>
-            <% if user_signed_in? && current_user.admin? %>
-                <%= link_to '| Edit', edit_document_category_path(document_category) %>
-                <%= link_to '| Destroy', document_category, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <% end %>
-            ]</td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="panel-footer">
-    <% if user_signed_in? %>
-        <% if current_user.admin? %>
-            <%= link_to 'Create', new_document_category_path %>
-        <% end %>
+   <% if user_signed_in? %>
+     <% if current_user.admin? %>
+	   <div class="panel-footer">
+       <%= link_to 'New Document Category', new_document_category_path %>
+	   </div>
+     <% end %>
     <% end %>
-  </div>
+  
 </div>

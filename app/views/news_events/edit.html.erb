@@ -1,6 +1,18 @@
-<h1>Editing news_event</h1>
+<% provide(:title, 'News Event') %>
 
-<%= render 'form' %>
+<br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Editing News Event</h1>
+  </div>
 
-<%= link_to 'Show', @news_event %> |
-<%= link_to 'Back', news_events_path %>
+  <div class="panel-body">
+    <%= render 'form' %>
+  </div>
+
+  <div class="panel-footer">
+	<%= link_to 'Show', @news_event %> |
+	<%= link_to 'Back', news_events_path %>
+  </div>
+</div>

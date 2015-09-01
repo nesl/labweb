@@ -9,8 +9,8 @@ class Grant < ActiveRecord::Base
   validates :title, presence: {message: ": Grant title is missing"}
   validates :isactive, presence: {message: ": Grant active/inactive status is missing"}
   validates :url, :fundingagencyurl, :fundingagencylogourl, :fundingagencygranturl, :programurl,
-            allow_nil: true, format: {with: URI::regexp(%w(http https)), message: ": URL is malformed"}
-  validates :totalawardamount, numericality: {only_integer: true, greater_than: 0,
+            allow_nil: true, allow_blank: true, format: {with: URI::regexp(%w(http https)), message: ": URL is malformed"}
+  validates :totalawardamount, allow_blank: true, numericality: {only_integer: true, greater_than: 0,
             message: ": Grant award amount must be positive integer"}
 
 end

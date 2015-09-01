@@ -1,18 +1,9 @@
+<div class="row bheader">
+	News Event: <%= @news_event.title %>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @news_event.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @news_event.description %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @news_event.date %>
-</p>
+<%= render partial: 'layouts/section', locals: {heading: "Description", content: @news_event.description} %>
+<%= render partial: 'layouts/section', locals: {heading: "Date", content: @news_event.date.inspect} %>
 
 <%= link_to 'Edit', edit_news_event_path(@news_event) %> |
 <%= link_to 'Back', news_events_path %>

@@ -10,16 +10,25 @@
       </ul>
     </div>
   <% end %>
-
+  <table class="table-condensed lw-table">
+  <tbody>
+  <tr><td>
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, size: 100%>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, size: "103x10" %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="actions">
     <%= f.submit %>
   </div>
+  </td></tr>
+  </tbody>
+  </table>
 <% end %>

@@ -10,72 +10,109 @@
       </ul>
     </div>
   <% end %>
-
+  <table class="table-condensed lw-table">
+  <tbody>
+  <tr><td>
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, size: "103x10" %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :isactive %><br>
+    <%= f.label :isactive, "Is this an active grant?" %>&nbsp;&nbsp;
     <%= f.check_box :isactive %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.label :url, "URL" %><br>
+    <%= f.text_field :url, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :startdate %><br>
+    <%= f.label :startdate, "Start Date" %><br>
     <%= f.date_select :startdate %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :enddate %><br>
+    <%= f.label :enddate, "End Date" %><br>
     <%= f.date_select :enddate %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :totalawardamount %><br>
+    <%= f.label :totalawardamount, "Award Amount (USD)" %><br>
     <%= f.number_field :totalawardamount %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :fundingagencyname %><br>
-    <%= f.text_field :fundingagencyname %>
+    <%= f.label :fundingagencyname, "Funding Agency Name"%><br>
+    <%= f.text_field :fundingagencyname, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :awardnumber %><br>
-    <%= f.text_field :awardnumber %>
+    <%= f.label :awardnumber, "Award #" %><br>
+    <%= f.text_field :awardnumber, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :fundingagencyurl %><br>
-    <%= f.text_field :fundingagencyurl %>
+    <%= f.label :fundingagencyurl, "Funding Agency URL" %><br>
+    <%= f.text_field :fundingagencyurl, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :fundingagencylogourl %><br>
-    <%= f.text_field :fundingagencylogourl %>
+    <%= f.label :fundingagencylogourl, "Funding Agency Logo URL" %><br>
+    <%= f.text_field :fundingagencylogourl, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :fundingagencygranturl %><br>
-    <%= f.text_field :fundingagencygranturl %>
+    <%= f.label :fundingagencygranturl,  "Funding Agency Grant URL" %><br>
+    <%= f.text_field :fundingagencygranturl, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :programname %><br>
-    <%= f.text_field :programname %>
+    <%= f.label :programname, "Name of Research Program" %><br>
+    <%= f.text_field :programname, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :programurl %><br>
-    <%= f.text_field :programurl %>
+    <%= f.label :programurl, "Reserch Program URL" %><br>
+    <%= f.text_field :programurl, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :miscattributes %><br>
-    <%= f.text_field :miscattributes %>
+    <%= f.label :miscattributes, "Miscellaneous Attributes (e.g 'a=>1,b=>2')" %><br>
+    <%= f.text_field :miscattributes, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="actions">
     <%= f.submit %>
   </div>
+  </td></tr>
+  </tbody>
+  </table>
 <% end %>

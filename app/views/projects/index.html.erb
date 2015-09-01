@@ -36,6 +36,7 @@
 				     </li>
 			      <% end %>
 			    </ul>
+			    </ul>
 			    </td>
 		    </tr>
 			<tr>
@@ -43,7 +44,7 @@
 				<ul style="list-style-type:none">
 				<li>Retired Projects:</li>
   				<ul>
-  			    <% project_list.select{|x| !x.isactive}.each do |p| %>
+  			     <% project_list.select{|x| !x.isactive}.each do |p| %>
   				     <li>
   					 <em><%= p.name %>:</em> <%= p.title %>
                        [ 
@@ -55,10 +56,10 @@
   					  ]
   				      </li>
   			      <% end %>
-  			      </ul>
-  			      </td>
-  			  </tr>
-			
+  			     </ul>
+			     </ul>
+  			     </td>
+  			  </tr>		
 	  <% end %>
 	  </table>
   </div>

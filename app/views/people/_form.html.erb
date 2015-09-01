@@ -14,20 +14,20 @@
   <tbody>
   <tr><td>
   <div class="field">
-    <%= f.label :last_name, "Last Name"%><br>
-    <%= f.text_field :lastname, size: 20  %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
     <%= f.label :first_name %><br>
-    <%= f.text_field :firstname %>
+    <%= f.text_field :firstname, size: 20 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
     <%= f.label :middle_initial %><br>
-    <%= f.text_field :middleinitial %>
+    <%= f.text_field :middleinitial, size: 1 %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :lastname, size: 20  %>
   </div>
   </td></tr>
   <tr><td>
@@ -38,266 +38,266 @@
   </td></tr>
   <tr><td>
   <div class="field">
+    <%= f.label :person_category_id, "Person Category:" %>&nbsp;&nbsp;
+    <%= f.select("person_category_id", PersonCategory.all.collect{|pc| [ pc.name, pc.id ] }, {include_blank: 'None'})%>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.label :url, "URL" %><br>
+    <%= f.text_field :url, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :urlphoto %><br>
-    <%= f.text_field :urlphoto %>
+    <%= f.label :urlphoto, "URL for photo" %><br>
+    <%= f.text_field :urlphoto, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :phonework %><br>
-    <%= f.text_field :phonework %>
+    <%= f.label :phonework, "Phone (work)" %><br>
+    <%= f.text_field :phonework, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :phonehome %><br>
-    <%= f.text_field :phonehome %>
+    <%= f.label :phonehome, "Phone (home)" %><br>
+    <%= f.text_field :phonehome, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :phonecell %><br>
-    <%= f.text_field :phonecell %>
+    <%= f.label :phonecell, "Phone (mobile)"%><br>
+    <%= f.text_field :phonecell, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :fax %><br>
-    <%= f.text_field :fax %>
+    <%= f.label :fax, "Fax" %><br>
+    <%= f.text_field :fax, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :addressoffice %><br>
-    <%= f.text_field :addressoffice %>
+    <%= f.label :addressoffice, "Office Room #" %><br>
+    <%= f.text_field :addressoffice, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :addresslab %><br>
-    <%= f.text_field :addresslab %>
+    <%= f.label :addresslab, "Lab Room #" %><br>
+    <%= f.text_field :addresslab, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :addressmail %><br>
-    <%= f.text_field :addressmail %>
+    <%= f.label :addressmail, "Mail Address"%><br>
+    <%= f.text_field :addressmail, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
     <%= f.label :department %><br>
-    <%= f.text_field :department %>
+    <%= f.text_field :department, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :urldepartment %><br>
-    <%= f.text_field :urldepartment %>
+    <%= f.label :urldepartment, "Department URL" %><br>
+    <%= f.text_field :urldepartment, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :organization %><br>
-    <%= f.text_field :organization %>
+    <%= f.label :organization, "Organization" %><br>
+    <%= f.text_field :organization, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :urlorganization %><br>
-    <%= f.text_field :urlorganization %>
+    <%= f.label :urlorganization, "Organization URL" %><br>
+    <%= f.text_field :urlorganization, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :biography %><br>
-    <%= f.text_area :biography %>
+    <%= f.label :bs_year, "B.S. Graduation Year" %><br>
+    <%= f.number_field :bs_year, size: 4 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :researchinterests %><br>
-    <%= f.text_area :researchinterests %>
+    <%= f.label :bs_title, "B.S. Degree Title" %><br>
+    <%= f.text_field :bs_title, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :education %><br>
-    <%= f.text_area :education %>
+    <%= f.label :bs_school, "B.S. School" %><br>
+    <%= f.text_field :bs_school, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :professionalexperience %><br>
-    <%= f.text_area :professionalexperience %>
+    <%= f.label :bs_field, "B.S. Field" %><br>
+    <%= f.text_field :bs_field, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :professionalservice %><br>
-    <%= f.text_area :professionalservice %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :otherpublications %><br>
-    <%= f.text_area :otherpublications %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :patents %><br>
-    <%= f.text_area :patents %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :awards %><br>
-    <%= f.text_area :awards %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :skills %><br>
-    <%= f.text_area :skills %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :interests %><br>
-    <%= f.text_area :interests %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :secretary %><br>
-    <%= f.text_area :secretary %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :bs_year %><br>
-    <%= f.number_field :bs_year %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :bs_title %><br>
-    <%= f.text_field :bs_title %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :bs_school %><br>
-    <%= f.text_field :bs_school %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :bs_field %><br>
-    <%= f.text_field :bs_field %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :bs_in_lab %><br>
+    <%= f.label :bs_in_lab, "Was B.S. done at #{ENV["LABACRONYM"]}?" %>&nbsp;&nbsp;
     <%= f.check_box :bs_in_lab %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :ms_year %><br>
-    <%= f.number_field :ms_year %>
+    <%= f.label :ms_year, "M.S. Graduation Year" %><br>
+    <%= f.number_field :ms_year, size: 4 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :ms_title %><br>
-    <%= f.text_field :ms_title %>
+    <%= f.label :ms_title, "M.S. Degree Title" %><br>
+    <%= f.text_field :ms_title, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :ms_school %><br>
-    <%= f.text_field :ms_school %>
+    <%= f.label :ms_school, "M.S. School" %><br>
+    <%= f.text_field :ms_school, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :ms_field %><br>
-    <%= f.text_field :ms_field %>
+    <%= f.label :ms_field, "M.S. Field" %><br>
+    <%= f.text_field :ms_field, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :ms_thesis %><br>
-    <%= f.text_field :ms_thesis %>
+    <%= f.label :ms_thesis, "M.S. Thesis Title" %><br>
+    <%= f.text_field :ms_thesis, size:100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :ms_in_lab %><br>
+    <%= f.label :ms_in_lab, "Was M.S. done at #{ENV["LABACRONYM"]}?" %>&nbsp;&nbsp;
     <%= f.check_box :ms_in_lab %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :phd_year %><br>
+    <%= f.label :phd_year, "Ph.D. Graduation Year" %><br>
     <%= f.number_field :phd_year %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :phd_title %><br>
-    <%= f.text_field :phd_title %>
+    <%= f.label :phd_title, "Ph.D Degree Title" %><br>
+    <%= f.text_field :phd_title, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :phd_school %><br>
-    <%= f.text_field :phd_school %>
+    <%= f.label :phd_school, "Ph.D. School" %><br>
+    <%= f.text_field :phd_school, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :phd_field %><br>
-    <%= f.text_field :phd_field %>
+    <%= f.label :phd_field, "Ph.D. Field" %><br>
+    <%= f.text_field :phd_field, size: 100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :phd_thesis %><br>
-    <%= f.text_field :phd_thesis %>
+    <%= f.label :phd_thesis, "Ph.D. Thesis Title" %><br>
+    <%= f.text_field :phd_thesis, size:100 %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :phd_in_lab %><br>
+    <%= f.label :phd_in_lab, "Was Ph.D. done at #{ENV["LABACRONYM"]}?"%>&nbsp;&nbsp;
     <%= f.check_box :phd_in_lab %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :miscattributes %><br>
-    <%= f.text_field :miscattributes %>
+    <%= f.label :biography %><br>
+    <%= f.text_area :biography, size: "103x10" %>
   </div>
   </td></tr>
   <tr><td>
   <div class="field">
-    <%= f.label :person_category_id %><br>
-    <%= f.text_field :person_category_id %>
+    <%= f.label :researchinterests, "Research Interests"%><br>
+    <%= f.text_area :researchinterests, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :education %><br>
+    <%= f.text_area :education, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :professionalexperience, "Professional Experience" %><br>
+    <%= f.text_area :professionalexperience, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :professionalservice, "Professional Service" %><br>
+    <%= f.text_area :professionalservice, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :otherpublications, "Other Publications" %><br>
+    <%= f.text_area :otherpublications, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :patents %><br>
+    <%= f.text_area :patents, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :awards %><br>
+    <%= f.text_area :awards, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :skills %><br>
+    <%= f.text_area :skills, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :interests %><br>
+    <%= f.text_area :interests, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :secretary %><br>
+    <%= f.text_area :secretary, size: "103x10" %>
+  </div>
+  </td></tr>
+  <tr><td>
+  <div class="field">
+    <%= f.label :miscattributes, "Miscellaneous Attributes" %><br>
+    <%= f.text_field :miscattributes, size:100 %>
   </div>
   </td></tr>
   <tr><td>

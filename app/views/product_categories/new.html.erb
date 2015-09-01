@@ -1,5 +1,17 @@
-<h1>New product_category</h1>
+<% provide(:title, 'Product Category') %>
 
-<%= render 'form' %>
+<br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Add New Product Category to <%= ENV["LABACRONYM"]%></h1>
+  </div>
 
-<%= link_to 'Back', product_categories_path %>
+  <div class="panel-body">
+    <%= render 'form' %>
+  </div>
+
+  <div class="panel-footer">
+    <%= link_to 'Back', product_categories_path %>
+  </div>
+</div>

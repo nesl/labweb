@@ -1,6 +1,18 @@
-<h1>Editing product_category</h1>
+<% provide(:title, 'Product Category') %>
 
-<%= render 'form' %>
+<br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Editing Product Category</h1>
+  </div>
 
-<%= link_to 'Show', @product_category %> |
-<%= link_to 'Back', product_categories_path %>
+  <div class="panel-body">
+    <%= render 'form' %>
+  </div>
+
+  <div class="panel-footer">
+	<%= link_to 'Show', @product_category %> |
+	<%= link_to 'Back', product_categories_path %>
+  </div>
+</div>

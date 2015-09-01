@@ -10,16 +10,25 @@
       </ul>
     </div>
   <% end %>
-
+  <table class="table-condensed lw-table">
+  <tbody>
+  <tr><td>
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, size: 100 %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="field">
-    <%= f.label :relationship_distance %><br>
+    <%= f.label :relationship_distance, "Relationship Distance" %><br>
     <%= f.number_field :relationship_distance %>
   </div>
+  </td></tr>
+  <tr><td>
   <div class="actions">
     <%= f.submit %>
   </div>
+  </td></tr>
+  </tbody>
+  </table>
 <% end %>

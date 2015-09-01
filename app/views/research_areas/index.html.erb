@@ -1,27 +1,41 @@
-<h1>Listing research_areas</h1>
+<% provide(:title, 'Research Areas') %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="panel panel-default lw-content-without-second-nav">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Research Areas @ <%= ENV["LABACRONYM"]%></h1>
+  </div>
+  
+  <div class="panel-body">
+	  <table class="table-condensed lw-table">
+		  <tbody>
+			  <% @research_areas.each do |research_area| %>
+			    <tr>
+					<td><%= research_area.name %></td>
+					<td>
+						<% if user_signed_in? && current_user.admin? %>
+						  &nbsp;&nbsp;&nbsp;&nbsp;[
+						  <%= link_to "Details,", research_area %>
+						  <%= link_to "Edit,", edit_research_area_path(research_area) %>
+						  <%= link_to 'Delete', research_area, method: :delete, data: { confirm: 'Are you sure?' } %>
+						  ]
+						<% else %>
+						  [
+						  <%= link_to "Details", research_area %>
+						  ]
+						<% end %>
+				    </td>
+			  <% end %>
+		  </tbody>
+	  </table>
+  </div>
 
-  <tbody>
-    <% @research_areas.each do |research_area| %>
-      <tr>
-        <td><%= research_area.name %></td>
-        <td><%= research_area.description %></td>
-        <td><%= link_to 'Show', research_area %></td>
-        <td><%= link_to 'Edit', edit_research_area_path(research_area) %></td>
-        <td><%= link_to 'Destroy', research_area, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+   <% if user_signed_in? %>
+     <% if current_user.admin? %>
+	   <div class="panel-footer">
+       <%= link_to 'New Research Area', new_research_area_path %>
+	   </div>
+     <% end %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Research area', new_research_area_path %>
+  
+</div>

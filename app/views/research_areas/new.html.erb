@@ -1,5 +1,17 @@
-<h1>New research_area</h1>
+<% provide(:title, 'Project') %>
 
-<%= render 'form' %>
+<br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Add New Research Area to <%= ENV["LABACRONYM"]%></h1>
+  </div>
 
-<%= link_to 'Back', research_areas_path %>
+  <div class="panel-body">
+    <%= render 'form' %>
+  </div>
+
+  <div class="panel-footer">
+    <%= link_to 'Back', research_areas_path %>
+  </div>
+</div>

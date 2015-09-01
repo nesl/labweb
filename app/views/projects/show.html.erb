@@ -13,8 +13,53 @@
 	  <% end %>
 	<% end %>
 	<% if @project.url.present? %>
-	  <%= link_to "Web Page", @project.url %>
+	  <p><strong><%= link_to "Web Page", @project.url %></strong></p>
 	<% end %>
+	<% if @project.people.length > 1 %>
+	<p><strong>People:</strong>
+		<ul>
+			<% @project.people.each do |person| %>
+			  <li><%= link_to "#{person.firstname} #{person.lastname}", person_path(person) %></li>
+			<% end %>
+		</ul>
+	</p>
+	<% end %>
+	<% if @project.documents.length > 1 %>
+	<p><strong>Documents:</strong>
+		<ul>
+			<% @project.documents.each do |document| %>
+			  <li><%= document.citation() %> [ <%= link_to "Details", document_path(document) %> ]</li>
+			<% end %>
+		</ul>
+	</p>
+	<%end%>
+	<% if @project.products.length > 1 %>
+	<p><strong>Products:</strong>
+		<ul>
+			<% @project.products.each do |product| %>
+			  <li><%= product.title %> [ <%= link_to "Details", product_path(product) %> ]</li>
+			<% end %>
+		</ul>
+	</p>
+	<%end%>
+	<% if @project.research_areas.length > 1 %>
+	<p><strong>Research Areas:</strong>
+		<ul>
+			<% @project.research_areas.each do |ra| %>
+			  <li><%= link_to "#{ra.name}", research_area_path(ra) %></li>
+			<% end %>
+		</ul>
+	</p>
+	<% end %>
+	<% if @project.grants.length > 1 %>
+	<p><strong>Grants:</strong>
+		<ul>
+			<% @project.grants.each do |grant| %>
+			  <li><%= link_to "#{grant.name}", grant_path(grant) %></li>
+			<% end %>
+		</ul>
+	</p>
+	<%end%>
 	<br>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
