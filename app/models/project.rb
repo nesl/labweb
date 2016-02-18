@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
   validates :name, presence: {message: ": Missing project name"}
   validates :title, presence: {message: ": Missing project title"}
   validates :isactive, presence: {message: ": Missing active/nonactive status"}
-  validates :url, allow_nil: true, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
+  validates :main_research_area, presence: {message: ": Missing research area"}
+  validates :url, allow_nil: true, allow_blank: true, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
 
 end

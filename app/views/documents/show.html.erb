@@ -1,6 +1,8 @@
 <div class="bheader">
 	<%= link_to_unless(@document.urlpdfpaper.nil?, @document.title) %>
+	<% if @document.document_category.present? %>
 	<span class="category">[<%= @document.document_category.name %>]</span>
+	<% end %>
 </div>
 <p>
 	<%= @document.citation() %>
@@ -198,7 +200,7 @@
 <% if @document.document_category.present? %>
 <p>
   <strong>Document category:</strong>
-  <%= @document.document_category %>
+  <%= @document.document_category.name %>
 </p>
 <% end %>
 
@@ -208,6 +210,40 @@
   <%= @document.main_research_area %>
 </p>
 <% end %>
+
+<p>
+  <% if @document.projects.length > 0 %>
+    <strong>Projects:</strong>
+	<ul>
+      <% @document.projects.each do |p| %>
+	    <li> <%= link_to p.name, p %> </li>
+	  <% end %>
+    </ul>
+  <% end %>
+</p>
+
+<p>
+  <% if @document.grants.length > 0 %>
+    <strong>Grants:</strong>
+	<ul>
+      <% @document.grants.each do |g| %>
+	    <li> <%= link_to g.name, g %> </li>
+	  <% end %>
+    </ul>
+  <% end %>
+</p>
+
+<p>
+  <% if @document.research_areas.length > 0 %>
+    <strong>Research Areas:</strong>
+	<ul>
+      <% @document.research_areas.each do |ra| %>
+	    <li> <%= link_to ra.name, ra %> </li>
+	  <% end %>
+    </ul>
+  <% end %>
+</p>
+  
 
 <% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_document_path(@document) %> |

@@ -3,6 +3,55 @@
 </div>
 
 	<%= render partial: 'layouts/section', locals: {heading: "Description", content: @research_area.description.presence || "No description available"} %>
+	
 
+<p>
+  <% if @research_area.projects.length > 0 %>
+    <strong>Projects:</strong>
+	<ul>
+      <% @research_area.projects.each do |p| %>
+	    <li> <%= link_to p.name, p %> </li>
+	  <% end %>
+    </ul>
+  <% end %>
+</p>
+
+<p>
+  <% if @research_area.grants.length > 0 %>
+    <strong>Grants:</strong>
+	<ul>
+      <% @research_area.grants.each do |ga| %>
+	    <li> <%= link_to ga.name, ga %> </li>
+	  <% end %>
+    </ul>
+  <% end %>
+</p>
+
+<!--
+<% if @research_area.documents.length > 0 %>
+<p><strong>Documents:</strong>
+	<ul>
+		<% @research_area.documents.each do |document| %>
+		  <li><%= document.citation() %> [ <%= link_to "Details", document_path(document) %> ]</li>
+		<% end %>
+	</ul>
+</p>
+<%end%>
+
+<% if @research_area.products.length > 0 %>
+<p><strong>Products:</strong>
+	<ul>
+		<% @research_area.products.each do |product| %>
+		  <li><%= product.title %> [ <%= link_to "Details", product_path(product) %> ]</li>
+		<% end %>
+	</ul>
+</p>
+<%end%>
+-->
+
+
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_research_area_path(@research_area) %> |
+<%= link_to 'Delete', research_area_path(@research_area), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', research_areas_path %>

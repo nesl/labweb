@@ -6,5 +6,9 @@
   <%= @document_category.priority %>
 </p>
 
+
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_document_category_path(@document_category) %> |
+<%= link_to 'Delete', document_category_path(@document_category), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', document_categories_path %>

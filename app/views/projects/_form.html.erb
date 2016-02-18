@@ -54,6 +54,12 @@
 	<%= f.select("main_research_area_id", ResearchArea.all.collect{|ra| [ ra.name, ra.id ] }, {include_blank: 'None'})%>
   </div>
   </td></tr>
+  
+  <tr><td>
+	<%= f.label :people, "Participants:" %>&nbsp;&nbsp;
+	<%= f.select("people", Person.all.order(:firstname).collect{|p| [ p.firstname+" "+p.lastname, p.id ] }, {include_blank: 'None'}, { :multiple => true, :size => 5 })%>
+  </td></tr>
+  
   <tr><td>
   <div class="actions">
     <%= f.submit %>

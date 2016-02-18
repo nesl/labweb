@@ -47,9 +47,50 @@
 </ul>
 <% end %>
 
+<% if @grant.documents.length > 0 %>
+<p><strong>Documents:</strong>
+	<ul>
+		<% @grant.documents.each do |document| %>
+		  <li><%= document.citation() %> [ <%= link_to "Details", document_path(document) %> ]</li>
+		<% end %>
+	</ul>
+</p>
+<%end%>
+<% if @grant.products.length > 0 %>
+<p><strong>Products:</strong>
+	<ul>
+		<% @grant.products.each do |product| %>
+		  <li><%= product.title %> [ <%= link_to "Details", product_path(product) %> ]</li>
+		<% end %>
+	</ul>
+</p>
+<%end%>
+<% if @grant.research_areas.length > 0 %>
+<p><strong>Research Areas:</strong>
+	<ul>
+		<% @grant.research_areas.each do |ra| %>
+		  <li><%= link_to "#{ra.name}", research_area_path(ra) %></li>
+		<% end %>
+	</ul>
+</p>
+<% end %>
+<% if @grant.projects.length > 0 %>
+<p><strong>Projects:</strong>
+	<ul>
+		<% @grant.projects.each do |project| %>
+		  <li><%= link_to "#{grant.name}", project_path(project) %></li>
+		<% end %>
+	</ul>
+</p>
+<%end%>
+
 <% if @grant.url.present? %>
   <%= link_to "Web Page", @grant.url %>
 <% end %>
 
+
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_grant_path(@grant) %> |
+<%= link_to 'Delete', grant_path(@grant), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', grants_path %>

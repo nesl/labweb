@@ -49,5 +49,42 @@
   <%= @product.main_research_area %>
 </p>
 
+<p>
+  <% if @product.projects.length > 0 %>
+    <strong>Projects:</strong>
+	<ul>
+      <% @product.projects.each do |p| %>
+	    <li> <%= link_to p.name, p %> </li>
+	  <% end %>
+    </ul>
+  <% end %>
+</p>
+
+<p>
+  <% if @product.grants.length > 0 %>
+    <strong>Grants:</strong>
+	<ul>
+      <% @product.grants.each do |g| %>
+	    <li> <%= link_to g.name, g %> </li>
+	  <% end %>
+    </ul>
+  <% end %>
+</p>
+
+<p>
+  <% if @product.research_areas.length > 0 %>
+    <strong>Research Areas:</strong>
+	<ul>
+      <% @product.research_areas.each do |ra| %>
+	    <li> <%= link_to ra.name, ra %> </li>
+	  <% end %>
+    </ul>
+  <% end %>
+</p>
+
+
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', products_path %>

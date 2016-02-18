@@ -6,5 +6,9 @@
   <%= @product_category.priority %>
 </p>
 
+
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_product_category_path(@product_category) %> |
+<%= link_to 'Delete', product_category_path(@product_category), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', product_categories_path %>
