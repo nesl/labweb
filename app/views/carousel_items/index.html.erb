@@ -25,8 +25,11 @@
         <td><%= carousel_item.gotourl %></td>
         <td><%= carousel_item.position %></td>
         <td><%= link_to 'Show', carousel_item %></td>
-        <td><%= link_to 'Edit', edit_carousel_item_path(carousel_item) %></td>
-        <td><%= link_to 'Destroy', carousel_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user_signed_in? && current_user.admin? %>
+          <td><%= link_to 'Edit', edit_carousel_item_path(carousel_item) %></td>
+          <td><%= link_to 'Destroy', carousel_item, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +37,6 @@
 
 <br>
 
-<%= link_to 'New Carousel item', new_carousel_item_path %>
+<% if user_signed_in? && current_user.admin? %>
+  <%= link_to 'New Carousel item', new_carousel_item_path %>
+<% end %>
