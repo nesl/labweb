@@ -1,10 +1,51 @@
 <% provide(:title, 'Welcome') %>
 
-<% 
-   if @carousel_items.length > 0 then
-	 provide(:carousel,"test")
-   end
-%>
+<% if @carousel_items.length > 0 then %>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <p>carousel length = <%= @carousel_items.length.to_s %></p>
+
+    <!-- Indicators -->
+	<ol class="carousel-indicators">
+	  <% for i in 0..@carousel_items.length %>
+	    <li data-target="#myCarousel" data-slide-to="<%= i%>"></li>
+	  <% end %>
+	</ol>
+
+
+	<!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      <div class="item">
+        <%= image_tag(ENV["DEFAULT_MUGSHOT"], :alt => "image1", :width => "100") %>
+        <div class="carousel-caption">
+          <h3>Test 1</h3>
+          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <%= image_tag(ENV["DEFAULT_MUGSHOT"], :alt => "image2", :width => "200") %>
+        <div class="carousel-caption">
+          <h3>Test 2</h3>
+          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+        </div>
+      </div>
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+	 	  
+  </div>
+<% end %>
+
 
 <% if @overview then
 	provide(:jumbotron,('<div><p>' + @overview.body + '</p></div>' +
