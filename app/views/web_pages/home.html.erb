@@ -1,26 +1,32 @@
 <style>
 .carouselImg img {
   width: auto;
-  height: 300px;
-  max-height: 300px;
-  min-height: 300px;
+  height: 400px;
+  max-height: 400px;
+  min-height: 200px;
 }
 
 .jumbotron { 
-  height: 300px;
-  max-height: 300px; 
-  min-height: 300px;
+  height: 400px;
+  max-height: 400px; 
+  min-height: 200px;
+  background-color: #ffffff;
+}
+
+.carousel-indicators li {
+  background-color: #eeeeee;
+}
+
+.carousel-indicators .active {
+  background-color: #347ab7;
+}
+
+.carousel-control {
+  color: #347ab7 !important;
 }
 </style>
 
 <% provide(:title, 'Welcome') %>
-
-<% 
-# if @overview then
-#   provide(:jumbotron,('<div class="col-md-3"><p>' + @overview.body + '</p></div>' +
-#         '<a class="btn btn-primary btn-md" href="' + about_path + '"role="button">Learn more &raquo;</a>').html_safe)
-#    end
-%>
 
 <br>
 
@@ -84,13 +90,10 @@
   <!-- Empty row for space -->
   <div class="row">
     <div class="col-md-3">
-      <br>
     </div>
     <div class="col-md-6">
-      <br>
     </div>
     <div class="col-md-3">
-      <br>
     </div>
   </div>
 
