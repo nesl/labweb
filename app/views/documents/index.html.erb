@@ -52,7 +52,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                <% @documents.where({document_category_id: item.id}).select{|x| @person.present? ? (x.people.member?(@person)) : true}.each do |document| %>
+                <% @documents.where({document_category_id: item.id}).order('pubdate DESC').select{|x| @person.present? ? (x.people.member?(@person)) : true}.each do |document| %>
                     <tr>
                       <td><%= document.citation() %><br>
                       [<%= link_to ' Details', document %>
@@ -105,7 +105,7 @@
                 </thead>
 
                 <tbody>
-                <% @documents.select{|x| (x.pubdate.year==item) && (@person.present? ? (x.people.member?(@person)) : true)}.each do |document| %>
+                <% @documents.order('pubdate DESC').select{|x| (x.pubdate.year==item) && (@person.present? ? (x.people.member?(@person)) : true)}.each do |document| %>
                     <tr>
                       <td><%= document.citation() %><br>
                       [<%= link_to ' Details', document %>
