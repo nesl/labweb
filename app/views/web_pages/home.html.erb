@@ -1,73 +1,164 @@
+<style>
+.carouselImg img {
+  width: auto;
+  height: 400px;
+  max-height: 400px;
+  min-height: 200px;
+}
+
+.jumbotron { 
+  height: 400px;
+  max-height: 400px; 
+  min-height: 200px;
+  background-color: #ffffff;
+}
+
+.carousel-indicators li {
+  background-color: #eeeeee;
+}
+
+.carousel-indicators .active {
+  background-color: #347ab7;
+}
+
+.carousel-control {
+  color: #347ab7 !important;
+}
+</style>
+
 <% provide(:title, 'Welcome') %>
 
-<% 
-   if @carousel_items.length > 0 then
-	 provide(:carousel,"test")
-   end
-%>
-
-<% if @overview then
-	provide(:jumbotron,('<div><p>' + @overview.body + '</p></div>' +
-        '<a class="btn btn-primary btn-md" href="' + about_path + '"role="button">Learn more &raquo;</a>').html_safe)
-   end
-%>
+<br>
 
 <div class="container">
-  <!-- Example row of columns -->
+  <!-- Row 1: overview + carousel -->
+  <div class="row">
+    <div class="jumbotron col-md-3">
+      <p>
+        <% if @overview then %>
+          <%= @overview.body.html_safe %>
+        <% else %>
+          <%= ENV["LABDESCRIPTION"] %>
+        <% end %>
+      </p>
+      <a class="btn btn-primary btn-md" href=<%= about_path.html_safe %> role="button">Learn more &raquo;</a>
+    </div>
+
+    <% if @carousel_items.length > 0 then %>
+    <div id="myCarousel" class="carousel slide col-md-9" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <% for i in 0..@carousel_items.length - 1 %>
+          <% if i == 0 %> 
+            <li data-target="#myCarousel" data-slide-to=<%= i%> class=active></li>
+          <% else %>
+            <li data-target="#myCarousel" data-slide-to=<%= i%>></li>
+          <% end %>
+        <% end %>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <% @carousel_items.each_with_index do |carousel_item, index| %>
+          <% if index == 0 %>
+            <div class="item active carouselImg">
+          <% else %>
+            <div class="item carouselImg">
+          <% end %>
+              <img src=<%= ENV["DEFAULT_MUGSHOT"] %> alt=<%= carousel_item.caption %> >
+              <div class="carousel-caption">
+                <h3><%= carousel_item.caption %></h3>
+                <p><%= carousel_item.description %></p>
+              </div>
+            </div>
+        <% end %>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <% end %>
+  </div>
+
+  <!-- Empty row for space -->
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+
+  <!-- Row 2: news + recent papers + projects -->
   <div class="row">
     <div class="col-md-3">
       <h2>News</h2>
-	  <% @recent_news.each do |n| %>
-	  <p> 
-		  &bull; <%=n.title%> (<%=n.date%>) [<%= link_to "Details", n %>]
-	  </p>
-	  <% end %>
+      <% @recent_news.each do |n| %>
+      <p> 
+        &bull; <%=n.title%> (<%=n.date%>) [<%= link_to "Details", n %>]
+      </p>
+      <% end %>
       <p><a class="btn btn-default" href="<%= news_events_path %>" role="button">View more &raquo;</a></p>
     </div>
+
     <div class="col-md-6">
       <h2>Recent Papers</h2>
-	  <% @recent_pubs.each do |d| %>
-	  <p>
-		  &bull; <%= d.citation() %>
-		  <% if d.urlpdfpaper then %> [<%= link_to "manuscript", d.urlpdfpaper%>] <% end %>
-		  <% if d.urlpdfpresentation then %> [<%= link_to "slides", d.urlpdfpresentation%>] <% end %>
-	  </p>
-	  <% end %>
+  	  <% @recent_pubs.each do |d| %>
+  	  <p>
+  		  &bull; <%= d.citation() %>
+  		  <% if d.urlpdfpaper then %> [<%= link_to "manuscript", d.urlpdfpaper%>] <% end %>
+  		  <% if d.urlpdfpresentation then %> [<%= link_to "slides", d.urlpdfpresentation%>] <% end %>
+  	  </p>
+  	  <% end %>
   	  <p><a class="btn btn-default" href="<%= documents_path %>" role="button">View more &raquo;</a></p>
     </div>
+
     <div class="col-md-3">
       <h2>Projects</h2>
-	  <% @select_projects.each do |p| %>
-      <p>
-		  &bull; <%= p.name %> [<%= link_to "Details", p %>]
-	  </p>
-	  <% end %>
+      <% @select_projects.each do |p| %>
+        <p>
+        &bull; <%= p.name %> [<%= link_to "Details", p %>]
+      </p>
+      <% end %>
       <p><a class="btn btn-default" href="<%= projects_path %>" role="button">View more &raquo;</a></p>
     </div>
   </div>
+
+  <!-- Empty row for space -->
   <div class="row">
     <div class="col-md-3">
     </div>
     <div class="col-md-6">
     </div>
     <div class="col-md-3">
-	</div>
-  </div>
-  <div class="row">
-	<div class="col-md-3">
-		<h2>Dashboard</h2>
-	</div>
-    <div class="col-md-6">
-		<h2>Interested in <%= ENV["LABACRONYM"] %>?</h2>
-		<p>&bull; <%= link_to "Prospective M.S. or Ph.D. students", "/interest#newgrad" %>
-		<p>&bull; <%= link_to "Graduate students  at #{ENV["UNIVACRONYM"]}", "/interest#currgrad" %>
-		<p>&bull; <%= link_to "Undergraduate students at #{ENV["UNIVACRONYM"]}", "/interest#currugrad" %>
-		<p>&bull; <%= link_to "Prospective Post-doctoral Scholars", "/interest#postdocs" %>
-		<p>&bull; <%= link_to "Industrial Visitors", "/interest#industryvisitors" %>
-		<p>&bull; <%= link_to "Visiting Faculty", "/interest#visitingfaculty" %>
-		<p>&bull; <%= link_to "Interns from outside #{ENV["UNIVACRONYM"]}", "/interest#interns" %>
     </div>
-	<div class="col-md-3">
-		<h2>Funding</h2>
-	</div>
   </div>
+
+  <!-- Row 3: dashboard + interested in join + funding -->
+  <div class="row">
+    <div class="col-md-3">
+      <h2>Funding</h2>
+    </div>
+    <div class="col-md-6">
+  		<h2>Interested in <%= ENV["LABACRONYM"] %>?</h2>
+  		<p>&bull; <%= link_to "Prospective M.S. or Ph.D. students", "/interest#newgrad" %></p>
+  		<p>&bull; <%= link_to "Graduate students  at #{ENV["UNIVACRONYM"]}", "/interest#currgrad" %></p>
+  		<p>&bull; <%= link_to "Undergraduate students at #{ENV["UNIVACRONYM"]}", "/interest#currugrad" %></p>
+  		<p>&bull; <%= link_to "Prospective Post-doctoral Scholars", "/interest#postdocs" %></p>
+  		<p>&bull; <%= link_to "Industrial Visitors", "/interest#industryvisitors" %></p>
+  		<p>&bull; <%= link_to "Visiting Faculty", "/interest#visitingfaculty" %></p>
+  		<p>&bull; <%= link_to "Interns from outside #{ENV["UNIVACRONYM"]}", "/interest#interns" %></p>
+    </div>
+    <div class="col-md-3">
+      <h2>Dashboard</h2>
+    </div>
+  </div>
+</div>

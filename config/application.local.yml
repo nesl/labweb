@@ -3,6 +3,7 @@
 defaults: &defaults
   LABNAME: "Networked and Embedded Systems Laboratory"
   LABACRONYM: "NESL"
+  LABDESCRIPTION: "Where cool things happen"
   LABURL: "http://nesl.ee.ucla.edu"
   LABMAILADDRESS: "UCLA<br>EE Department<br>420 Westwood Plaza<br>MC# 951594<br>Los Angeles, CA 90095-1594<br>ATTN: 56-125KK, EEIV<br>C/O: Fe Asuncion"
   LABFAX: "310-825-7928"
