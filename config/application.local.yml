@@ -27,7 +27,20 @@ defaults: &defaults
   LAB_DASHBOARD_URL: "http://dashboard.nesl.info"
   MAILER_SENDER: "nesl.ucla@gmail.com"
   DEFAULT_URL_HOSTPORT: "localhost:3000"
-  PEOPLE_DISPLAY_ORDER: '[
+  DOCUMENT_DISPLAY_ORDER: [
+    "Book",
+    "Book Chapter",
+    "Conference Paper",
+    "Journal Paper",
+    "Demonstration", 
+    "Poster", 
+    "Magazine Article", 
+    "Report", 
+    "Slides",  
+    "Patent", 
+    "Other"
+  ]
+  PEOPLE_DISPLAY_ORDER: [
     "Faculty",
     "Staff",
     "Administrative Staff",
@@ -74,7 +87,7 @@ defaults: &defaults
     "Former Intern",
     "-Coauthor",
     "-Other"
-]'
+  ]
 
 development:
   <<: *defaults

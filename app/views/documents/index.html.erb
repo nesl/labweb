@@ -27,7 +27,7 @@
       <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" id="myScrollspy">
         <!--<div class="nav-wrapper">-->
           <ul class="nav nav-pills nav-stacked lw-content-with-second-nav-sidenav affix">
-            <% @document_categories.order(:name).each_with_index do |item, index| %>
+            <% @document_categories.each_with_index do |item, index| %>
               <li <% if index==0 %> class="active"<% end %> >
                 <a href="#<%= index==0 ? index : index+1 %>"><%= item.name.pluralize(2) %><span class="glyphicon glyphicon-menu-right"></span></a>
               </li>
@@ -43,7 +43,7 @@
             Documents from <%= ENV["LABACRONYM"]%><%= " by #{@person.firstname} #{@person.lastname}" if @person.present? %></h1>
           </div>
           <div class="panel-body">
-            <% @document_categories.order(:name).each_with_index do |item, index| %>
+            <% @document_categories.each_with_index do |item, index| %>
               <!-- Table -->
               <table class="table table-condensed">
                 <thead>

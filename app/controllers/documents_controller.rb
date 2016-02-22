@@ -5,7 +5,12 @@ class DocumentsController < ApplicationController
   # GET /documents.json
   def index
     @documents = Document.all
-    @document_categories = DocumentCategory.all
+    @document_categories = DocumentCategory.all.map.select{ |x| 
+      @documents.select{ |d|
+        d.document_category.name==x.name
+      }.length>0
+    }
+    Rails.logger.debug("doc_controller: document_categories=#{@document_categories.inspect}")
     person_id = nil
     params.each {|key, value| person_id = value if key=="person_id"}    
     if person_id.present? 
@@ -14,6 +19,28 @@ class DocumentsController < ApplicationController
     else
       @person = nil
     end
+
+
+    # Sort the document list
+    display_order_raw = eval(ENV["DOCUMENT_DISPLAY_ORDER"])
+    display_order_all = display_order_raw.map{|x| x[0]!='-'? x : x[1..-1]}
+    @document_categories.sort!{ |a,b|
+      a_index = display_order_all.find_index(a.name)
+      b_index = display_order_all.find_index(b.name)
+      a_index = display_order_raw.length+1 unless a_index.present?
+      b_index = display_order_raw.length+1 unless b_index.present?
+      a_index<=>b_index
+    }
+
+    # Filter category names for display
+    filter = true    
+    params.each { |key, value| filter = false if key=="all" }
+    
+    if filter 
+      display_order_filtered = display_order_raw.select{ |x| x if x[0]!='-'}
+      @document_categories = @document_categories.select { |x| display_order_filtered.member?(x.name)}
+    end
+
   end
 
   # GET /documents/1
