@@ -1,52 +1,85 @@
 <% provide(:title, 'People') %>
+<% provide(:scrollspytag, "myScrollspy")%>
 
-<div class="panel panel-default lw-content-without-second-nav">
-  <!-- Default panel contents -->
-  <div class="panel-heading">
-    <h1 class="panel-title">People @ <%= ENV["LABACRONYM"]%></h1>
-  </div>
+<!--sidenav-->
+<div class="lw-content-sidenav-without-second-nav" id="myScrollspy">
+  <ul class="sidenav nav nav-pills nav-stacked" id="mySidenav">
+    <% @person_categories.each_with_index do |person_category, index| %>
+      <li <% if index==0 %> class="active"<% end %> >
+        <a href="#<%= index==0 ? index : index+1 %>"><%= person_category %>
+          <span class="glyphicon glyphicon-menu-right"></span>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
-  <div class="panel-body">
-	  <table class="table-condensed lw-table">
-	  <% @person_categories.each_with_index do |person_category, index| %>
-	      <tbody>
-	          <tr>
-	            <th 
-			      <%if user_signed_in? && current_user.admin? %>colspan="2"<%end%>
-			    ><%= person_category %></th>
-	          </tr>
-			  <% @people.select{|x| x.person_category.name==person_category}.sort{|a,b| a.firstname <=> b.firstname}.each do |person| %>
-			  <tr>
-	            <td>
-					<ul style="list-style-type:none">
-						<li><%= link_to "#{person.firstname} #{person.lastname}", person %><li>
-					</ul>
-				</td>
-					<% if user_signed_in? && current_user.admin? %>
-					<td>
-						<ul style="list-style-type:none">
-						<li>
-		                [
-						<%= link_to 'Details', person %>,
-						<%= link_to 'Edit', edit_person_path(person) %>,
-						<%= link_to 'Delete', person, method: :delete, data: { confirm: 'Are you sure?' } %>
-						]
-					    </li>
-					    </ul>
-		            <% end %>
-			  </tr>
-			  <% end %>
-		  </tbody>
-	  <% end %>
-	  </table>
+<!--content-->
+<div class="lw-content-without-second-nav">
+  <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" id="sidenavholder">&nbsp;</div>
+  <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+    <div class="panel panel-default lw-content-without-second-nav">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <h1 class="panel-title"><a id="0" class="anchorwithoffset"></a>People @ <%= ENV["LABACRONYM"]%></h1>
+      </div>
+
+      <div class="panel-body">
+        <table class="table-condensed lw-table">
+        <% @person_categories.each_with_index do |person_category, index| %>
+          <tbody>
+            <tr>
+              <th 
+                <%if user_signed_in? && current_user.admin? %>colspan="2"<%end%>
+              ><a id="<%= index+1 %>" class="anchorwithoffset"></a><%= person_category %></th>
+            </tr>
+            <% @people.select{|x| x.person_category.name==person_category}
+                      .sort{|a,b| a.firstname <=> b.firstname}.each do |person| %>
+              <tr>
+                <td>
+                  <ul style="list-style-type:none">
+                    <li><%= link_to "#{person.firstname} #{person.lastname}", person %><li>
+                  </ul>
+                </td>
+                <% if user_signed_in? && current_user.admin? %>
+                  <td>
+                    <ul style="list-style-type:none">
+                      <li>
+                        [
+                        <%= link_to 'Details', person %>,
+                        <%= link_to 'Edit', edit_person_path(person) %>,
+                        <%= link_to 'Delete', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+                        ]
+                      </li>
+                    </ul>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 
+<!--adjust sidenav width-->
+<script>
+function resize() {
+  $("#mySidenav").width($("#sidenavholder").width() + 20);
+}
+
+resize();
+window.onresize = resize;
+
+</script>
+
 <% if user_signed_in? %>
     <% if current_user.admin? %>
-	    <div class="panel-footer">
+      <div class="panel-footer">
         <%= link_to 'New Person', new_person_path %>
-		</div>
+    </div>
     <% end %>
 <% end %>
 
