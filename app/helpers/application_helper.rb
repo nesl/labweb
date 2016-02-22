@@ -12,13 +12,20 @@ module ApplicationHelper
   def find_webpage_by_title(title)
     title.present? ? WebPage.where("pagetitle = ?",title).first : nil
   end
-  
+
+  # NOTE: This function can block the rest of procedures. Consider reimplement
+  # this in javascript
   def url_exists?(url_string)
     url = URI.parse(url_string)
     req = Net::HTTP.new(url.host, url.port)
+    req.open_timeout = 1
+    req.read_timeout = 1
     req.use_ssl = (url.scheme == "https")
-    res = req.request_head(url.path)
-    res.code == "200"  
+    path = url.path.present? ? url.path : '/'
+    res = req.request_head(path)
+    res.code == "200"
+  rescue
+    false #can't find the server
   end
   
 end
