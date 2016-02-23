@@ -25,40 +25,58 @@
       </div>
 
       <div class="panel-body">
-        <table class="table-condensed lw-table">
         <% @person_categories.each_with_index do |person_category, index| %>
-          <tbody>
-            <tr>
-              <th 
-                <%if user_signed_in? && current_user.admin? %>colspan="2"<%end%>
-              ><a id="<%= index+1 %>" class="anchorwithoffset"></a><%= person_category %></th>
-            </tr>
-            <% @people.select{|x| x.person_category.name==person_category}
-                      .sort{|a,b| a.firstname <=> b.firstname}.each do |person| %>
-              <tr>
-                <td>
-                  <ul style="list-style-type:none">
-                    <li><%= link_to "#{person.firstname} #{person.lastname}", person %><li>
-                  </ul>
-                </td>
-                <% if user_signed_in? && current_user.admin? %>
-                  <td>
-                    <ul style="list-style-type:none">
-                      <li>
-                        [
-                        <%= link_to 'Details', person %>,
-                        <%= link_to 'Edit', edit_person_path(person) %>,
-                        <%= link_to 'Delete', person, method: :delete, data: { confirm: 'Are you sure?' } %>
-                        ]
-                      </li>
-                    </ul>
+          <div style='font-weight: bold; padding: 5px 5px 15px 5px; font-size:125%'>
+            <a id="<%= index+1 %>" class="anchorwithoffset"></a><%= person_category %>
+          </div>
+
+          <% if index < 6 %>
+            <div class="row">
+              <% @people.select{|x| x.person_category.name==person_category}
+                        .sort{|a,b| a.firstname <=> b.firstname}.each do |person| %>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 personview">
+                  <% if person.urlphoto.present? && url_exists?(person.urlphoto) %>
+                    <%= link_to image_tag(person.urlphoto, :alt => "image", :width => "162"), person %>
+                  <% else %>
+                    <%= link_to image_tag(ENV["DEFAULT_MUGSHOT"], :alt => "image", :width => "162"), person %>
+                  <% end %>
+                  <br/>
+                  <span style='font-weight: bold'><%= "#{person.firstname} #{person.lastname}" %></span>
+                  <br/>
+                  <%= person.person_category.name %>
+                  <% if user_signed_in? && current_user.admin? %>
+                    <br/>
+                    [
+                    <%= link_to 'Details', person %>,
+                    <%= link_to 'Edit', edit_person_path(person) %>,
+                    <%= link_to 'Delete', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    ]
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <table class='table-condensed lw-table'>
+              <% @people.select{|x| x.person_category.name==person_category}
+                        .sort{|a,b| a.firstname <=> b.firstname}.each do |person| %>
+                <tr>
+                  <td style='padding-left: 40px; padding-bottom: 10px'>
+                    <%= link_to "#{person.firstname} #{person.lastname}", person %>
+                    <% if user_signed_in? && current_user.admin? %>
+                      [
+                      <%= link_to 'Details', person %>,
+                      <%= link_to 'Edit', edit_person_path(person) %>,
+                      <%= link_to 'Delete', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      ]
+                    <% end %>
                   </td>
-                <% end %>
-              </tr>
-            <% end %>
-          </tbody>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
+
+          <div style='height: 20px'>&nbsp;</div>
         <% end %>
-        </table>
       </div>
     </div>
   </div>

@@ -1,5 +1,7 @@
 <div class="row bheader">
-	<%= "#{@person.firstname} #{@person.middleinitial}. #{@person.lastname}" %>
+	<%= "#{@person.firstname}" %>
+  <%= @person.middleinitial.present? ? (@person.middleinitial + '.') : '' %>
+	<%= "#{@person.lastname}" %>
 	<%= "(#{@person.webname})" if @person.webname.present? %>
 	<span class="category">[<%= @person.person_category.name %>]</span>
 </div>
