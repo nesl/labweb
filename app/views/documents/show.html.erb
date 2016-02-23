@@ -4,9 +4,9 @@
 	<span class="category">[<%= @document.document_category.name %>]</span>
 	<% end %>
 </div>
-<p>
+<!-- <p>
 	<%= @document.citation() %>
-</p>
+</p> -->
 
 <% if @document.tryear.present? && @document.trmonth.present? && @document.trnumber.present? %>
 <p>
@@ -14,6 +14,17 @@
   <%= "#{@document.tryear}-#{@document.trmonth}-#{@document.trnumber}" %>
 </p>
 <% end %>
+
+<p>
+  <% if @document.people.length > 0 %>
+    <strong>Authors:</strong>
+  <ul>
+      <% @document.people.each do |p| %>
+      <li> <%= link_to p.firstname + " " + p.lastname, p %> </li>
+    <% end %>
+    </ul>
+  <% end %>
+</p>
 
 <% if @document.abstract.present? %>
 <p>
@@ -37,66 +48,39 @@
 <% end %>
 
 <% if @document.urlpdfpaper.present? %>
-<p>
-  <strong>Paper (PDF):</strong>
-  <%= link_to @document.urlpdfpaper %>
-</p>
+  <p><strong><%= link_to "Paper (PDF)", @document.urlpdfpaper %></strong></p>
 <% end %>
 
 <% if @document.urlsrcpaper.present? %>
-<p>
-  <strong>Paper (Source):</strong>
-  <%= link_to @document.urlsrcpaper %>
-</p>
+  <p><strong><%= link_to "Paper (Source)", @document.urlsrcpaper %></strong></p>
 <% end %>
 
 <% if @document.urlpdfpresentation.present? %>
-<p>
-  <strong>Presentation (PDF):</strong>
-  <%= link_to @document.urlpdfpresentation %>
-</p>
+  <p><strong><%= link_to "Presentation (PDF)", @document.urlpdfpresentation %></strong></p>
 <% end %>
 
 <% if @document.urlsrcpresentation.present? %>
-<p>
-  <strong>Presentation (Source):</strong>
-  <%= link_to @document.urlsrcpresentation %>
-</p>
+  <p><strong><%= link_to "Presentation (Source)", @document.urlsrcpresentation %></strong></p>
 <% end %>
 
 <% if @document.urlavmedia.present? %>
-<p>
-  <strong>Media:</strong>
-  <%= link_to @document.urlavmedia %>
-</p>
+  <p><strong><%= link_to "Media", @document.urlavmedia %></strong></p>
 <% end %>
 
 <% if @document.urldoi.present? %>
-<p>
-  <strong>DOI:</strong>
-  <%= link_to @document.urldoi %>
-</p>
+  <p><strong><%= link_to "DOI", @document.urldoi %></strong></p>
 <% end %>
 
 <% if @document.urlpublisher.present? %>
-<p>
-  <strong>Publisher:</strong>
-  <%= link_to @document.urlpublisher %>
-</p>
+  <p><strong><%= link_to "Publisher", @document.urlpublisher %></strong></p>
 <% end %>
 
 <% if @document.urlgooglescholar.present? %>
-<p>
-  <strong>Google Scholar:</strong>
-  <%= link_to @document.urlgooglescholar %>
-</p>
+  <p><strong><%= link_to "Google Scholar", @document.urlgooglescholar %></strong></p>
 <% end %>
 
 <% if @document.urlciteseer.present? %>
-<p>
-  <strong>Citeseer:</strong>
-  <%= link_to @document.urlciteseer %>
-</p>
+  <p><strong><%= link_to "Citeseer", @document.urlciteseer %></strong></p>
 <% end %>
 
 <% if @document.pubin.present? %>
