@@ -167,55 +167,66 @@ a.anchorwithoffset {
 }
 
 .sidenav {
-  position: fixed;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
-     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
-          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	-webkit-border-radius: 6px;
+	   -moz-border-radius: 6px;
+	        border-radius: 6px;
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+	   -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+	        box-shadow: 0 1px 4px rgba(0,0,0,.065);
 }
 
 .sidenav > li > a {
-  display: block;
-  margin: 0 0 -1px;
-  padding: 8px 14px;
-  border: 1px solid #e5e5e5;
+	display: block;
+	margin: 0 0 -1px;
+	padding: 8px 14px;
+	border: 1px solid #e5e5e5;
 }
 
 .sidenav > li:first-child > a {
-  -webkit-border-radius: 6px 6px 0 0;
-     -moz-border-radius: 6px 6px 0 0;
-          border-radius: 6px 6px 0 0;
+	-webkit-border-radius: 6px 6px 0 0;
+	   -moz-border-radius: 6px 6px 0 0;
+	        border-radius: 6px 6px 0 0;
 }
 
 .sidenav > li:last-child > a {
-  -webkit-border-radius: 0 0 6px 6px;
-     -moz-border-radius: 0 0 6px 6px;
-          border-radius: 0 0 6px 6px;
+	-webkit-border-radius: 0 0 6px 6px;
+	   -moz-border-radius: 0 0 6px 6px;
+	        border-radius: 0 0 6px 6px;
 }
 
 .sidenav > .active > a {
-  z-index: 2;
-  padding: 9px 15px;
-  border: 0;
-  text-shadow: 0 1px 0 rgba(0,0,0,.15);
-  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+	z-index: 2;
+	padding: 9px 15px;
+	border: 0;
+	text-shadow: 0 1px 0 rgba(0,0,0,.15);
+	-webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+	   -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+	        box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
 }
 
 .sidenav .glyphicon {
-  float: right;
-  margin-top: 2px;
-  margin-right: -6px;
-  opacity: .25;
+	float: right;
+	margin-top: 2px;
+	margin-right: -6px;
+	opacity: .25;
 }
 
 .sidenav > li > a:hover {
-  background-color: #f5f5f5;
+	background-color: #f5f5f5;
 }
 
+
+.globalmessage {
+	position: fixed;
+	z-index: 1000;
+	left: 50%;
+	top: 55px;
+	-webkit-transform: translateX(-50%);
+	   -moz-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	box-shadow: 5px 5px 3px #aaa;
+}

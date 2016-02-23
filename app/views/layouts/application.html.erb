@@ -38,19 +38,16 @@
     <% end %>
 <% end %>
 
-<% if flash[:notice] || flash[:alert] %>
-    <div class="container lw-alerts">
-		<div class="row">
-		  <div class="col-md-12">
-		    <% if flash[:notice] %>
-		        <div id="notice"><%= flash[:notice] %></div>
-		    <% end %>
-		    <% if flash[:alert] %>
-		        <div id="alert"><%= flash[:alert] %></div>
-		    <% end %>
-		  </div>
-		</div>
-	</div>
+<% if flash[:alert] %>
+  <div class="alert alert-danger globalmessage" id="globalmsg">
+    <%= flash[:alert] %>
+  </div>
+  <script>setTimeout(function(){ $("#globalmsg").fadeOut(2000) }, 3000);</script>
+<% elsif flash[:notice] %>
+  <div class="alert alert-success globalmessage" id="globalmsg">
+    <%= flash[:notice] %>
+  </div>
+  <script>setTimeout(function(){ $("#globalmsg").fadeOut(2000) }, 3000);</script>
 <% end %>
 
 <div class="container lw-content">
