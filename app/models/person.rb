@@ -11,7 +11,7 @@ class Person < ActiveRecord::Base
 
   validates :lastname, presence: {message: ": Person's last name is missing"}
   validates :firstname, presence: {message: ": Person's first name is missing"}
-  validates :bs_year, :ms_year, :phd_year, numericality: {only_integer: true,
+  validates :bs_year, :ms_year, :phd_year, allow_nil: true, numericality: {only_integer: true,
             greater_than: 1970, less_than: 2070,
             message: ": Person's degree year does not seem right"}
   validates :url, :urlphoto, :urldepartment, :urlorganization,
