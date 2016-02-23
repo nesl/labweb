@@ -55,12 +55,11 @@
                 <% @documents.where({document_category_id: item.id}).order('pubdate DESC').select{|x| @person.present? ? (x.people.member?(@person)) : true}.each do |document| %>
                     <tr>
                       <td><%= document.citation_formatted() %><br>
-                      [<%= link_to ' Details', document %>
+                      [ <%= link_to ' Details', document %>
                       <% if user_signed_in? && current_user.admin? %>
                           , <%= link_to 'Edit', edit_document_path(document) %>
                           , <%= link_to 'Delete', document, method: :delete, data: { confirm: 'Are you sure?' } %>
-                      <% end %>
-                      ]</td>
+                      <% end %> ]</td>
                     </tr>
                 <% end %>
                 </tbody>
@@ -108,12 +107,11 @@
                 <% @documents.order('pubdate DESC').select{|x| (x.pubdate.year==item) && (@person.present? ? (x.people.member?(@person)) : true)}.each do |document| %>
                     <tr>
                       <td><%= document.citation_formatted() %><br>
-                      [<%= link_to ' Details', document %>
+                      [ <%= link_to ' Details', document %>
                       <% if user_signed_in? && current_user.admin? %>
                           , <%= link_to 'Edit', edit_document_path(document) %>
                           , <%= link_to 'Delete', document, method: :delete, data: { confirm: 'Are you sure?' } %>
-                      <% end %>
-                      ]</td>
+                      <% end %> ]</td>
                     </tr>
                 <% end %>
                 </tbody>

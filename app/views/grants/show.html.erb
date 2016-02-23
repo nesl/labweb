@@ -51,7 +51,7 @@
 <p><strong>Documents:</strong>
 	<ul>
 		<% @grant.documents.each do |document| %>
-		  <li><%= document.citation() %> [ <%= link_to "Details", document_path(document) %> ]</li>
+		  <li><%= document.citation_formatted() %> [ <%= link_to "Details", document_path(document) %> ]</li>
 		<% end %>
 	</ul>
 </p>

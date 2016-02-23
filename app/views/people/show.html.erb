@@ -81,11 +81,11 @@
 		<p><strong>Recent Publications: </strong>
 			<ul>
 				<% @person.documents.order(pubdate: :desc)[0..9].each do |document| %>
-				  <li><%= document.citation_formatted() %><br>[<%= link_to 'Details', document %>]</li>
+				  <li><%= document.citation_formatted() %> [ <%= link_to 'Details', document %> ]</li>
 				<% end %>
 			</ul>
 			<ul style="list-style-type:none">
-			    <li><%= link_to "More Publications...", documents_path %></li>
+			    <li><%= link_to "More Publications...", documents_path(:person_id => @person.id) %></li>
 		    </ul>
 		</p>		
 		<%= render partial: 'layouts/section', locals: {heading: "Other Publications", content: @person.otherpublications} %> 

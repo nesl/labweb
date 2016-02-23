@@ -114,7 +114,7 @@
   	  <% @recent_pubs.each do |d| %>
   	  <p>
   		  &bull; <%= d.citation() %>
-        [<%= link_to 'Details', d %>]
+        [ <%= link_to 'Details', d %> ]
   	  </p>
   	  <% end %>
   	  <p><a class="btn btn-default" href="<%= documents_path %>" role="button">View more &raquo;</a></p>
