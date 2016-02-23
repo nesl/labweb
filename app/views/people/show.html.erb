@@ -3,6 +3,7 @@
   <%= @person.middleinitial.present? ? (@person.middleinitial + '.') : '' %>
 	<%= "#{@person.lastname}" %>
 	<%= "(#{@person.webname})" if @person.webname.present? %>
+
 	<span class="category">[<%= @person.person_category.name %>]</span>
 </div>
 
@@ -105,19 +106,14 @@
 	
 </div>
 
-<div class="row">
-<div class="col-xs-12">
-
-<% if user_signed_in? && current_user.admin? %>
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Delete', person_path(@person), method: :delete, data: { confirm: 'Are you sure?' } %> |
-<% end %>
-<%= link_to 'Back', people_path %>
-
-
-
+<div class="panel-footer" style="margin-top: 20px">
+  <% if user_signed_in? && current_user.admin? %>
+    <%= link_to 'Edit', edit_person_path(@person) %> |
+    <%= link_to 'Delete', person_path(@person), method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <% end %>
+  <%= link_to 'Back', people_path %>
 </div>
-</div>
+
 
 
 
