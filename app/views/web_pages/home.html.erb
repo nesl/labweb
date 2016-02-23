@@ -114,8 +114,7 @@
   	  <% @recent_pubs.each do |d| %>
   	  <p>
   		  &bull; <%= d.citation() %>
-  		  <% if d.urlpdfpaper then %> [<%= link_to "manuscript", d.urlpdfpaper%>] <% end %>
-  		  <% if d.urlpdfpresentation then %> [<%= link_to "slides", d.urlpdfpresentation%>] <% end %>
+        [<%= link_to 'Details', d %>]
   	  </p>
   	  <% end %>
   	  <p><a class="btn btn-default" href="<%= documents_path %>" role="button">View more &raquo;</a></p>

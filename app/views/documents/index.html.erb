@@ -54,15 +54,7 @@
                 <tbody>
                 <% @documents.where({document_category_id: item.id}).order('pubdate DESC').select{|x| @person.present? ? (x.people.member?(@person)) : true}.each do |document| %>
                     <tr>
-                      <td>
-                      <b><%= document.title %></b><br>
-                      <%= document.authors_string %><br>
-                      <% if !document.pubin.blank? %>
-                        <%= document.pubin %>, 
-                      <% end %>
-                      <%= Date::MONTHNAMES[document.pubdate.month] %>
-                      <%= document.pubdate.year %><br>
-                      
+                      <td><%= document.citation_formatted() %><br>
                       [<%= link_to ' Details', document %>
                       <% if user_signed_in? && current_user.admin? %>
                           , <%= link_to 'Edit', edit_document_path(document) %>
@@ -115,13 +107,7 @@
                 <tbody>
                 <% @documents.order('pubdate DESC').select{|x| (x.pubdate.year==item) && (@person.present? ? (x.people.member?(@person)) : true)}.each do |document| %>
                     <tr>
-                      <td>
-                      <b><%= document.title %></b><br>
-                      <%= document.authors_string %><br>
-                      <%= document.pubin %>, 
-                      <%= Date::MONTHNAMES[document.pubdate.month] %>
-                      <%= document.pubdate.year %><br>
-                      
+                      <td><%= document.citation_formatted() %><br>
                       [<%= link_to ' Details', document %>
                       <% if user_signed_in? && current_user.admin? %>
                           , <%= link_to 'Edit', edit_document_path(document) %>

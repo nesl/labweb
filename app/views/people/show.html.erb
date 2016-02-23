@@ -81,7 +81,7 @@
 		<p><strong>Recent Publications: </strong>
 			<ul>
 				<% @person.documents.order(pubdate: :desc)[0..9].each do |document| %>
-				  <li><%= document.citation() %></li>
+				  <li><%= document.citation_formatted() %><br>[<%= link_to 'Details', document %>]</li>
 				<% end %>
 			</ul>
 			<ul style="list-style-type:none">

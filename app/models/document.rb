@@ -39,8 +39,12 @@ class Document < ActiveRecord::Base
   end
   
   def citation
-    ans = "#{authors_string}. \"#{title},\" #{pubin}, #{Date::MONTHNAMES[pubdate.month]} #{pubdate.year}."
-    return ans
+    ans = "#{authors_string}. \"#{title}\", #{pubin.blank? ? "" : pubin + ","} #{Date::MONTHNAMES[pubdate.month]} #{pubdate.year}."
+  end
+
+  def citation_formatted
+    ans = "<b>#{title}</b><br> #{authors_string}.<br> #{pubin.blank? ? "" : pubin + ","} #{Date::MONTHNAMES[pubdate.month]} #{pubdate.year}."
+    return ans.html_safe
   end
   
   def authors_list
