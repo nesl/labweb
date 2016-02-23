@@ -15,7 +15,7 @@
 </div>
 
 <!--content-->
-<div class="lw-content-without-second-nav">
+<div class="lw-content-without-second-nav row">
   <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" id="sidenavholder">&nbsp;</div>
   <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
     <div class="panel panel-default lw-content-without-second-nav">
@@ -78,6 +78,13 @@
           <div style='height: 20px'>&nbsp;</div>
         <% end %>
       </div>
+
+      <% if user_signed_in? && current_user.admin? %>
+        <div class="panel-footer">
+          <%= link_to 'New Person', new_person_path %>
+        </div>
+      <% end %>
+
     </div>
   </div>
 </div>
@@ -93,12 +100,5 @@ window.onresize = resize;
 
 </script>
 
-<% if user_signed_in? %>
-    <% if current_user.admin? %>
-      <div class="panel-footer">
-        <%= link_to 'New Person', new_person_path %>
-    </div>
-    <% end %>
-<% end %>
 
 
