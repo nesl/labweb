@@ -1,5 +1,20 @@
 <% provide(:title, 'Projects') %>
 
+
+<!-- <div class="row lw-content-with-second-nav">
+    <div class="col-xs-4 col-sm-3 col-md-5 col-lg-3" id="myScrollspy">
+	  <ul class="sidenav nav nav-pills nav-stacked" id="mySidenav">
+	    <% @research_areas.each_with_index do |research_area, index| %>
+	      <li <% if index==0 %> class="active"<% end %> >
+	        <a href="#<%= index==0 ? index : index+1 %>"><%= research_area.name %>
+	          <span class="glyphicon glyphicon-menu-right"></span>
+	        </a>
+	      </li>
+	    <% end %>
+	  </ul>
+	</div> -->
+
+
 <div class="panel panel-default lw-content-without-second-nav">
   <!-- Default panel contents -->
   <div class="panel-heading">
@@ -12,54 +27,71 @@
 	    <tbody>
 			<tr>
 				<th>
-					<%= area_name %>
+					<h4><%= area_name %></h4>
 				</th>
 			</tr>
 			<tr>
 				<td>
-				<ul style="list-style-type:none">
-				<li>Active Projects:</li>
-				<ul>
-			      <% project_list.select{|x| x.isactive}.each do |p| %>
-				     <li>
-					 <em><%= p.name %>:</em> <%= p.title %>
-                     [ 
-					    
-						<% if user_signed_in? && current_user.admin? %>
-						  <%= link_to "Details,", p %>
-						  <%= link_to "Edit,", edit_project_path(p) %>
-						  <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
-						<% else %>
-						  <%= link_to "Details", p %>
-						<% end %>
-					 ]
-				     </li>
-			      <% end %>
-			    </ul>
-			    </ul>
+				<!-- Active projects -->
+				<% project_list.select{|x| x.isactive}.each_with_index do |p| %>
+					<div class="panel-group">
+						<div class="panel panel-default">
+						  <div class="panel-heading active-project" style="background-color: #9bc2e4">
+						    <h4 class="panel-title">
+						      <a data-toggle="collapse" href=<%= "\#" + p.name + "_active" %>>
+						      	<em><%= p.name %>:</em> <%= p.title %> (Active)
+						      </a>
+						    </h4>
+						  </div>
+						  <div id=<%= p.name + "_active" %> class="panel-collapse collapse">
+						    <div class="panel-body">
+						    	<%= p.description.blank? ? "TBA" : p.description.html_safe() %>
+						    	[ 
+									<% if user_signed_in? && current_user.admin? %>
+									  <%= link_to "Details,", p %>
+									  <%= link_to "Edit,", edit_project_path(p) %>
+									  <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+									<% else %>
+									  <%= link_to "Details", p %>
+									<% end %>
+								 ]
+						    </div>
+						  </div>
+						</div>
+					</div>
+				<% end %>
+
+				<!-- Inactive projects -->
+				<% project_list.select{|x| !x.isactive}.each_with_index do |p| %>
+					<div class="panel-group">
+						<div class="panel panel-default">
+						  <div class="panel-heading active-project" style="background-color: #cccccc">
+						    <h4 class="panel-title">
+						      <a data-toggle="collapse" href=<%= "\#" + p.name + "_inactive"%>>
+						      	<em><%= p.name %>:</em> <%= p.title %> (Inactive)
+						      </a>
+						    </h4>
+						  </div>
+						  <div id=<%= p.name + "_inactive" %> class="panel-collapse collapse">
+						    <div class="panel-body">
+						    	<%= p.description.blank? ? "TBA" : p.description.html_safe() %>
+						    	[ 
+									<% if user_signed_in? && current_user.admin? %>
+									  <%= link_to "Details,", p %>
+									  <%= link_to "Edit,", edit_project_path(p) %>
+									  <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+									<% else %>
+									  <%= link_to "Details", p %>
+									<% end %>
+								 ]
+						    </div>
+						  </div>
+						</div>
+					</div>
+				<% end %>
 			    </td>
-		    </tr>
-			<tr>
-				<td>
-				<ul style="list-style-type:none">
-				<li>Retired Projects:</li>
-  				<ul>
-  			     <% project_list.select{|x| !x.isactive}.each do |p| %>
-  				     <li>
-  					 <em><%= p.name %>:</em> <%= p.title %>
-                       [ 
-  					    <%= link_to "Details", p %> 
-  						<% if user_signed_in? && current_user.admin? %>
-  						  <%= link_to ", Edit", edit_project_path(p) %>
-  						  <%= link_to ', Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
-  						<% end %>
-  					  ]
-  				      </li>
-  			      <% end %>
-  			     </ul>
-			     </ul>
-  			     </td>
-  			  </tr>		
+		    </tr>	
+		</tbody>
 	  <% end %>
 	  </table>
   </div>
@@ -72,5 +104,4 @@
 	   </div>
      <% end %>
     <% end %>
-  
 </div>
