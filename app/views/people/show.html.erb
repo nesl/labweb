@@ -9,11 +9,7 @@
 
 <div class="row">
 	<div class="col-xs-3">
-		<% if @person.urlphoto.present? && url_exists?(@person.urlphoto) %>
-		  <%= image_tag(@person.urlphoto, :alt => "image", :width => "162") %>
-		<% else %>
-		  <%= image_tag(ENV["DEFAULT_MUGSHOT"], :alt => "image", :width => "162") %>
-		<% end %>
+    <%= image_tag(@person.get_photo_url(), :alt => "image", :width => "162") %>
 		<br><br>
 		<%= render partial: 'layouts/section', locals: {heading: nil, content: @person.organization, url: @person.urlorganization, content_boldfont: true} %>
 		<%= render partial: 'layouts/section', locals: {heading: nil, content: @person.department, url: @person.urldepartment, content_boldfont: true } %>
