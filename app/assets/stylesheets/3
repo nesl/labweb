@@ -2,10 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.panel-default > .active-project {
+.active-project {
 	background-color: #9bc2e4;
 }
 
-.panel-default > .inactive-project {
+.inactive-project {
 	background-color: #cccccc;
 }
