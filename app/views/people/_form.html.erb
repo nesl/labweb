@@ -1,4 +1,4 @@
-<%= form_for(@person) do |f| %>
+<%= form_for(@person, html: { multipart: true }) do |f| %>
   <% if @person.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
@@ -300,6 +300,14 @@
     <%= f.text_field :miscattributes, size:100 %>
   </div>
   </td></tr>
+
+  <tr><td>
+  <div class="field">
+    <%= f.label :localphoto, "" %><br>
+    <%= f.file_field :localphoto %>
+  </div>
+  </td></tr>
+
   <tr><td>
   <div class="actions">
     <%= f.submit %>
