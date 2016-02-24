@@ -51,3 +51,5 @@ gem 'devise'
 gem 'pundit'
 gem 'simple_form'
 gem 'thin'
+
+gem 'carrierwave'
