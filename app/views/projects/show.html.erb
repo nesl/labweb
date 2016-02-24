@@ -64,7 +64,7 @@
 <%end%>
 
 <% if @project.url.present? %>
-  <p><strong><%= link_to "Web Page", @project.url %></strong></p>
+  <p><strong><%= link_to "Web Page", @project.url, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if user_signed_in? && current_user.admin? %>

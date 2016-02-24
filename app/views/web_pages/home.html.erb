@@ -1,51 +1,31 @@
-<style>
-.carouselImg img {
-  width: auto;
-  height: 400px;
-  max-height: 400px;
-  min-height: 200px;
-}
-
-.jumbotron { 
-  height: 400px;
-  max-height: 400px; 
-  min-height: 200px;
-  background-color: #ffffff;
-}
-
-.carousel-indicators li {
-  background-color: #eeeeee;
-}
-
-.carousel-indicators .active {
-  background-color: #347ab7;
-}
-
-.carousel-control {
-  color: #347ab7 !important;
-}
-</style>
+<script>
+  $(document).ready(function () {
+      $('#myCarousel').carousel({
+          interval: 10000
+      })
+      $('.carousel .item').each(function () {
+          var next = $(this).next();
+          if (!next.length) {
+              next = $(this).siblings(':first');
+          }
+          next.children(':first-child').clone().appendTo($(this));
+          if (next.next().length > 0) {
+              next.next().children(':first-child').clone().appendTo($(this));
+          } else {
+              $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+          }
+      });
+  });
+</script>
 
 <% provide(:title, 'Welcome') %>
 
 <br>
-
 <div class="container">
-  <!-- Row 1: overview + carousel -->
-  <div class="row">
-    <div class="jumbotron col-md-3">
-      <p>
-        <% if @overview then %>
-          <%= @overview.body.html_safe %>
-        <% else %>
-          <%= ENV["LABDESCRIPTION"] %>
-        <% end %>
-      </p>
-      <a class="btn btn-primary btn-md" href=<%= about_path.html_safe %> role="button">Learn more &raquo;</a>
-    </div>
 
-    <% if @carousel_items.length > 0 then %>
-    <div id="myCarousel" class="carousel slide col-md-9" data-ride="carousel">
+  <!-- Row 1: carousel -->
+  <div class="row">
+    <div class="carousel slide col-md-12" id="myCarousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <% for i in 0..@carousel_items.length - 1 %>
@@ -57,47 +37,46 @@
         <% end %>
       </ol>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
+      <!-- Slides -->
+      <div class="carousel-inner">
         <% @carousel_items.each_with_index do |carousel_item, index| %>
           <% if index == 0 %>
             <div class="item active carouselImg">
           <% else %>
             <div class="item carouselImg">
           <% end %>
-              <img src=<%= ENV["DEFAULT_MUGSHOT"] %> alt=<%= carousel_item.caption %> >
-              <div class="carousel-caption">
-                <h3><%= carousel_item.caption %></h3>
-                <p><%= carousel_item.description %></p>
+              <div class="col-xs-4">
+                <a href=<%= carousel_item.gotourl %> target="_blank">
+                  <img src=<%= carousel_item.sourceurl %> class="img-responsive" alt=<%= carousel_item.caption %> >
+                  <div class="carousel-caption">
+                    <h3><%= carousel_item.caption %></h3>
+                    <p><%= carousel_item.description %></p>
+                  </div>
+                </a>
               </div>
             </div>
         <% end %>
       </div>
-
-      <!-- Left and right controls -->
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
     </div>
-    <% end %>
   </div>
 
-  <!-- Empty row for space -->
+  <!-- Row 2: overview -->
   <div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-6">
-    </div>
-    <div class="col-md-3">
+    <div class="jumbotron col-md-12">
+      <p>
+        <% if @overview then %>
+          <%= ENV["LABDESCRIPTION"] + " " + @overview.body.html_safe %>
+        <% else %>
+          <%= ENV["LABDESCRIPTION"] %>
+        <% end %>
+      </p>
+      <a class="btn btn-primary btn-md" href=<%= about_path.html_safe %> role="button">Learn more &raquo;</a>
     </div>
   </div>
 
-  <!-- Row 2: news + recent papers + projects -->
+  <!-- Row 3: news + recent papers + projects -->
   <div class="row">
     <div class="col-md-3">
       <h2>News</h2>
@@ -141,7 +120,7 @@
     </div>
   </div>
 
-  <!-- Row 3: dashboard + interested in join + funding -->
+  <!-- Row 4: dashboard + interested in join + funding -->
   <div class="row">
     <div class="col-md-3">
       <h2>Funding</h2>

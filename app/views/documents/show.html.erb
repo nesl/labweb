@@ -48,39 +48,39 @@
 <% end %>
 
 <% if @document.urlpdfpaper.present? %>
-  <p><strong><%= link_to "Paper (PDF)", @document.urlpdfpaper %></strong></p>
+  <p><strong><%= link_to "Paper (PDF)", @document.urlpdfpaper, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.urlsrcpaper.present? %>
-  <p><strong><%= link_to "Paper (Source)", @document.urlsrcpaper %></strong></p>
+  <p><strong><%= link_to "Paper (Source)", @document.urlsrcpaper, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.urlpdfpresentation.present? %>
-  <p><strong><%= link_to "Presentation (PDF)", @document.urlpdfpresentation %></strong></p>
+  <p><strong><%= link_to "Presentation (PDF)", @document.urlpdfpresentation, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.urlsrcpresentation.present? %>
-  <p><strong><%= link_to "Presentation (Source)", @document.urlsrcpresentation %></strong></p>
+  <p><strong><%= link_to "Presentation (Source)", @document.urlsrcpresentation, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.urlavmedia.present? %>
-  <p><strong><%= link_to "Media", @document.urlavmedia %></strong></p>
+  <p><strong><%= link_to "Media", @document.urlavmedia, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.urldoi.present? %>
-  <p><strong><%= link_to "DOI", @document.urldoi %></strong></p>
+  <p><strong><%= link_to "DOI", @document.urldoi, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.urlpublisher.present? %>
-  <p><strong><%= link_to "Publisher", @document.urlpublisher %></strong></p>
+  <p><strong><%= link_to "Publisher", @document.urlpublisher, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.urlgooglescholar.present? %>
-  <p><strong><%= link_to "Google Scholar", @document.urlgooglescholar %></strong></p>
+  <p><strong><%= link_to "Google Scholar", @document.urlgooglescholar, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.urlciteseer.present? %>
-  <p><strong><%= link_to "Citeseer", @document.urlciteseer %></strong></p>
+  <p><strong><%= link_to "Citeseer", @document.urlciteseer, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.pubin.present? %>
