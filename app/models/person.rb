@@ -1,4 +1,5 @@
 class Person < ActiveRecord::Base
+  mount_uploader :localphoto, PeoplephotoUploader
   store_accessor :miscattributes, :key1, :key2
   belongs_to :person_category
   has_many :document_person_maps
@@ -21,4 +22,15 @@ class Person < ActiveRecord::Base
   validates :phonehome, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's phone (Home) is in wrong format"}
   validates :phonecell, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's phone (Mobile) is in wrong format"}
   validates :fax, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's fax is in wrong format"}
+  
+  def get_photo_url
+    if localphoto.present?
+      localphoto
+    elsif urlphoto.present? && url_exists?(urlphoto)
+      urlphoto
+    else
+      ENV["DEFAULT_MUGSHOT"]
+    end
+  end
+
 end

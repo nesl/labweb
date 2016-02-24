@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150819083101) do
+ActiveRecord::Schema.define(version: 20160224074907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,6 +223,7 @@ ActiveRecord::Schema.define(version: 20150819083101) do
     t.integer  "person_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "localphoto"
   end
 
   add_index "people", ["person_category_id"], name: "index_people_on_person_category_id", using: :btree
