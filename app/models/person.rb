@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
+  include ApplicationHelper
+
   mount_uploader :localphoto, PeoplephotoUploader
   store_accessor :miscattributes, :key1, :key2
   belongs_to :person_category
