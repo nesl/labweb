@@ -2,10 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.panel-default > .active-project {
+.panel-default .active-project {
 	background-color: #9bc2e4;
 }
 
-.panel-default > .inactive-project {
+.panel-default .inactive-project {
 	background-color: #cccccc;
 }
+
+.active-project .panel-title {
+	color: #333;
+}
+
+.inactive-project .panel-title {
+	color: #444;
+}
+
+a.project-title-a {
+	text-decoration: none;
+}
+
+a.project-title-a:hover > .active-project {
+	background-color: #5f9dd3;
+}
+
+a.project-title-a:hover > .inactive-project {
+	background-color: #999999;
+}
+

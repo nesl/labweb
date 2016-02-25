@@ -11,6 +11,7 @@
 
 # Swapfiles
 *.swp
+*.swo
 
 # Ignore bundler config.
 /.bundle

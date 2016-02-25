@@ -33,14 +33,14 @@
                       .sort{|a,b| (a.isactive? ? 0 : 1) <=> (b.isactive? ? 0 : 1)}.each do |p| %>
             <div class="panel-group">
               <div class="panel panel-default">
-                <div class="panel-heading <%= p.isactive? ? "active-project" : "inactive-project" %>">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" href=<%= "\#" + p.name %>>
-                      <em><%= p.name %>:</em> <%= p.title %>
-                      <%= p.isactive? ? "(Active)" : "(Inactive)" %>
-                    </a>
-                  </h4>
-                </div>
+                <a data-toggle="collapse" href=<%= "\#" + p.name %> style="display: block" class="project-title-a">
+                  <div class="panel-heading <%= p.isactive? ? "active-project" : "inactive-project" %>">
+                    <h4 class="panel-title project-title-a">
+                        <em><%= p.name %>:</em> <%= p.title %>
+                        <%= p.isactive? ? "(Active)" : "(Inactive)" %>
+                    </h4>
+                  </div>
+                </a>
                 <div id=<%= p.name %> class="panel-collapse collapse">
                   <div class="panel-body">
                     <%= p.description.blank? ? "TBA" : p.description.html_safe() %>
