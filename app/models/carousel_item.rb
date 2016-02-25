@@ -1,5 +1,7 @@
 class CarouselItem < ActiveRecord::Base
   CAROUSEL_ITEM_TYPE_OPTIONS = %w(photo video Photo Video)
+
+  mount_uploader :localphoto, CarouselPhotoUploader
   validates :caption, presence: {message: ": Missing caption"}
   validates :itemtype, :inclusion => {:in => CAROUSEL_ITEM_TYPE_OPTIONS,  message: ": type is incorrect"}
   validates :sourceurl, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}

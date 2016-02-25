@@ -69,6 +69,6 @@ class CarouselItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carousel_item_params
-      params.require(:carousel_item).permit(:itemtype, :caption, :sourceurl, :description, :gotourl, :position)
+      params.require(:carousel_item).permit(:itemtype, :caption, :sourceurl, :description, :gotourl, :position, :localphoto)
     end
 end

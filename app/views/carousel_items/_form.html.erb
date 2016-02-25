@@ -8,7 +8,11 @@
     <%= f.input :description %>
     <%= f.input :gotourl %>
     <%= f.input :position %>
+    <%= f.label :localphoto, "Photo" %><br>
+    <%= f.file_field :localphoto %>
   </div>
+
+  <br>
 
   <div class="form-actions">
     <%= f.button :submit %>
