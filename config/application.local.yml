@@ -19,7 +19,8 @@ defaults: &defaults
   MAINTAINER_LAST: "Srivastava"
   MAINTAINER_FIRST: "Mani"
   YEARONE: "1985"
-  DEFAULT_MUGSHOT: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/800px-Smiley.svg.png"
+  DEFAULT_MUGSHOT_SMILE: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/800px-Smiley.svg.png"
+  DEFAULT_MUGSHOT: "http://www.digitalamerica.org/wp-content/uploads/2014/01/facebook-default-no-profile-pic.jpg"
   RECENT_NEWS_COUNT: 3
   RECENT_DOCS_COUNT: 4
   RECENT_PROJS_COUNT: 5
