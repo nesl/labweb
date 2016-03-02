@@ -23,9 +23,22 @@
 <br>
 <div class="container">
 
-  <!-- Row 1: carousel -->
+  <!-- Row 1: overview + carousel -->
   <div class="row">
-    <div class="carousel slide col-md-12" id="myCarousel">
+    <div class="col-md-3">
+      <span class="break-wo" style="white-space: normal !important;">
+        <% if @overview then %>
+          <%= @overview.body.html_safe %>
+        <% else %>
+          <%= ENV["LABDESCRIPTION"] %>
+        <% end %>
+        <br>
+         <br>
+        <a class="btn btn-primary btn-md" href=<%= about_path.html_safe %> role="button">Learn more &raquo;</a>
+      </span>
+    </div>
+
+    <div class="carousel slide col-md-8" id="myCarousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <% for i in 0..@carousel_items.length - 1 %>
@@ -58,21 +71,7 @@
     </div>
   </div>
 
-  <!-- Row 2: overview -->
-  <div class="row">
-    <div class="jumbotron col-md-12">
-      <p>
-        <% if @overview then %>
-          <%= ENV["LABDESCRIPTION"] + " " + @overview.body.html_safe %>
-        <% else %>
-          <%= ENV["LABDESCRIPTION"] %>
-        <% end %>
-      </p>
-      <a class="btn btn-primary btn-md" href=<%= about_path.html_safe %> role="button">Learn more &raquo;</a>
-    </div>
-  </div>
-
-  <!-- Row 3: news + recent papers + projects -->
+  <!-- Row 2: news + recent papers + projects -->
   <div class="row">
     <div class="col-md-3">
       <h2>News</h2>
