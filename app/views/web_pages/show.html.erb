@@ -1,28 +1,16 @@
+<div class="row bheader">
+<%= @web_page.bartitle %>
+</div>
 
-<p>
-  <strong>Pagetitle:</strong>
-  <%= @web_page.pagetitle %>
-</p>
+<%= @web_page.body.html_safe() %>
 
-<p>
-  <strong>Bartitle:</strong>
-  <%= @web_page.bartitle %>
-</p>
+<% if !@web_page.url.blank? %>
+<a href=<%= @web_page.url %>>Link</a>
+<% end %>
 
-<p>
-  <strong>Body:</strong>
-  <%= @web_page.body %>
-</p>
-
-<p>
-  <strong>Ispublic:</strong>
-  <%= @web_page.ispublic %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @web_page.url %>
-</p>
-
+<div class="panel-footer" style="margin-top: 20px">
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_web_page_path(@web_page) %> |
+<% end %>
 <%= link_to 'Back', web_pages_path %>
+</div>
