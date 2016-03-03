@@ -57,7 +57,15 @@
                         .sort{|a,b| a.firstname <=> b.firstname}.each do |person| %>
                 <tr>
                   <td style='padding-left: 40px; padding-bottom: 10px'>
-                    <%= link_to "#{person.firstname} #{person.lastname}", person %>
+                    <%= link_to "#{person.firstname} #{person.lastname}", person %> 
+                    <% if !person.organization.blank? %>
+                      <% if !person.urlorganization.blank? %>
+                        (now at <%= link_to "#{person.organization}", person.urlorganization %>)
+                      <% else %>
+                        (now at <%= person.organization %>)
+                      <% end %>
+                    <% end %>
+                    
                     <% if user_signed_in? && current_user.admin? %>
                       [
                       <%= link_to 'Details', person %>,
