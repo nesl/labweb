@@ -4,7 +4,9 @@
 	<%= "#{@person.lastname}" %>
 	<%= "(#{@person.webname})" if @person.webname.present? %>
 
-	<span class="category">[<%= @person.person_category.name %>]</span>
+	<% if @person.person_category != nil %>
+		<span class="category">[<%= @person.person_category.name %>]</span>
+	<% end %>
 </div>
 
 <div class="row">

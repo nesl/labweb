@@ -5,9 +5,9 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
-    @person_categories = PersonCategory.all.map{|x| x.name}.select{ |x| 
+    @person_categories = PersonCategory.all.map{|x| x.name if x != nil}.select{ |x| 
       @people.select{ |p|
-        p.person_category.name==x
+        p.person_category != nil && p.person_category.name==x
       }.length>0
     }
     display_order_raw = eval(ENV["PEOPLE_DISPLAY_ORDER"])
@@ -26,7 +26,7 @@ class PeopleController < ApplicationController
     if filter 
       display_order_filtered = display_order_raw.select{|x| x if x[0]!='-'}
       @person_categories = @person_categories.select { |x| display_order_filtered.member?(x)}
-      @people = Person.all.select{|p| p.person_category.name}
+      @people = Person.all.select{|p| p.person_category.name if p.person_category != nil}
     end
     
     #byebug
