@@ -27,3 +27,6 @@
 # Upload folder
 public/uploads
 shared
+
+# assets files
+public/assets
