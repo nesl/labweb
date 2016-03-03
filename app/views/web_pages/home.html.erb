@@ -23,7 +23,7 @@
 <br>
 <div class="container">
 
-  <!-- Row 1: carousel -->
+  <!-- Row 1: overview + carousel -->
   <div class="row">
     <div class="carousel slide col-md-12" id="myCarousel">
       <!-- Indicators -->
@@ -58,24 +58,24 @@
     </div>
   </div>
 
-  <!-- Row 2: overview -->
+  <br>
+
   <div class="row">
-    <div class="jumbotron col-md-12">
-      <p>
+    <div class="col-md-12">
+      <span class="break-wo" style="white-space: normal !important;">
         <% if @overview then %>
-          <%= ENV["LABDESCRIPTION"] + " " + @overview.body.html_safe %>
+          <%= @overview.body.html_safe %>
         <% else %>
           <%= ENV["LABDESCRIPTION"] %>
         <% end %>
-      </p>
-      <a class="btn btn-primary btn-md" href=<%= about_path.html_safe %> role="button">Learn more &raquo;</a>
+      </span>
     </div>
   </div>
 
-  <!-- Row 3: news + recent papers + projects -->
+  <!-- Row 2: news + recent papers + projects -->
   <div class="row">
     <div class="col-md-3">
-      <h2>News</h2>
+      <h3>News</h3>
       <% @recent_news.each do |n| %>
       <p> 
         &bull; <%=n.title%> (<%=n.date%>) [<%= link_to "Details", n %>]
@@ -85,7 +85,7 @@
     </div>
 
     <div class="col-md-6">
-      <h2>Recent Papers</h2>
+      <h3>Recent Papers</h3>
   	  <% @recent_pubs.each do |d| %>
   	  <p>
   		  &bull; <%= d.citation() %>
@@ -96,7 +96,7 @@
     </div>
 
     <div class="col-md-3">
-      <h2>Projects</h2>
+      <h3>Projects</h3>
       <% @select_projects.each do |p| %>
         <p>
         &bull; <%= p.name %> [<%= link_to "Details", p %>]
@@ -119,10 +119,35 @@
   <!-- Row 4: dashboard + interested in join + funding -->
   <div class="row">
     <div class="col-md-3">
-      <h2>Funding</h2>
+      <h3>Funding</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <a href="http://www.nsf.gov/" target="_blank"><img src="http://www.nsf.gov/images/logos/nsf4sm.jpg" style="width: 100px; height: 100px" alt="NSF Logo" ></a>
+        </div>
+        <div class="col-md-6">
+          <a href="http://www.nih.gov/" target="_blank"><img src="http://www.nih.gov/sites/default/files/styles/featured_media_breakpoint-large/public/about-nih/2012-logo.png" style="width: 100px; height: 100px" alt="NIH Logo" ></a>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <a href="http://www.arl.army.mil/" target="_blank"><img src="https://www.icb.ucsb.edu/sites/www.icb.ucsb.edu/files/images/collaborations/ARL_logo.png" style="width: 100px; height: 50px" alt="ARL Logo" ></a>
+        </div>
+        <div class="col-md-6">
+          <a href="http://www.darpa.mil/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/DARPA_Logo.jpg/440px-DARPA_Logo.jpg" style="width: 100px; height: 50px" alt="DARPA Logo" ></a>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <a href="http://www.kaust.edu.sa/" target="_blank"><img src="http://www.kaust.edu.sa/assets/images/logo.png" style="width: 80px; height: 80px" alt="KAUST Logo" ></a>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
     </div>
     <div class="col-md-6">
-  		<h2>Interested in <%= ENV["LABACRONYM"] %>?</h2>
+  		<h3>Interested in <%= ENV["LABACRONYM"] %>?</h3>
   		<p>&bull; <%= link_to "Prospective M.S. or Ph.D. students", "/joining#newgrad" %></p>
   		<p>&bull; <%= link_to "Graduate students  at #{ENV["UNIVACRONYM"]}", "/joining#currgrad" %></p>
   		<p>&bull; <%= link_to "Undergraduate students at #{ENV["UNIVACRONYM"]}", "/joining#currugrad" %></p>
@@ -132,7 +157,9 @@
   		<p>&bull; <%= link_to "Interns from outside #{ENV["UNIVACRONYM"]}", "/joining#interns" %></p>
     </div>
     <div class="col-md-3">
-      <h2>Dashboard</h2>
+      <h3>Dashboard</h3>
+      <a class="twitter-timeline" href="https://twitter.com/hashtag/UCLA" data-widget-id="704788138921578496">#UCLA Tweets</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </div>
   </div>
 </div>
