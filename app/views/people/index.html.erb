@@ -30,7 +30,7 @@
             <a id="<%= index+1 %>" class="anchorwithoffset"></a><%= person_category %>
           </div>
 
-          <% if index < 6 %>
+          <% if person_category.name != "Alum" %>
             <div class="row">
               <% @people.select{|x| x.person_category.name==person_category}
                         .sort{|a,b| a.firstname <=> b.firstname}.each do |person| %>
