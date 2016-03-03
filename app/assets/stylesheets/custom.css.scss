@@ -268,5 +268,6 @@ a.anchorwithoffset {
   color: #347ab7 !important;
 }
 .carousel-caption {
-  color: #000 !important;
+  position: absolute;
+  bottom: -40px;
 }

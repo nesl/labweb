@@ -49,6 +49,9 @@
                 <a href=<%= carousel_item.gotourl %> target="_blank">
                   <img src=<%= carousel_item.localphoto %> class="img-responsive" alt=<%= carousel_item.caption %> >
                 </a>
+                <div class="carousel-caption">
+                  <p><%= carousel_item.description %></p>
+                </div>
               </div>
             </div>
         <% end %>
