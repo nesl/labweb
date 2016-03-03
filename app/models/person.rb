@@ -28,7 +28,7 @@ class Person < ActiveRecord::Base
   def get_photo_url
     if localphoto.present?
       localphoto
-    elsif urlphoto.present? && url_exists?(urlphoto)
+    elsif urlphoto.present?
       urlphoto
     else
       ENV["DEFAULT_MUGSHOT"]
