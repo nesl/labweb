@@ -17,7 +17,7 @@ class Document < ActiveRecord::Base
 
   validates :urlpdfpaper,  :urlsrcpaper,  :urlpdfpresentation,  :urlsrcpresentation,
             :urlavmedia,  :urldoi,  :urlpublisher,  :urlgooglescholar,  :urlciteseer,
-            allow_nil: true, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
+            allow_nil: true, allow_blank: true, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
 
   validates :pubvol, allow_nil: true, format: {with:  /\A((\d+)|([IVXLCDM]+))?\z/, message:  ": Volume is in wrong format"}
   validates :pubnum, allow_nil: true, format: {with:  /\A\d*\z/, message:  ": Number start is in wrong format"}
