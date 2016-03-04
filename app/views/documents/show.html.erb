@@ -19,7 +19,7 @@
   <% if @document.people.length > 0 %>
     <strong>Authors:</strong>
   <ul>
-      <% @document.people.each do |p| %>
+      <% @document.authors_list.each do |p| %>
       <li> <%= link_to p.firstname + " " + p.lastname, p %> </li>
     <% end %>
     </ul>
