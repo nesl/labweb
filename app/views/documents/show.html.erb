@@ -113,7 +113,7 @@
 
 <% if @document.pubpagefirst.present? %>
 <p>
-  <strong>Page:</strong>
+  <strong>Page (Start):</strong>
   <%= @document.pubpagefirst %>
 </p>
 <% end %>
@@ -136,13 +136,6 @@
 <p>
   <strong>Date:</strong>
   <%= @document.pubdate %>
-</p>
-<% end %>
-
-<% if @document.pubdate_end.present? %>
-<p>
-  <strong>Date (End):</strong>
-  <%= @document.pubdate_end %>
 </p>
 <% end %>
 
