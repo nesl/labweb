@@ -22,6 +22,9 @@
       <!-- Default panel contents -->
       <div class="panel-heading">
         <h1 class="panel-title"><a id="0" class="anchorwithoffset"></a>People @ <%= ENV["LABACRONYM"]%></h1>
+        <% if user_signed_in? && current_user.admin? %>
+          <span style='float:right; margin-top:-18px'><%= link_to 'New person', new_person_path %></span>
+        <% end %>
       </div>
 
       <div class="panel-body">
@@ -35,8 +38,9 @@
               <% @people.select{|x| x.person_category.name==person_category}
                         .sort{|a,b| a.firstname <=> b.firstname}.each do |person| %>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 personview">
-                  <%= link_to image_tag(person.get_photo_url, :alt => "image", :width => "162"), person %>
-                  <br/>
+                  <div class='squarephoto'>
+                    <%= link_to image_tag(person.get_photo_url, :alt => "image", :width => "162"), person %>
+                  </div>
                   <span style='font-weight: bold'><%= "#{person.firstname} #{person.lastname}" %></span>
                   <br/>
                   <%= person.person_category.name %>
@@ -93,14 +97,28 @@
   </div>
 </div>
 
-<!--adjust sidenav width-->
 <script>
+// adjust sidenav width
 function resize() {
   $("#mySidenav").width($("#sidenavholder").width() + 20);
 }
 
 resize();
 window.onresize = resize;
+
+// resize and crop photos
+$('.squarephoto').each(function(idx) {
+  div = $(this);
+  img = $('img', this);
+  raw_width = img.prop('naturalWidth');
+  raw_height = img.prop('naturalHeight');
+  target_length = div.width();
+  ratio = target_length / Math.min(raw_width, raw_height);
+  resized_width = raw_width * ratio;
+  resized_height = raw_height * ratio;
+  img.width(resized_width);
+  img.height(resized_height);
+});
 
 </script>
 

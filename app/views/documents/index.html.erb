@@ -41,6 +41,9 @@
           <div class="panel-heading">
             <h1 class="panel-title"><a id="0" class="anchorwithoffset"></a>
             Documents from <%= ENV["LABACRONYM"]%><%= " by #{@person.firstname} #{@person.lastname}" if @person.present? %></h1>
+            <% if user_signed_in? && current_user.admin? %>
+              <span style='float:right; margin-top:-18px'><%= link_to 'New Document', new_document_path %></span>
+            <% end %>
           </div>
           <div class="panel-body">
             <% @document_categories.each_with_index do |item, index| %>
@@ -120,9 +123,9 @@
             </div>
               <div class="panel-footer">
                 <% if user_signed_in? && current_user.admin? %>
-                    <%= link_to 'New Document', new_document_path %>
-                  <% end %>
-              </div>
+                  <%= link_to 'New Document', new_document_path %>
+                <% end %>
+            </div>
         </div>
       </div>
     </div>
