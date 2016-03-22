@@ -24,6 +24,9 @@
       <!-- Default panel contents -->
       <div class="panel-heading">
         <h1 class="panel-title"><a id="0" class="anchorwithoffset"></a>Projects @ <%= ENV["LABACRONYM"]%></h1>
+        <% if user_signed_in? && current_user.admin? %>
+          <span style='float:right; margin-top:-18px'><%= link_to 'New Project', new_project_path %></span>
+        <% end %>
       </div>
   
       <div class="panel-body">
