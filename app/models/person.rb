@@ -35,4 +35,9 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def get_name_first_middleinitial_last
+    firstname\
+        + (middleinitial.present? ? (' ' + middleinitial + '.') : '')\
+        + ' ' + lastname
+  end
 end
