@@ -1,4 +1,5 @@
 class ProductCategoriesController < ApplicationController
+  before_action :authenticate_user!, only_member_actions: true
   before_action :set_product_category, only: [:show, :edit, :update, :destroy]
 
   # GET /product_categories

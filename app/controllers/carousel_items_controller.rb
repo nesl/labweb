@@ -1,4 +1,5 @@
 class CarouselItemsController < ApplicationController
+  before_action :authenticate_user!, only_member_actions: true
   before_action :set_carousel_item, only: [:show, :edit, :update, :destroy]
 
   # GET /carousel_items

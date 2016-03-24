@@ -1,4 +1,5 @@
 class ProductPersonMapsController < ApplicationController
+  before_action :authenticate_user!, only_member_actions: true
   before_action :set_product_person_map, only: [:show, :edit, :update, :destroy]
 
   # GET /product_person_maps

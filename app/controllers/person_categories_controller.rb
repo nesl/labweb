@@ -1,4 +1,5 @@
 class PersonCategoriesController < ApplicationController
+  before_action :authenticate_user!, only_member_actions: true
   before_action :set_person_category, only: [:show, :edit, :update, :destroy]
 
   # GET /person_categories
