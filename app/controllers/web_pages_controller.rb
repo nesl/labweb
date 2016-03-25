@@ -1,5 +1,6 @@
 class WebPagesController < ApplicationController
-  before_action :authenticate_user!, only_member_actions: true
+  # TODO: authenticate private pages
+  #before_action :authenticate_user!, except: [:index]
   before_action :set_web_page, only: [:show, :edit, :update, :destroy]
 
   # GET /web_pages
