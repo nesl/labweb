@@ -51,6 +51,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    @document_person_maps = @document.document_person_maps.build
   end
 
   # GET /documents/1/edit
@@ -60,7 +61,9 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
+    @debug_params = document_params
     @document = Document.new(document_params)
+    #@document = Document.new
 
     respond_to do |format|
       if @document.save
@@ -105,6 +108,16 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:tryear, :trmonth, :trnumber, :title, :abstract, :filename, :file, :urlpdfpaper, :urlsrcpaper, :urlpdfpresentation, :urlsrcpresentation, :urlavmedia, :urldoi, :urlpublisher, :urlgooglescholar, :urlciteseer, :pubin, :pubvol, :pubnum, :pubnum_end, :pubpagefirst, :pubpagelast, :pubpagecount, :pubdate, :pubdate_end, :pubplace, :publisher, :ispublic, :islabdocument, :miscattributes, :document_category_id, :main_research_area_id)
+      params.require(:document).permit(
+          :tryear, :trmonth, :trnumber,
+          :title, :abstract,
+          :filename, :file,
+          :urlpdfpaper, :urlsrcpaper, :urlpdfpresentation, :urlsrcpresentation,
+          :urlavmedia, :urldoi, :urlpublisher, :urlgooglescholar, :urlciteseer,
+          :pubin, :pubvol, :pubnum, :pubnum_end, :pubpagefirst, :pubpagelast,
+          :pubpagecount, :pubdate, :pubdate_end, :pubplace, :publisher,
+          :ispublic, :islabdocument, :miscattributes,
+          :document_category_id, :main_research_area_id,
+          document_person_maps_attributes: [:person_id, :rank])
     end
 end

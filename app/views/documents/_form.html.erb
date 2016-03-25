@@ -1,8 +1,7 @@
 <%= form_for(@document) do |f| %>
   <% if @document.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
-
       <ul>
       <% @document.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,205 +9,191 @@
       </ul>
     </div>
   <% end %>
-  <table class="table-condensed lw-table">
-  <tbody>
-  <tr><td>
+
+  <%= params %>
+  <br/>
+  <%= @debug_params %>
+
   <div class="field">
     <%= f.label :document_category_id, "Document Category:" %>&nbsp;&nbsp;
-    <%= f.select("document_category_id", DocumentCategory.all.collect{|pc| [ pc.name, pc.id ] }, {include_blank: 'None'})%>
+    <%= f.select(:document_category_id, DocumentCategory.all.collect{|dc| [ dc.name, dc.id ] }, {include_blank: 'None'})%>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :main_research_area_id, "Main Research Area:" %>&nbsp;&nbsp;
-	<%= f.select("main_research_area_id", ResearchArea.all.collect{|ra| [ ra.name, ra.id ] }, {include_blank: 'None'})%>
+    <%= f.select(:main_research_area_id, ResearchArea.all.collect{|ra| [ ra.name, ra.id ] }, {include_blank: 'None'})%>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :ispublic, "Is this document public?" %>&nbsp;&nbsp;
+    <%= f.hidden_field :ispublic, :value => 0 %>
     <%= f.check_box :ispublic %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :islabdocument, "Was this docuent created at #{ENV["LABACRONYM"]}?" %>&nbsp;&nbsp;
     <%= f.check_box :islabdocument %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :tryear, "Tech Report Year" %><br>
+    <%= f.label :tryear, "Tech Report Year" %><br/>
     <%= f.number_field :tryear %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :trmonth, "Tech Report Month" %><br>
+    <%= f.label :trmonth, "Tech Report Month" %><br/>
     <%= f.number_field :trmonth %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :trnumber, "Tech Report #" %><br>
+    <%= f.label :trnumber, "Tech Report #" %><br/>
     <%= f.number_field :trnumber %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title %><br/>
     <%= f.text_field :title, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :abstract %><br>
+    <%= f.label :document_person_maps, "Authors" %><br/>
+    <div>
+      <%= f.fields_for :document_person_maps do |map_form| %>
+        <!--<span>Author 1:</span>-->
+        <%= map_form.label :person_id %>
+        <%= map_form.select(
+                :person_id,
+                Person.order(:lastname, :firstname).collect{|p| [\
+                    p.get_name_first_middleinitial_last(),\
+                    p.id\
+                ]},
+                {include_blank: 'None'}) %>
+        <%= map_form.hidden_field :rank, :value => 0 %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :abstract %><br/>
     <%= f.text_area :abstract, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :filename %><br>
+    <%= f.label :filename %><br/>
     <%= f.text_field :filename, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :file %><br>
+    <%= f.label :file %><br/>
     <%= f.text_field :file, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :urlpdfpaper, "PDF manuscript URL" %><br>
+    <%= f.label :urlpdfpaper, "PDF manuscript URL" %><br/>
     <%= f.text_field :urlpdfpaper, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :urlsrcpaper, "Manuscript source URL" %><br>
+    <%= f.label :urlsrcpaper, "Manuscript source URL" %><br/>
     <%= f.text_field :urlsrcpaper, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :urlpdfpresentation, "PDF slides URL" %><br>
+    <%= f.label :urlpdfpresentation, "PDF slides URL" %><br/>
     <%= f.text_field :urlpdfpresentation, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :urlsrcpresentation, "Slide source URL" %><br>
+    <%= f.label :urlsrcpresentation, "Slide source URL" %><br/>
     <%= f.text_field :urlsrcpresentation, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :urlavmedia, "Audio-visual media URL" %><br>
+    <%= f.label :urlavmedia, "Audio-visual media URL" %><br/>
     <%= f.text_field :urlavmedia, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :urldoi, "DOI" %><br>
+    <%= f.label :urldoi, "DOI" %><br/>
     <%= f.text_field :urldoi, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :urlpublisher, "Publisher URL" %><br>
+    <%= f.label :urlpublisher, "Publisher URL" %><br/>
     <%= f.text_field :urlpublisher, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :urlgooglescholar, "Google Scholar URL" %><br>
+    <%= f.label :urlgooglescholar, "Google Scholar URL" %><br/>
     <%= f.text_field :urlgooglescholar, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :urlciteseer, "CiteSeer URL" %><br>
+    <%= f.label :urlciteseer, "CiteSeer URL" %><br/>
     <%= f.text_field :urlciteseer, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubin, "Published In" %><br>
+    <%= f.label :pubin, "Published In" %><br/>
     <%= f.text_field :pubin, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubvol, "Volume" %><br>
+    <%= f.label :pubvol, "Volume" %><br/>
     <%= f.text_field :pubvol, size: 10 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubnum, "Number" %><br>
+    <%= f.label :pubnum, "Number" %><br/>
     <%= f.text_field :pubnum, size: 10 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubnum_end, "Number (end)"%><br>
+    <%= f.label :pubnum_end, "Number (end)"%><br/>
     <%= f.text_field :pubnum_end, size: 10 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubpagefirst, "Page (start)" %><br>
+    <%= f.label :pubpagefirst, "Page (start)" %><br/>
     <%= f.text_field :pubpagefirst, size: 10 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubpagelast, "Page (end)"%><br>
+    <%= f.label :pubpagelast, "Page (end)"%><br/>
     <%= f.text_field :pubpagelast, size: 10 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubpagecount, "Page (count)" %><br>
+    <%= f.label :pubpagecount, "Page (count)" %><br/>
     <%= f.text_field :pubpagecount, size: 10 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubdate, "Publication Date" %><br>
+    <%= f.label :pubdate, "Publication Date" %><br/>
     <%= f.date_select :pubdate %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubdate_end, "Publication Date (end)" %><br>
+    <%= f.label :pubdate_end, "Publication Date (end)" %><br/>
     <%= f.date_select :pubdate_end %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :pubplace, "Place" %><br>
+    <%= f.label :pubplace, "Place" %><br/>
     <%= f.text_field :pubplace %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :publisher %><br>
+    <%= f.label :publisher %><br/>
     <%= f.text_field :publisher %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
-    <%= f.label :miscattributes, "Miscellaneous Attributes (e.g 'a=>1,b=>2')" %><br>
+    <%= f.label :miscattributes, "Miscellaneous Attributes (e.g 'a=>1,b=>2')" %><br/>
     <%= f.text_field :miscattributes, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="field">
+    <%= f.submit :class => "btn btn-primary" %>
   </div>
-  </td></tr>
-  </tbody>
-  </table>
 <% end %>

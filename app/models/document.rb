@@ -1,33 +1,64 @@
 class Document < ActiveRecord::Base
   include ActionView::Helpers::UrlHelper
   belongs_to :document_category
-  has_many :document_person_maps
+  has_many :document_person_maps, inverse_of: :document # TODO: :dependent => :destory
   has_many :people, :through => :document_person_maps
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :research_areas
   has_and_belongs_to_many :grants
   belongs_to :main_research_area, :class_name => "ResearchArea", :foreign_key => "main_research_area_id"
 
+  accepts_nested_attributes_for :document_person_maps
+
   validates :tryear, presence: {message: ": Missing year"}
+  validates :tryear, numericality: {
+              only_integer: true, greater_than: 1970, less_than: 2070,
+              message: ": Document year does not seem right"
+            }
+
   validates :trmonth, presence: {message: ": Missing month"}
+  validates :trmonth, numericality: {
+              only_integer: true,
+              greater_than_or_equal_to: 1,
+              less_than_or_equal_to: 12,
+              message: ": Document month does not seem right"
+            }
+
   validates :trnumber, presence: {message: ": Missing number"}
   validates :title, presence: {message: ": Missing title"}
   validates :ispublic, presence: {message: ": Missing public/nonpublic status"}
   validates :islabdocument, presence: {message: ": Missing lab status"}
 
-  validates :urlpdfpaper,  :urlsrcpaper,  :urlpdfpresentation,  :urlsrcpresentation,
-            :urlavmedia,  :urldoi,  :urlpublisher,  :urlgooglescholar,  :urlciteseer,
-            allow_nil: true, allow_blank: true, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
+  validates :urlpdfpaper, :urlsrcpaper, :urlpdfpresentation, :urlsrcpresentation,
+            :urlavmedia, :urldoi, :urlpublisher, :urlgooglescholar, :urlciteseer,
+            allow_nil: true, allow_blank: true,
+            format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
 
-  validates :pubvol, allow_nil: true, format: {with:  /\A((\d+)|([IVXLCDM]+))?\z/, message:  ": Volume is in wrong format"}
-  validates :pubnum, allow_nil: true, format: {with:  /\A\d*\z/, message:  ": Number start is in wrong format"}
-  validates :pubnum_end, allow_nil: true, format: {with:  /\A\d*\z/, message:  ": Number end is in wrong format"}
-  validates :pubpagecount, allow_nil: true, format: {with:  /\A\d*\z/, message:  ": Page Count is in wrong format"}
-  validates :pubpagefirst, allow_nil: true, format: {with:  /\A((\d+)|([IVXLCDM]+)|([ivxlcdm]+))?\z/, message:  ": Page number start is in wrong format"}
-  validates :pubpagelast, allow_nil: true, format: {with:  /\A((\d+)|([IVXLCDM]+)|([ivxlcdm]+))?\z/, message:  ": Page number end is in wrong format"}
+  validates :pubvol, allow_nil: true, format: {
+              with: /\A((\d+)|([IVXLCDM]+))?\z/,
+              message: ": Volume is in wrong format"
+            }
+  validates :pubnum, allow_nil: true, format: {
+              with: /\A\d*\z/,
+              message: ": Number start is in wrong format"
+            }
+  validates :pubnum_end, allow_nil: true, format: {
+              with: /\A\d*\z/,
+              message: ": Number end is in wrong format"
+            }
+  validates :pubpagecount, allow_nil: true, format: {
+              with: /\A\d*\z/,
+              message: ": Page Count is in wrong format"
+            }
+  validates :pubpagefirst, allow_nil: true, format: {
+              with: /\A((\d+)|([IVXLCDM]+)|([ivxlcdm]+))?\z/,
+              message: ": Page number start is in wrong format"
+            }
+  validates :pubpagelast, allow_nil: true, format: {
+              with: /\A((\d+)|([IVXLCDM]+)|([ivxlcdm]+))?\z/,
+              message: ": Page number end is in wrong format"
+            }
 
-  validates :tryear, numericality: {only_integer: true, greater_than: 1970, less_than: 2070, message: ": Document year does not seem right"}
-  validates :trmonth, numericality: {only_integer: true, greater_than: 0, less_than: 13, message: ": Document month does not seem right"}
 
   def self.get_trnumber(year, month)
     results = Document.find_by_sql "SELECT MAX(trnumber) AS trnumber FROM documents d WHERE d.tryear=#{year} AND d.trmonth=#{month}"
@@ -47,17 +78,13 @@ class Document < ActiveRecord::Base
     return ans.html_safe
   end
   
-  def authors_list
-    answer = []
-    document_person_maps.each {|m| answer[m.rank-1] = m.person}
-    answer.select {|a| a}
-  end
-  
   def authors_string
-      author_string = authors_list.map {|m| "#{m.firstname} #{m.lastname}" if m}.join(", ")
-      last_comma_index = author_string.rindex(',')
-      author_string.insert(last_comma_index+1, " and ") if last_comma_index
-      return author_string
-    end
+		author_string = document_person_maps.order(:rank).map {|m|
+      m.person.get_name_first_middleinitial_last
+    }.join(", ")
+		last_comma_index = author_string.rindex(',')
+		author_string.insert(last_comma_index+1, " and ") if last_comma_index
+		return author_string
+	end
 
 end
