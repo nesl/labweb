@@ -2,7 +2,6 @@
   <% if @person.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
-
       <ul>
       <% @person.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,313 +9,284 @@
       </ul>
     </div>
   <% end %>
-  <table class="table-condensed lw-table">
-  <tbody>
-  <tr><td>
+  
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :firstname, size: 20 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :middle_initial %><br>
     <%= f.text_field :middleinitial, size: 1 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :last_name %><br>
     <%= f.text_field :lastname, size: 20  %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :webname %><br>
     <%= f.text_field :webname %>
   </div>
-  </td></tr>
-  <tr><td>
+
+  <%# TODO: Now the segmented-control box does not connect to database. It only toggles
+      the photo display method %>
+  <%# TODO: Rename the name/id attributes of children elements in segmented-conrol as
+      well as corresponding javascripts. %>
+  <%# TODO: Add a photo preview div %>
+  <div class="field">
+    <%= f.label "photo", "Personal photo" %><br>
+
+    <div class="segmented-control" style="width:300px; color:#337ab7; margin:auto">
+      <input type="radio" name="sc-1-1" id="sc-1-1-1" onclick="toggle_photo_upload_content()" checked>
+      <input type="radio" name="sc-1-1" id="sc-1-1-2" onclick="toggle_photo_upload_content()">
+
+      <label for="sc-1-1-1" data-value="Uploaded photo">Uploaded photo</label>
+      <label for="sc-1-1-2" data-value="Remote URL">Remote URL</label>
+    </div>
+  </div>
+
+  <div class="field" id="field_local_photo">
+    <%= f.label :localphoto, "Profile Picture (square photo only)" %><br>
+    <%= f.file_field :localphoto %>
+  </div>
+
+  <div class="field" id="field_url_photo" style="display:none">
+    <%= f.label :urlphoto, "URL for photo" %><br>
+    <%= f.text_field :urlphoto, size: 100 %>
+  </div>
+
   <div class="field">
     <%= f.label :person_category_id, "Person Category:" %>&nbsp;&nbsp;
     <%= f.select("person_category_id", PersonCategory.all.collect{|pc| [ pc.name, pc.id ] }, {include_blank: 'None'})%>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :url, "URL" %><br>
     <%= f.text_field :url, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :urlphoto, "URL for photo" %><br>
-    <%= f.text_field :urlphoto, size: 100 %>
-  </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :phonework, "Phone (work)" %><br>
     <%= f.text_field :phonework, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :phonehome, "Phone (home)" %><br>
     <%= f.text_field :phonehome, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :phonecell, "Phone (mobile)"%><br>
     <%= f.text_field :phonecell, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :fax, "Fax" %><br>
     <%= f.text_field :fax, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :addressoffice, "Office Room #" %><br>
     <%= f.text_field :addressoffice, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :addresslab, "Lab Room #" %><br>
     <%= f.text_field :addresslab, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :addressmail, "Mail Address"%><br>
     <%= f.text_field :addressmail, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :department %><br>
     <%= f.text_field :department, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :urldepartment, "Department URL" %><br>
     <%= f.text_field :urldepartment, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :organization, "Organization" %><br>
     <%= f.text_field :organization, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :urlorganization, "Organization URL" %><br>
     <%= f.text_field :urlorganization, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :bs_year, "B.S. Graduation Year" %><br>
     <%= f.number_field :bs_year, size: 4 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :bs_title, "B.S. Degree Title" %><br>
     <%= f.text_field :bs_title, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :bs_school, "B.S. School" %><br>
     <%= f.text_field :bs_school, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :bs_field, "B.S. Field" %><br>
     <%= f.text_field :bs_field, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :bs_in_lab, "Was B.S. done at #{ENV["LABACRONYM"]}?" %>&nbsp;&nbsp;
     <%= f.check_box :bs_in_lab %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :ms_year, "M.S. Graduation Year" %><br>
     <%= f.number_field :ms_year, size: 4 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :ms_title, "M.S. Degree Title" %><br>
     <%= f.text_field :ms_title, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :ms_school, "M.S. School" %><br>
     <%= f.text_field :ms_school, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :ms_field, "M.S. Field" %><br>
     <%= f.text_field :ms_field, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :ms_thesis, "M.S. Thesis Title" %><br>
     <%= f.text_field :ms_thesis, size:100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :ms_in_lab, "Was M.S. done at #{ENV["LABACRONYM"]}?" %>&nbsp;&nbsp;
     <%= f.check_box :ms_in_lab %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :phd_year, "Ph.D. Graduation Year" %><br>
     <%= f.number_field :phd_year %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :phd_title, "Ph.D Degree Title" %><br>
     <%= f.text_field :phd_title, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :phd_school, "Ph.D. School" %><br>
     <%= f.text_field :phd_school, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :phd_field, "Ph.D. Field" %><br>
     <%= f.text_field :phd_field, size: 100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :phd_thesis, "Ph.D. Thesis Title" %><br>
     <%= f.text_field :phd_thesis, size:100 %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :phd_in_lab, "Was Ph.D. done at #{ENV["LABACRONYM"]}?"%>&nbsp;&nbsp;
     <%= f.check_box :phd_in_lab %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :biography %><br>
     <%= f.text_area :biography, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :researchinterests, "Research Interests"%><br>
     <%= f.text_area :researchinterests, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :education %><br>
     <%= f.text_area :education, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :professionalexperience, "Professional Experience" %><br>
     <%= f.text_area :professionalexperience, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :professionalservice, "Professional Service" %><br>
     <%= f.text_area :professionalservice, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :otherpublications, "Other Publications" %><br>
     <%= f.text_area :otherpublications, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :patents %><br>
     <%= f.text_area :patents, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :awards %><br>
     <%= f.text_area :awards, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :skills %><br>
     <%= f.text_area :skills, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :interests %><br>
     <%= f.text_area :interests, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :secretary %><br>
     <%= f.text_area :secretary, size: "103x10" %>
   </div>
-  </td></tr>
-  <tr><td>
+
   <div class="field">
     <%= f.label :miscattributes, "Miscellaneous Attributes" %><br>
     <%= f.text_field :miscattributes, size:100 %>
   </div>
-  </td></tr>
-
-  <tr><td>
+  
   <div class="field">
-    <%= f.label :localphoto, "Profile Picture (square photo only)" %><br>
-    <%= f.file_field :localphoto %>
+    <%= f.submit :class => "btn btn-primary" %>
   </div>
-  </td></tr>
-
-  <tr><td>
-  <br>
-  </td></tr>
-
-  <tr><td>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  </td></tr>
-  </tbody>
-  </table>
 <% end %>
+
+<script>
+function show_or_hide_div(show_flag, div) {
+  if (show_flag == false)
+    div.css("display", "none");
+  else
+    div.fadeIn();
+}
+
+function toggle_photo_upload_content() {
+  show_or_hide_div($("#sc-1-1-1").prop("checked"), $("#field_local_photo"));
+  show_or_hide_div($("#sc-1-1-2").prop("checked"), $("#field_url_photo"));
+}
+</script>

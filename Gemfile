@@ -53,3 +53,5 @@ gem 'simple_form'
 gem 'thin'
 
 gem 'carrierwave'
+
+gem 'compass-rails', '~> 3.0.2'
