@@ -4,6 +4,8 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
+    # TODO: if the document category or main research area are not chosen,
+    # the form validator will pass, but it will crash here
     @documents = Document.all
     @document_categories = DocumentCategory.all.map.select{ |x| 
       @documents.select{ |d|
@@ -51,7 +53,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
-    @document_person_maps = @document.document_person_maps.build
+    @document_person_maps = @document.document_person_maps.build(rank: 0)
   end
 
   # GET /documents/1/edit
@@ -61,9 +63,7 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @debug_params = document_params
     @document = Document.new(document_params)
-    #@document = Document.new
 
     respond_to do |format|
       if @document.save
@@ -118,6 +118,6 @@ class DocumentsController < ApplicationController
           :pubpagecount, :pubdate, :pubdate_end, :pubplace, :publisher,
           :ispublic, :islabdocument, :miscattributes,
           :document_category_id, :main_research_area_id,
-          document_person_maps_attributes: [:person_id, :rank])
+          document_person_maps_attributes: [:id, :person_id, :rank, :_destroy])
     end
 end

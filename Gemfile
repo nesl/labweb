@@ -50,6 +50,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'pundit'
 gem 'simple_form'
+gem "nested_form", :git => "git://github.com/madebydna/nested_form.git"
 gem 'thin'
 
 gem 'carrierwave'

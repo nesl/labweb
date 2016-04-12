@@ -1,4 +1,6 @@
-<%= form_for(@document) do |f| %>
+<% author_cnt = 0 %>
+
+<%= form_for @document do |f| %>
   <% if @document.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
@@ -9,10 +11,6 @@
       </ul>
     </div>
   <% end %>
-
-  <%= params %>
-  <br/>
-  <%= @debug_params %>
 
   <div class="field">
     <%= f.label :document_category_id, "Document Category:" %>&nbsp;&nbsp;
@@ -26,7 +24,6 @@
 
   <div class="field">
     <%= f.label :ispublic, "Is this document public?" %>&nbsp;&nbsp;
-    <%= f.hidden_field :ispublic, :value => 0 %>
     <%= f.check_box :ispublic %>
   </div>
 
@@ -57,19 +54,31 @@
 
   <div class="field">
     <%= f.label :document_person_maps, "Authors" %><br/>
-    <div>
+    <div style='margin-left:30px' id='authors'>
       <%= f.fields_for :document_person_maps do |map_form| %>
-        <!--<span>Author 1:</span>-->
-        <%= map_form.label :person_id %>
-        <%= map_form.select(
-                :person_id,
-                Person.order(:lastname, :firstname).collect{|p| [\
-                    p.get_name_first_middleinitial_last(),\
-                    p.id\
-                ]},
-                {include_blank: 'None'}) %>
-        <%= map_form.hidden_field :rank, :value => 0 %>
+        <% author_cnt += 1 %>
+        <div class='one-author'>
+          <span>
+            <%= author_cnt.ordinalize %> author:
+          </span>
+          <%= map_form.select(
+                  :person_id,
+                  Person.order(:lastname, :firstname).collect{|p| [\
+                      p.get_name_first_middleinitial_last(),\
+                      p.id\
+                  ]},
+                  {include_blank: 'None'}) %>
+          <%= map_form.hidden_field :rank %>
+          <%= map_form.hidden_field :_destroy %>
+        </div>
       <% end %>
+      <p style='margin:5px 0px 10px 0px'>
+        <a onclick="add_an_author()">Add a new author</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <% remove_style = (author_cnt > 1 ? 'inline' : 'none') %>
+        <a onclick="remove_the_last_author()" style="display:<%= remove_style %>" id="a_remove_author">
+          Remove the last author
+        </a>
+      </p>
     </div>
   </div>
 
@@ -197,3 +206,126 @@
     <%= f.submit :class => "btn btn-primary" %>
   </div>
 <% end %>
+
+<script>
+//var num_authors = <%= author_cnt %>;
+var root_model_name;
+var focused_model_attr;
+
+function get_ordinal(n) {
+  var s = ["th", "st", "nd", "rd"],
+    v = n % 100;
+  return n + (s[(v-20)%10] || s[v] || s[0]);
+}
+
+function move_id_input_tags_into_belonged_divs() {
+  $('#authors > input').each(function(idx) {
+    var parent_div = $(this).prev();
+    $(this).appendTo(parent_div);
+  });
+}
+
+function parse_name(name) {
+  var terms = name.match(/(.*)\[(.*)\]\[(.*)\]\[(.*)\]/);
+  // e.g, name  = "document[document_person_maps_attributes][0][person_id]"
+  //      terms =  1^^^^^^^ 2^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 3  4^^^^^^^^
+  return terms.slice(1);
+}
+
+function remember_attribute_prefix() {
+  var name = $('#authors > .one-author > input').attr('name');
+  var terms = parse_name(name);
+  root_model_name = terms[0];
+  focused_model_attr = terms[1];
+}
+
+function make_name(key, attr) {
+  return '{0}[{1}][{2}][{3}]'.format(root_model_name, focused_model_attr, key, attr);
+}
+
+function make_id(key, attr) {
+  return '{0}_{1}_{2}_{3}'.format(root_model_name, focused_model_attr, key, attr);
+}
+
+function create_input(input_type, key, attr, input_value) {
+  return $('<input>')
+      .attr('type', input_type)
+      .attr('name', make_name(key, attr))
+      .attr('id', make_id(key, attr))
+      .attr('value', input_value);
+}
+
+function update_key_of_all_inputs(parent_div, key) {
+  for (type of ['select', 'input'])
+    $(type, parent_div).each(function(idx) {
+      var attr = parse_name($(this).attr('name'))[3];
+      $(this).attr('name', make_name(key, attr));
+      $(this).attr('id', make_id(key, attr));
+    });
+}
+
+function reorder_ranks() {
+  $('#authors .one-author').each(function(idx) {
+    $('span', $(this)).text('{0} author:'.format(get_ordinal(idx + 1)));
+    var one_name = $('input', $(this)).first().attr('name');
+    var key = parse_name(one_name)[2];
+    var hidden_rank_id = make_id(key, 'rank');
+    var hidden_rank = $('input[id="{0}"]'.format(hidden_rank_id), $(this));
+    hidden_rank.attr('value', '' + idx);
+  });
+}
+
+function add_an_author() {
+  var last_author_div = $('#authors .one-author').last();
+  var new_div = last_author_div.clone();
+  new_div.insertAfter(last_author_div);
+
+  var key = new Date().getTime();
+  update_key_of_all_inputs(new_div, key);
+  $('input[id="{0}"]'.format(make_id(key, 'id'))).remove();
+  console.log(make_id(key, 'id'));
+
+  var sel = $('select', new_div);
+
+  $('option:eq(0)', sel).prop('selected', true);
+
+  reorder_ranks();
+
+  if ($('.one-author').length > 1)
+    $('#a_remove_author').css('display', 'inline');
+}
+
+function remove_the_last_author() {
+  //$('#authors .one-author').last().remove();
+  var del_div = $('#authors .one-author').last();
+  var one_name = $('input', del_div).first().attr('name');
+  var key = parse_name(one_name)[2];
+  var hidden_destroy_id = make_id(key, '_destroy');
+  var hidden_destroy = $('input[id="{0}"]'.format(hidden_destroy_id), del_div);
+  hidden_destroy.attr('value', 'true');
+
+  del_div.attr('class', 'deleted-author');
+
+  reorder_ranks();
+
+  if ($('.one-author').length == 1)
+    $('#a_remove_author').css('display', 'none');
+}
+
+function hide_deleted_authors() {
+  $('#authors .one-author').each(function(idx) {
+    var one_name = $('input', $(this)).first().attr('name');
+    var key = parse_name(one_name)[2];
+    var hidden_destroy_id = make_id(key, '_destroy');
+    var hidden_destroy = $('input[id="{0}"]'.format(hidden_destroy_id), $(this));
+    if (hidden_destroy.attr('value') == 'true')
+      $(this).attr('class', 'deleted-author');
+  });
+  reorder_ranks();
+}
+
+move_id_input_tags_into_belonged_divs();
+remember_attribute_prefix();
+hide_deleted_authors();
+
+</script>
