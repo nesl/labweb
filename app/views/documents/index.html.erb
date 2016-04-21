@@ -67,10 +67,10 @@
                           , <%= link_to 'Delete', document, method: :delete, data: { confirm: 'Are you sure?' } %>
                       <% end %> ]</td>
                     </tr>
+	        <% end %>
                 </tbody>
               </table>
-              <% end %>
-              <% end %>
+            <% end %>
             </div>
               <div class="panel-footer">
                 <% if user_signed_in? && current_user.admin? %>
