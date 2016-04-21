@@ -13,8 +13,8 @@
   <tbody>
     <% @document_person_maps.each do |document_person_map| %>
       <tr>
-        <td><%= document_person_map.document.id %></td>
-        <td><%= document_person_map.person.id %></td>
+        <td><%= document_person_map.document_id %></td>
+        <td><%= document_person_map.person_id %></td>
         <td><%= document_person_map.rank %></td>
         <td>
           <%= link_to '[Show]', document_person_map %>

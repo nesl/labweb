@@ -58,7 +58,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                <% @documents.where({document_category_id: item.id}).order('pubdate DESC').select{|x| @person.present? ? (x.people.member?(@person)) : true}.each do |document| %>
+                <% @documents.where({document_category_id: item.id}).order('pubdate DESC').select{|d| @person.present? ? (d.people.member?(@person)) : true}.each do |document| %>
                     <tr>
                       <td><%= document.citation_formatted() %><br>
                       [ <%= link_to ' Details', document %>
@@ -67,9 +67,9 @@
                           , <%= link_to 'Delete', document, method: :delete, data: { confirm: 'Are you sure?' } %>
                       <% end %> ]</td>
                     </tr>
-                <% end %>
                 </tbody>
               </table>
+              <% end %>
               <% end %>
             </div>
               <div class="panel-footer">
@@ -109,8 +109,8 @@
                 </tr>
                 </thead>
 
-                <tbody>
-                <% @documents.order('pubdate DESC').select{|x| (x.pubdate.year==item) && (@person.present? ? (x.people.member?(@person)) : true)}.each do |document| %>
+		<tbody>
+                <% @documents.select{|d| (d.pubdate.year == item) && (@person.present? ? (d.people.member?(@person)) : true)}.each do |document| %>
                     <tr>
                       <td><%= document.citation_formatted() %><br>
                       [ <%= link_to ' Details', document %>

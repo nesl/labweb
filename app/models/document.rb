@@ -80,14 +80,13 @@ class Document < ActiveRecord::Base
   end
 
   def authors_list
-    # TODO: remove order(:rank_ as it's already sorted by rank
-    document_person_maps.order(:rank).map {|m| m.person }
+    # TODO: obselete this no-op method
+    people
   end
   
   def authors_string
-    # TODO: remove order(:rank_ as it's already sorted by rank
-    author_string = document_person_maps.order(:rank).map {|m|
-      m.person.get_name_first_middleinitial_last
+    author_string = people.map {|p|
+      p.get_name_first_middleinitial_last
     }.join(", ")
     last_comma_index = author_string.rindex(',')
     author_string.insert(last_comma_index+1, " and ") if last_comma_index

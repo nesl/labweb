@@ -6,13 +6,15 @@ class DocumentsController < ApplicationController
   def index
     # TODO: if the document category or main research area are not chosen,
     # the form validator will pass, but it will crash here
-    @documents = Document.all
-    @document_categories = DocumentCategory.all.map.select{ |x| 
-      @documents.select{ |d|
-        d.document_category.name==x.name
-      }.length>0
+    @documents = Document.includes(:people).all.order('pubdate DESC')
+    
+    Rails.logger.debug(@documents.to_sql)
+    
+    @document_categories = DocumentCategory.all.select{ |dc|
+      @documents.where(:document_category => dc).any?
     }
-    Rails.logger.debug("doc_controller: document_categories=#{@document_categories.inspect}")
+    
+    #Rails.logger.debug("doc_controller: document_categories=#{@document_categories.inspect}")
     person_id = nil
     params.each {|key, value| person_id = value if key=="person_id"}    
     if person_id.present? 
