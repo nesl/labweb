@@ -6,8 +6,9 @@ class DocumentsController < ApplicationController
   def index
     # TODO: if the document category or main research area are not chosen,
     # the form validator will pass, but it will crash here
+    # TODO: more optimization: http://stackoverflow.com/questions/12400860/activerecord-includes-specify-included-columns
     @documents = Document.includes(:people).all.order('pubdate DESC')
-    
+
     Rails.logger.debug(@documents.to_sql)
     
     @document_categories = DocumentCategory.all.select{ |dc|
