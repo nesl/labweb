@@ -1,16 +1,31 @@
 <div class="container">
   <div class="row">
     <h3>Users</h3>
-    <div class="column">
-      <table class="table">
-        <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <%= render user %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+    <table class="table">
+      <thead>
+        <th>User email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.role.titleize %></td>
+            <td>
+              <% if user.admin? %>
+                Admin
+              <% else %>
+                <%= link_to '[Show]', user %> 
+                [Edit] 
+                <%= link_to("[Delete]", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% # TODO: implement new user action %>
+    <%= link_to 'New website user', new_user_path, class: "btn btn-primary" %>
   </div>
 </div>
