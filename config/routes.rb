@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/about'    => 'web_pages#findone', pagetitle: "About"
   get '/joining'    => 'web_pages#findone', pagetitle: "Joining"
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users
 
 
