@@ -18,6 +18,7 @@
 //= require sortable.min.js
 //= require_tree .
 
+// Overload string.format(), example usage:, "{0}_{1}".format("hello", "NESL")
 if (!String.prototype.format) {
   String.prototype.format = function() {
     var args = arguments;
