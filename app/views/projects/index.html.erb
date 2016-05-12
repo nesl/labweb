@@ -24,7 +24,7 @@
       <!-- Default panel contents -->
       <div class="panel-heading">
         <h1 class="panel-title"><a id="0" class="anchorwithoffset"></a>Projects @ <%= ENV["LABACRONYM"]%></h1>
-        <% if user_signed_in? && current_user.admin? %>
+        <% if user_signed_in? %>
           <span style='float:right; margin-top:-18px'><%= link_to 'New Project', new_project_path %></span>
         <% end %>
       </div>
@@ -48,7 +48,7 @@
                   <div class="panel-body">
                     <%= p.description.blank? ? "TBA" : p.description.html_safe() %>
                     [ 
-                    <% if user_signed_in? && current_user.admin? %>
+                    <% if user_signed_in? %>
                       <%= link_to "Details,", p %>
                       <%= link_to "Edit,", edit_project_path(p) %>
                       <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -67,7 +67,7 @@
         <% end %>
       </div>
 
-      <% if user_signed_in? && current_user.admin? %>
+      <% if user_signed_in? %>
         <div class="panel-footer">
           <%= link_to 'New Project', new_project_path %>
         </div>

@@ -44,7 +44,7 @@
               <%# TODO: is following line necessary? %>
               <%= " by #{@person.firstname} #{@person.lastname}" if @person.present? %>
             </h1>
-            <% if user_signed_in? && current_user.admin? %>
+            <% if user_signed_in? %>
               <span style='float:right; margin-top:-18px'><%= link_to 'New Document', new_document_path %></span>
             <% end %>
           </div>
@@ -62,7 +62,7 @@
                     <tr>
                       <td><%= document.citation_formatted() %><br>
                       [ <%= link_to ' Details', document %>
-                      <% if user_signed_in? && current_user.admin? %>
+                      <% if user_signed_in? %>
                           , <%= link_to 'Edit', edit_document_path(document) %>
                           , <%= link_to 'Delete', document, method: :delete, data: { confirm: 'Are you sure?' } %>
                       <% end %> ]</td>
@@ -73,7 +73,7 @@
             <% end %>
             </div>
               <div class="panel-footer">
-                <% if user_signed_in? && current_user.admin? %>
+                <% if user_signed_in? %>
                     <%= link_to 'New Document', new_document_path %>
                   <% end %>
               </div>
@@ -114,7 +114,7 @@
                     <tr>
                       <td><%= document.citation_formatted() %><br>
                       [ <%= link_to ' Details', document %>
-                      <% if user_signed_in? && current_user.admin? %>
+                      <% if user_signed_in? %>
                           , <%= link_to 'Edit', edit_document_path(document) %>
                           , <%= link_to 'Delete', document, method: :delete, data: { confirm: 'Are you sure?' } %>
                       <% end %> ]</td>
@@ -125,7 +125,7 @@
               <% end %>
             </div>
               <div class="panel-footer">
-                <% if user_signed_in? && current_user.admin? %>
+                <% if user_signed_in? %>
                   <%= link_to 'New Document', new_document_path %>
                 <% end %>
             </div>

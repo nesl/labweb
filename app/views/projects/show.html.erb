@@ -67,7 +67,7 @@
   <p><strong><%= link_to "Web Page", @project.url, :target => "_blank" %></strong></p>
 <% end %>
 
-<% if user_signed_in? && current_user.admin? %>
+<% if user_signed_in? %>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Delete', project_path(@project), method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>

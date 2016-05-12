@@ -22,7 +22,7 @@
       <!-- Default panel contents -->
       <div class="panel-heading">
         <h1 class="panel-title"><a id="0" class="anchorwithoffset"></a>People @ <%= ENV["LABACRONYM"]%></h1>
-        <% if user_signed_in? && current_user.admin? %>
+        <% if user_signed_in? %>
           <span style='float:right; margin-top:-18px'><%= link_to 'New person', new_person_path %></span>
         <% end %>
       </div>
@@ -44,7 +44,7 @@
                   <span style='font-weight: bold'><%= "#{person.firstname} #{person.lastname}" %></span>
                   <br/>
                   <%= person.person_category.name %>
-                  <% if user_signed_in? && current_user.admin? %>
+                  <% if user_signed_in? %>
                     <br/>
                     [
                     <%= link_to 'Details', person %>,
@@ -70,7 +70,7 @@
                       <% end %>
                     <% end %>
                     
-                    <% if user_signed_in? && current_user.admin? %>
+                    <% if user_signed_in? %>
                       [
                       <%= link_to 'Details', person %>,
                       <%= link_to 'Edit', edit_person_path(person) %>,
@@ -87,7 +87,7 @@
         <% end %>
       </div>
 
-      <% if user_signed_in? && current_user.admin? %>
+      <% if user_signed_in? %>
         <div class="panel-footer">
           <%= link_to 'New Person', new_person_path %>
         </div>

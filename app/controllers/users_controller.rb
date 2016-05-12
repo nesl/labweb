@@ -32,9 +32,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # TODO: After a user is created, the current user will shift to this new user,
-  #       which instead shouldn't change (i.e., still an admin.) Keep an eye
-  #       on this thread: http://stackoverflow.com/questions/36948400/devise-for-how-should-we-do-so-that-only-admin-can-create-normal-users
   # POST /users
   # POST /users.json
   def create

@@ -56,3 +56,6 @@ gem 'thin'
 gem 'carrierwave'
 
 gem 'compass-rails', '~> 3.0.2'
+
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
