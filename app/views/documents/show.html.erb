@@ -222,7 +222,7 @@
 </p>
   
 
-<% if user_signed_in? && current_user.admin? %>
+<% if user_signed_in? %>
 <%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Delete', document_path(@document), method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
