@@ -11,6 +11,7 @@
   <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag "jumbotron", media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%#= stylesheet_link_tag params[:controller] %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
@@ -22,20 +23,20 @@
 <%= render 'layouts/header' %>
 
 <% if current_page?(root_path) %>
-    <% if content_for?(:carousel) %>
-	    <div class="carousel">
-		    <div class="container-fluid">
-				<%= yield :carousel %>
-			</div>
-		</div>
+  <% if content_for?(:carousel) %>
+    <div class="carousel">
+      <div class="container-fluid">
+        <%= yield :carousel %>
+      </div>
+    </div>
 	<% end %>
-    <% if content_for?(:jumbotron) %>
-        <div class="jumbotron">
-			<div class="container-fluid">
-              <%= yield :jumbotron %>
-			</div>
-        </div>
-    <% end %>
+  <% if content_for?(:jumbotron) %>
+    <div class="jumbotron">
+      <div class="container-fluid">
+        <%= yield :jumbotron %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
 
 <% if flash[:alert] %>
@@ -51,12 +52,12 @@
 <% end %>
 
 <div class="container lw-content">
-    <%= yield %>
+  <%= yield %>
 </div>
 
 <div class="container lw-content">
-<%= render 'layouts/footer' %>
-<div class="container lw-content">
+  <%= render 'layouts/footer' %>
+</div>
 
 <%= debug(params) if Rails.env.development? %>
 
