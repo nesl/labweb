@@ -7,7 +7,13 @@ class RegistrationsController < Devise::RegistrationsController
     super
   end
 
-private
+  protected
+
+  def sign_up(resource_name, resource)
+    # Don't sign_in()
+  end
+
+  private
 
   def authorize_user!
     if !current_user || !current_user.admin?
