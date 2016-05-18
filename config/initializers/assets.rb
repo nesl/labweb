@@ -32,15 +32,3 @@ Rails.application.config.assets.precompile += %w(projects.css)
 Rails.application.config.assets.precompile += %w(research_areas.css)
 Rails.application.config.assets.precompile += %w(web_pages.css)
 
-#routes = Rails.application.routes.routes.map do |route|
-#  Rails.application.config.assets.precompile += (route.defaults[:controller] + ".css")
-#end
-
-#Rails.application.eager_load!
-#for controller in ApplicationController.subclasses
-#  controller_name = controller.controller_name
-#  unless ['visitors', 'users', 'devise'].include? controller_name
-#    Rails.application.config.assets.precompile += (controller_name + ".css")
-#  end
-#end
-
