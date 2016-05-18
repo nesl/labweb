@@ -28,10 +28,14 @@ class Person < ActiveRecord::Base
   validates_inclusion_of :useurlphoto, :in => [true, false], message: ": Missing photo source: by url or by uploading"
   
   def get_photo_url
-    if localphoto.present?
+    if useurlphoto && urlphoto.present?
+      urlphoto
+    elsif !useurlphoto && localphoto.present?
       localphoto
     elsif urlphoto.present?
       urlphoto
+    elsif localphoto.present?
+      localphoto
     else
       ENV["DEFAULT_MUGSHOT"]
     end
