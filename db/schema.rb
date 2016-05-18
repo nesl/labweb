@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408224854) do
+ActiveRecord::Schema.define(version: 20160518004851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,8 +174,8 @@ ActiveRecord::Schema.define(version: 20160408224854) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.string   "lastname",               limit: 32, null: false
-    t.string   "firstname",              limit: 32, null: false
+    t.string   "lastname",               limit: 32,                null: false
+    t.string   "firstname",              limit: 32,                null: false
     t.string   "middleinitial",          limit: 1
     t.string   "webname",                limit: 32
     t.string   "email"
@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(version: 20160408224854) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "localphoto"
+    t.boolean  "useurlphoto",                       default: true, null: false
   end
 
   add_index "people", ["person_category_id"], name: "index_people_on_person_category_id", using: :btree
