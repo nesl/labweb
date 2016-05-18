@@ -9,7 +9,7 @@
       </ul>
     </div>
   <% end %>
-  
+
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :firstname, size: 20 %>
@@ -30,21 +30,17 @@
     <%= f.text_field :webname %>
   </div>
 
-  <%# TODO: Now the segmented-control box does not connect to database. It only toggles
-      the photo display method %>
-  <%# TODO: Rename the name/id attributes of children elements in segmented-conrol as
-      well as corresponding javascripts. %>
   <%# TODO: Add a photo preview div, possibly consider http://www.dropzonejs.com
       and http://www.dropzonejs.com/bootstrap.html . %>
   <div class="field">
-    <%= f.label "photo", "Personal photo" %><br>
+    <%= f.label :useurlphoto, "Personal photo" %><br/>
 
     <div class="segmented-control" style="width:300px; color:#337ab7; margin:auto">
-      <input type="radio" name="sc-1-1" id="sc-1-1-1" onclick="toggle_photo_upload_content()" checked>
-      <input type="radio" name="sc-1-1" id="sc-1-1-2" onclick="toggle_photo_upload_content()">
+      <%= f.radio_button :useurlphoto, false, :checked => !@person.useurlphoto, :onclick => "toggle_photo_upload_content()" %>
+      <%= f.radio_button :useurlphoto, true, :checked => @person.useurlphoto, :onclick => "toggle_photo_upload_content()" %>
 
-      <label for="sc-1-1-1" data-value="Uploaded photo">Uploaded photo</label>
-      <label for="sc-1-1-2" data-value="Remote URL">Remote URL</label>
+      <label for="person_useurlphoto_false" data-value="Uploaded photo">Uploaded photo</label>
+      <label for="person_useurlphoto_true" data-value="Remote URL">Remote URL</label>
     </div>
   </div>
 
@@ -53,7 +49,7 @@
     <%= f.file_field :localphoto %>
   </div>
 
-  <div class="field" id="field_url_photo" style="display:none">
+  <div class="field" id="field_url_photo">
     <%= f.label :urlphoto, "URL for photo" %><br>
     <%= f.text_field :urlphoto, size: 100 %>
   </div>
@@ -287,7 +283,9 @@ function show_or_hide_div(show_flag, div) {
 }
 
 function toggle_photo_upload_content() {
-  show_or_hide_div($("#sc-1-1-1").prop("checked"), $("#field_local_photo"));
-  show_or_hide_div($("#sc-1-1-2").prop("checked"), $("#field_url_photo"));
+  show_or_hide_div($("#person_useurlphoto_false").prop("checked"), $("#field_local_photo"));
+  show_or_hide_div($("#person_useurlphoto_true").prop("checked"), $("#field_url_photo"));
 }
+
+toggle_photo_upload_content();
 </script>

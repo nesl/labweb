@@ -25,6 +25,8 @@ class Person < ActiveRecord::Base
   validates :phonecell, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's phone (Mobile) is in wrong format"}
   validates :fax, allow_nil: true, format: {with: Labweb::RE_PHONE, message: ": Person's fax is in wrong format"}
   
+  validates_inclusion_of :useurlphoto, :in => [true, false], message: ": Missing photo source: by url or by uploading"
+  
   def get_photo_url
     if localphoto.present?
       localphoto
