@@ -1,70 +1,72 @@
 <div class="bheader">
-	<%= link_to_unless(@document.urlpdfpaper.nil?, @document.title) %>
-	<% if @document.document_category.present? %>
-	<span class="category">[<%= @document.document_category.name %>]</span>
-	<% end %>
+  <%= link_to_if(@document.paperupload.present?, @document.title) %>
+  <% if @document.document_category.present? %>
+    <span class="category">[<%= @document.document_category.name %>]</span>
+  <% end %>
 </div>
 <!-- <p>
-	<%= @document.citation() %>
+  <%= @document.citation() %>
 </p> -->
 
-<% if @document.tryear.present? && @document.trmonth.present? && @document.trnumber.present? %>
 <p>
   <strong><%= ENV["LABACRONYM"]%> Technical Report #:</strong>
   <%= "#{@document.tryear}-#{@document.trmonth}-#{@document.trnumber}" %>
 </p>
-<% end %>
 
-<p>
-  <% if @document.people.length > 0 %>
+<% if @document.people.length > 0 %>
+  <%# TODO: consider remove this checking %>
+  <p>
     <strong>Authors:</strong>
-  <ul>
+    <ul>
       <% @document.authors_list.each do |p| %>
-      <li> <%= link_to p.firstname + " " + p.lastname, p %> </li>
-    <% end %>
+        <li> <%= link_to p.firstname + " " + p.lastname, p %> </li>
+      <% end %>
     </ul>
-  <% end %>
-</p>
+  </p>
+<% end %>
 
 <% if @document.abstract.present? %>
-<p>
-  <strong>Abstract:</strong>
-  <%= @document.abstract %>
-</p>
+  <%# TODO: consider remove this checking %>
+  <p>
+    <strong>Abstract:</strong>
+    <%= @document.abstract.html_safe %>
+  </p>
 <% end %>
 
-<% if @document.filename.present? %>
-<p>
-  <strong>Filename:</strong>
-  <%= @document.filename %>
-</p>
+<% if false %>
+  <p>
+    <strong>Filename:</strong>
+    <%= @document.filename %>
+  </p>
 <% end %>
 
-<% if @document.file.present? %>
-<p>
-  <strong>File:</strong>
-  <%= @document.file %>
-</p>
+
+<% if @document.has_local_files? %>
+  <p>
+    <strong>Local downloads:</strong>
+    <ul>
+      <% if @document.paperupload.present? %>
+        <li><%= link_to "Paper", @document.paperupload.url, :target => "_blank" %></li>
+      <% end %>
+      
+      <% if @document.slidesupload.present? %>
+        <li><%= link_to "Slides", @document.slidesupload.url, :target => "_blank" %></li>
+      <% end %>
+      
+      <% if @document.avmediaupload.present? %>
+        <li><%= link_to "Audio/Video files", @document.avmediaupload.url, :target => "_blank" %></li>
+      <% end %>
+      
+      <% if @document.othersupload.present? %>
+        <li><%= link_to "Other supplements", @document.othersupload.url, :target => "_blank" %></li>
+      <% end %>
+    </ul>
+  </p>
 <% end %>
 
-<% if @document.urlpdfpaper.present? %>
-  <p><strong><%= link_to "Paper (PDF)", @document.urlpdfpaper, :target => "_blank" %></strong></p>
-<% end %>
-
-<% if @document.urlsrcpaper.present? %>
-  <p><strong><%= link_to "Paper (Source)", @document.urlsrcpaper, :target => "_blank" %></strong></p>
-<% end %>
-
-<% if @document.urlpdfpresentation.present? %>
-  <p><strong><%= link_to "Presentation (PDF)", @document.urlpdfpresentation, :target => "_blank" %></strong></p>
-<% end %>
-
-<% if @document.urlsrcpresentation.present? %>
-  <p><strong><%= link_to "Presentation (Source)", @document.urlsrcpresentation, :target => "_blank" %></strong></p>
-<% end %>
-
-<% if @document.urlavmedia.present? %>
-  <p><strong><%= link_to "Media", @document.urlavmedia, :target => "_blank" %></strong></p>
+<%# TODO: unify URL links %>
+<% if @document.urlextpaper.present? %>
+  <p><strong><%= link_to "External paper URL", @document.urlextpaper, :target => "_blank" %></strong></p>
 <% end %>
 
 <% if @document.urldoi.present? %>
@@ -84,31 +86,31 @@
 <% end %>
 
 <% if @document.pubin.present? %>
-<p>
-  <strong>Publication Forum:</strong>
-  <%= @document.pubin %>
-</p>
+  <p>
+    <strong>Publication Forum:</strong>
+    <%= @document.pubin %>
+  </p>
 <% end %>
 
 <% if @document.pubvol.present? %>
-<p>
-  <strong>Volume:</strong>
-  <%= @document.pubvol %>
-</p>
+  <p>
+    <strong>Volume:</strong>
+    <%= @document.pubvol %>
+  </p>
 <% end %>
 
 <% if @document.pubnum.present? %>
-<p>
-  <strong>Number:</strong>
-  <%= @document.pubnum %>
-</p>
+  <p>
+    <strong>Number:</strong>
+    <%= @document.pubnum %>
+  </p>
 <% end %>
 
 <% if @document.pubnum_end.present? %>
-<p>
-  <strong>Number (End):</strong>
-  <%= @document.pubnum_end %>
-</p>
+  <p>
+    <strong>Number (End):</strong>
+    <%= @document.pubnum_end %>
+  </p>
 <% end %>
 
 <% if @document.pubpagefirst.present? %>
@@ -191,10 +193,10 @@
 <p>
   <% if @document.projects.length > 0 %>
     <strong>Projects:</strong>
-	<ul>
+    <ul>
       <% @document.projects.each do |p| %>
-	    <li> <%= link_to p.name, p %> </li>
-	  <% end %>
+        <li> <%= link_to p.name, p %> </li>
+      <% end %>
     </ul>
   <% end %>
 </p>
@@ -202,10 +204,10 @@
 <p>
   <% if @document.grants.length > 0 %>
     <strong>Grants:</strong>
-	<ul>
+    <ul>
       <% @document.grants.each do |g| %>
-	    <li> <%= link_to g.name, g %> </li>
-	  <% end %>
+        <li> <%= link_to g.name, g %> </li>
+      <% end %>
     </ul>
   <% end %>
 </p>
@@ -213,10 +215,10 @@
 <p>
   <% if @document.research_areas.length > 0 %>
     <strong>Research Areas:</strong>
-	<ul>
+    <ul>
       <% @document.research_areas.each do |ra| %>
-	    <li> <%= link_to ra.name, ra %> </li>
-	  <% end %>
+        <li> <%= link_to ra.name, ra %> </li>
+      <% end %>
     </ul>
   <% end %>
 </p>

@@ -1,6 +1,12 @@
 class Document < ActiveRecord::Base
   include ActionView::Helpers::UrlHelper
   belongs_to :document_category
+  
+  mount_uploader :paperupload, DocumentPaperUploader
+  mount_uploader :slidesupload, DocumentSlidesUploader
+  mount_uploader :avmediaupload, DocumentAvmediaUploader
+  mount_uploader :othersupload, DocumentOthersUploader
+
   has_many :document_person_maps, -> { order(:rank) }, inverse_of: :document,
            :dependent => :destroy
   has_many :people, :through => :document_person_maps
@@ -30,8 +36,7 @@ class Document < ActiveRecord::Base
   validates_inclusion_of :ispublic, :in => [true, false], message: ": Missing public/nonpublic status"
   validates :islabdocument, presence: {message: ": Missing lab status"}
 
-  validates :urlpdfpaper, :urlsrcpaper, :urlpdfpresentation, :urlsrcpresentation,
-            :urlavmedia, :urldoi, :urlpublisher, :urlgooglescholar, :urlciteseer,
+  validates :urlextpaper, :urldoi, :urlpublisher, :urlgooglescholar, :urlciteseer,
             allow_nil: true, allow_blank: true,
             format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
 
@@ -93,4 +98,7 @@ class Document < ActiveRecord::Base
     return author_string
   end
 
+  def has_local_files?
+    paperupload.present? || slidesupload.present? || avmediaupload.present? || othersupload.present?
+  end
 end

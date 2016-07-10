@@ -88,38 +88,44 @@
   </div>
 
   <div class="field">
-    <%= f.label :filename %><br/>
-    <%= f.text_field :filename, size: 100 %>
+    <%= f.label :paperupload, "Camera-Ready Paper (PDF)" %>
+    <% if @document.paperupload.present? %>
+      &nbsp;&nbsp;<%= link_to "[View current version]", @document.paperupload.url, :target => "_blank" %>
+    <% end %>
+    <br/>
+    <%= f.file_field :paperupload %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :slidesupload, "Presentation Slides" %>
+    <% if @document.slidesupload.present? %>
+      &nbsp;&nbsp;<%= link_to "[View current version]", @document.slidesupload.url, :target => "_blank" %>
+    <% end %>
+    <br/>
+    <%= f.file_field :slidesupload %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :avmediaupload, "Audio-Visual Media" %>
+    <% if @document.avmediaupload.present? %>
+      &nbsp;&nbsp;<%= link_to "[View current version]", @document.avmediaupload.url, :target => "_blank" %>
+    <% end %>
+    <br/>
+    <%= f.file_field :avmediaupload %>
   </div>
 
   <div class="field">
-    <%= f.label :file %><br/>
-    <%= f.text_field :file, size: 100 %>
+    <%= f.label :othersupload, "Other Materials" %>
+    <% if @document.othersupload.present? %>
+      &nbsp;&nbsp;<%= link_to "[View current version]", @document.othersupload.url, :target => "_blank" %>
+    <% end %>
+    <br/>
+    <%= f.file_field :othersupload %>
   </div>
 
   <div class="field">
-    <%= f.label :urlpdfpaper, "PDF manuscript URL" %><br/>
-    <%= f.text_field :urlpdfpaper, size: 100 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :urlsrcpaper, "Manuscript source URL" %><br/>
-    <%= f.text_field :urlsrcpaper, size: 100 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :urlpdfpresentation, "PDF slides URL" %><br/>
-    <%= f.text_field :urlpdfpresentation, size: 100 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :urlsrcpresentation, "Slide source URL" %><br/>
-    <%= f.text_field :urlsrcpresentation, size: 100 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :urlavmedia, "Audio-visual media URL" %><br/>
-    <%= f.text_field :urlavmedia, size: 100 %>
+    <%= f.label :urlextpaper, "External Paper URL (From ACM, IEEE, etc)" %><br/>
+    <%= f.text_field :urlextpaper, size: 100 %>
   </div>
 
   <div class="field">

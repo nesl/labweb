@@ -29,9 +29,6 @@ class PeopleController < ApplicationController
       @people = Person.all.select{|p| p.person_category.name if p.person_category != nil}
     end
     
-    # TODO: what's the meaning of the following comment?
-    #byebug
-    
   end
 
   # GET /people/1
@@ -97,7 +94,20 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:lastname, :firstname, :middleinitial, :webname, :email, :url, :urlphoto, :phonework, :phonehome, :phonecell, :fax, :addressoffice, :addresslab, :addressmail, :department, :urldepartment, :organization, :urlorganization, :biography, :researchinterests, :education, :professionalexperience, :professionalservice, :otherpublications, :patents, :awards, :skills, :interests, :secretary, :bs_year, :bs_title, :bs_school, :bs_field, :bs_in_lab, :ms_year, :ms_title, :ms_school, :ms_field, :ms_thesis, :ms_in_lab, :phd_year, :phd_title, :phd_school, :phd_field, :phd_thesis, :phd_in_lab, :miscattributes, :person_category_id, :localphoto, :useurlphoto)
+      params.require(:person).permit(:lastname, :firstname, :middleinitial,
+          :webname, :email, :url, :person_category_id,
+          :useurlphoto, :urlphoto, :localphoto,
+          :phonework, :phonehome, :phonecell, :fax,
+          :addressoffice, :addresslab, :addressmail,
+          :department, :urldepartment, :organization, :urlorganization,
+          :biography, :researchinterests, :education,
+          :professionalexperience, :professionalservice,
+          :otherpublications, :patents, :awards, :skills,
+          :interests, :secretary,
+          :bs_year, :bs_title, :bs_school, :bs_field, :bs_in_lab,
+          :ms_year, :ms_title, :ms_school, :ms_field, :ms_thesis, :ms_in_lab,
+          :phd_year, :phd_title, :phd_school, :phd_field,
+          :phd_thesis, :phd_in_lab, :miscattributes)
     end
 
 end

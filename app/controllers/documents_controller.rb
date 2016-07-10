@@ -104,23 +104,24 @@ class DocumentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_document
-      @document = Document.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def document_params
-      params.require(:document).permit(
-          :tryear, :trmonth, :trnumber,
-          :title, :abstract,
-          :filename, :file,
-          :urlpdfpaper, :urlsrcpaper, :urlpdfpresentation, :urlsrcpresentation,
-          :urlavmedia, :urldoi, :urlpublisher, :urlgooglescholar, :urlciteseer,
-          :pubin, :pubvol, :pubnum, :pubnum_end, :pubpagefirst, :pubpagelast,
-          :pubpagecount, :pubdate, :pubdate_end, :pubplace, :publisher,
-          :ispublic, :islabdocument, :miscattributes,
-          :document_category_id, :main_research_area_id,
-          document_person_maps_attributes: [:id, :person_id, :rank, :_destroy])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_document
+    @document = Document.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def document_params
+    params.require(:document).permit(
+        :tryear, :trmonth, :trnumber,
+        :title, :abstract,
+        :paperupload, :slidesupload, :avmediaupload, :othersupload,
+        :urlextpaper, :urldoi, :urlpublisher, :urlgooglescholar, :urlciteseer,
+        :pubin, :pubvol, :pubnum, :pubnum_end, :pubpagefirst, :pubpagelast,
+        :pubpagecount, :pubdate, :pubdate_end, :pubplace, :publisher,
+        :ispublic, :islabdocument, :miscattributes,
+        :document_category_id, :main_research_area_id,
+        document_person_maps_attributes: [:id, :person_id, :rank, :_destroy])
+  end
+
 end
