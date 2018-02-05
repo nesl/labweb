@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
-    @research_areas = ResearchArea.select("DISTINCT name")
+    @research_areas = ResearchArea.select(:id, :name).order(:order)
   end
 
   # GET /projects/1

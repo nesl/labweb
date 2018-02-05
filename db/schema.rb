@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518004851) do
+ActiveRecord::Schema.define(version: 20160709233113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,13 +75,6 @@ ActiveRecord::Schema.define(version: 20160518004851) do
     t.integer  "trnumber",              limit: 2,                  null: false
     t.string   "title",                                            null: false
     t.text     "abstract"
-    t.string   "filename"
-    t.binary   "file"
-    t.string   "urlpdfpaper"
-    t.string   "urlsrcpaper"
-    t.string   "urlpdfpresentation"
-    t.string   "urlsrcpresentation"
-    t.string   "urlavmedia"
     t.string   "urldoi"
     t.string   "urlpublisher"
     t.string   "urlgooglescholar"
@@ -104,6 +97,11 @@ ActiveRecord::Schema.define(version: 20160518004851) do
     t.integer  "main_research_area_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "paperupload"
+    t.string   "slidesupload"
+    t.string   "avmediaupload"
+    t.string   "othersupload"
+    t.string   "urlextpaper"
   end
 
   add_index "documents", ["document_category_id"], name: "index_documents_on_document_category_id", using: :btree

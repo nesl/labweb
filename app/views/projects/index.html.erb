@@ -40,22 +40,22 @@
                   <div class="panel-heading <%= p.isactive? ? "active-project" : "inactive-project" %>">
                     <h4 class="panel-title project-title-a">
                         <em><%= p.name %>:</em> <%= p.title %>
-                        <%= p.isactive? ? "(Active)" : "(Inactive)" %>
+                        <%= p.isactive? ? "" : "(Inactive)" %>
                     </h4>
                   </div>
                 </a>
                 <div id=<%= p.name %> class="panel-collapse collapse">
                   <div class="panel-body">
                     <%= p.description.blank? ? "TBA" : p.description.html_safe() %>
-                    [ 
-                    <% if user_signed_in? %>
-                      <%= link_to "Details,", p %>
-                      <%= link_to "Edit,", edit_project_path(p) %>
-                      <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
-                    <% else %>
-                      <%= link_to "Details", p %>
-                    <% end %>
-                   ]
+                    <p>[ 
+                      <% if user_signed_in? %>
+                        <%= link_to "Details,", p %>
+                        <%= link_to "Edit,", edit_project_path(p) %>
+                        <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <% else %>
+                        <%= link_to "Details", p %>
+                      <% end %>
+                    ]</p>
                   </div>
                 </div>
               </div>
