@@ -34,7 +34,7 @@ class Document < ActiveRecord::Base
   validates :trnumber, presence: {message: ": Missing number"}
   validates :title, presence: {message: ": Missing title"}
   validates_inclusion_of :ispublic, :in => [true, false], message: ": Missing public/nonpublic status"
-  validates :islabdocument, presence: {message: ": Missing lab status"}
+  validates_inclusion_of :islabdocument, :in => [true, false], message: ": Missing lab status"
 
   validates :urlextpaper, :urldoi, :urlpublisher, :urlgooglescholar, :urlciteseer,
             allow_nil: true, allow_blank: true,

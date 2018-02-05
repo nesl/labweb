@@ -8,8 +8,8 @@ class Product < ActiveRecord::Base
   belongs_to :main_research_area, :class_name => "ResearchArea", :foreign_key => "main_research_area_id"
 
   validates :title, presence: {message: ": Missing title"}
-  validates :ispublic, presence: {message: ": Missing public/nonpublic status"}
-  validates :islabproduct, presence: {message: ": Missing lab status"}
+  validates_inclusion_of :ispublic, :in => [true, false], message: ": Missing public/nonpublic status"
+  validates_inclusion_of :islabproduct, :in => [true, false], message: ": Missing lab product status"
 
   validates :url, allow_nil: true, format: {with: URI::regexp(%w(http https)),  message: ": URL is malformed"}
   validates :year, numericality: {only_integer: true, greater_than: 1970, less_than: 2070, message: ": Product year does not seem right"}
