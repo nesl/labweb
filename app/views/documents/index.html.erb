@@ -58,77 +58,82 @@
                   </tr>
                 </thead>
                 <tbody>
-                <% @documents.where({document_category_id: item.id}).order('pubdate DESC').select{|d| @person.present? ? (d.people.member?(@person)) : true}.each do |document| %>
+                  <% @documents.where({document_category_id: item.id}).order('pubdate DESC').select{|d| @person.present? ? (d.people.member?(@person)) : true}.each do |document| %>
                     <tr>
-                      <td><%= document.citation_formatted() %><br>
-                      [ <%= link_to ' Details', document %>
-                      <% if user_signed_in? %>
+                      <td>
+                        <%= document.citation_formatted() %><br/>
+                        [ <%= link_to ' Details', document %>
+                        <% if user_signed_in? %>
                           , <%= link_to 'Edit', edit_document_path(document) %>
                           , <%= link_to 'Delete', document, method: :delete, data: { confirm: 'Are you sure?' } %>
-                      <% end %> ]</td>
+                        <% end %> ]
+                      </td>
                     </tr>
-	        <% end %>
+                  <% end %>
                 </tbody>
               </table>
             <% end %>
-            </div>
-              <div class="panel-footer">
-                <% if user_signed_in? %>
-                    <%= link_to 'New Document', new_document_path %>
-                  <% end %>
-              </div>
+          </div>
+          <div class="panel-footer">
+            <% if user_signed_in? %>
+              <%= link_to 'New Document', new_document_path %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
   <div id="docbyyear" class="tab-pane fade">
     <div class="row lw-content-with-second-nav">
       <div class="nav-wrapper">
         <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" id="myScrollspy">
           <ul class="nav nav-pills nav-stacked lw-content-with-second-nav-sidenav affix">
             <% @documents.collect{|i| i.pubdate.year}.sort.uniq.reverse[0..8].each_with_index do |item, index| %>
-              <li <% if index==0 %> class="active"<% end %> >
-                <a href="#year<%= index==0 ? index : index+1 %>"><%= index<8?item:"#{item} & older" %><span class="glyphicon glyphicon-menu-right"></span></a></li>
+              <li <% if index==0 %> class="active" <% end %> >
+                <a href="#year<%= index==0 ? index : index+1 %>"><%= index<8?item:"#{item} & older" %><span class="glyphicon glyphicon-menu-right"></span></a>
+              </li>
             <% end %>
-          </ul >
+          </ul>
         </div>
-        </div>
+      </div>
       <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
         <div class="panel panel-default lw-content-with-second-nav-panel">
-            <!-- Default panel contents -->
-            <div class="panel-heading">
-              <h1 class="panel-title"><a id="year0" class="anchorwithoffset"></a>Documents from <%= ENV["LABACRONYM"]%><%= " by #{@person.firstname} #{@person.lastname}" if @person.present? %></h1>
-              </div>
-            <div class="panel-body">
-              <% @documents.collect{|i| i.pubdate.year}.sort.uniq.reverse.each_with_index do |item, index| %>
-                 <!-- Table -->
-                <table class="table table-condensed">
+          <!-- Default panel contents -->
+          <div class="panel-heading">
+            <h1 class="panel-title"><a id="year0" class="anchorwithoffset"></a>Documents from <%= ENV["LABACRONYM"]%><%= " by #{@person.firstname} #{@person.lastname}" if @person.present? %></h1>
+          </div>
+          <div class="panel-body">
+            <% @documents.collect{|i| i.pubdate.year}.sort.uniq.reverse.each_with_index do |item, index| %>
+              <!-- Table -->
+              <table class="table table-condensed">
                 <thead>
-                <tr>
-                  <th class="col-md-6"><h4><a id="year<%=index+1%>" class="anchorwithoffset"></a><%= item %></h4></th>
-                </tr>
+                  <tr>
+                    <th class="col-md-6"><h4><a id="year<%=index+1%>" class="anchorwithoffset"></a><%= item %></h4></th>
+                  </tr>
                 </thead>
-
-		<tbody>
-                <% @documents.select{|d| (d.pubdate.year == item) && (@person.present? ? (d.people.member?(@person)) : true)}.each do |document| %>
+                <tbody>
+                  <% @documents.select{|d| (d.pubdate.year == item) && (@person.present? ? (d.people.member?(@person)) : true)}.each do |document| %>
                     <tr>
-                      <td><%= document.citation_formatted() %><br>
-                      [ <%= link_to ' Details', document %>
-                      <% if user_signed_in? %>
-                          , <%= link_to 'Edit', edit_document_path(document) %>
-                          , <%= link_to 'Delete', document, method: :delete, data: { confirm: 'Are you sure?' } %>
-                      <% end %> ]</td>
+                      <td>
+                        <%= document.citation_formatted() %><br/>
+                        [ <%= link_to ' Details', document %>
+                        <% if user_signed_in? %>
+                            , <%= link_to 'Edit', edit_document_path(document) %>
+                            , <%= link_to 'Delete', document, method: :delete, data: { confirm: 'Are you sure?' } %>
+                        <% end %> ]
+                      </td>
                     </tr>
-                <% end %>
+                  <% end %>
                 </tbody>
               </table>
-              <% end %>
-            </div>
-              <div class="panel-footer">
-                <% if user_signed_in? %>
-                  <%= link_to 'New Document', new_document_path %>
-                <% end %>
-            </div>
+            <% end %>
+          </div>
+          <div class="panel-footer">
+            <% if user_signed_in? %>
+              <%= link_to 'New Document', new_document_path %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
