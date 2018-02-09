@@ -80,7 +80,7 @@ class Document < ActiveRecord::Base
   end
 
   def citation_formatted
-    ans = "<b>#{title}</b><br> #{authors_string}.<br> #{pubin.blank? ? "" : pubin + ","} #{Date::MONTHNAMES[pubdate.month]} #{pubdate.year}."
+    ans = "<b>#{title}</b><br/> #{authors_string}.<br/> #{pubin.blank? ? "" : pubin + ","} #{Date::MONTHNAMES[pubdate.month]} #{pubdate.year}."
     return ans.html_safe
   end
 
@@ -94,7 +94,7 @@ class Document < ActiveRecord::Base
       p.get_name_first_middleinitial_last
     }.join(", ")
     last_comma_index = author_string.rindex(',')
-    author_string.insert(last_comma_index+1, " and ") if last_comma_index
+    author_string.insert(last_comma_index+1, " and") if last_comma_index
     return author_string
   end
 
