@@ -6,8 +6,8 @@
 <%= render partial: 'layouts/section', locals: {heading: "Date", content: @news_event.date.inspect} %>
 
 
-<% if user_signed_in? && current_user.admin? %>
-<%= link_to 'Edit', edit_news_event_path(@news_event) %> |
-<%= link_to 'Delete', news_event_path(@news_event), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% if user_signed_in? %>
+  <%= link_to 'Edit', edit_news_event_path(@news_event) %> |
+  <%= link_to 'Delete', news_event_path(@news_event), method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
 <%= link_to 'Back', news_events_path %>

@@ -7,35 +7,33 @@
   </div>
   
   <div class="panel-body">
-	  <table class="table-condensed lw-table">
-	    <tbody>
-			<% @news_events.sort{|x,y| x.date<=>y.date}.reverse.each do |news_event| %>
-			  <tr>
-				  <td><strong><%= news_event.date %>:</strong>
-					<%= news_event.title.html_safe %><br>
-                    [  
-					<% if user_signed_in? && current_user.admin? %>
-					  <%= link_to "Details,", news_event %>
-					  <%= link_to "Edit,", edit_news_event_path(news_event) %>
-					  <%= link_to 'Delete', news_event, method: :delete, data: { confirm: 'Are you sure?' } %>
-					<% else %>
-					  <%= link_to "Details", news_event %>
-					<% end %>
-				    ]
-				  </td>
-			  </tr>
-			<% end %>
-	    </tbody>
-	  </table>
+    <table class="table-condensed lw-table">
+      <tbody>
+        <% @news_events.sort{|x,y| x.date<=>y.date}.reverse.each do |news_event| %>
+          <tr>
+            <td><strong><%= news_event.date %>:</strong>
+            <%= news_event.title.html_safe %><br/>
+            [
+            <% if user_signed_in? %>
+              <%= link_to "Details,", news_event %>
+              <%= link_to "Edit,", edit_news_event_path(news_event) %>
+              <%= link_to 'Delete', news_event, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% else %>
+              <%= link_to "Details", news_event %>
+            <% end %>
+            ]
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 
   
-   <% if user_signed_in? %>
-     <% if current_user.admin? %>
-	   <div class="panel-footer">
-       <%= link_to 'New News Event', new_news_event_path %>
-	   </div>
-     <% end %>
-   <% end %>
+  <% if user_signed_in? %>
+    <div class="panel-footer">
+      <%= link_to 'Add News Event', new_news_event_path %>
+    </div>
+  <% end %>
   
 </div>
