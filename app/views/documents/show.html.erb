@@ -114,10 +114,10 @@
 <% end %>
 
 <% if @document.pubpagefirst.present? %>
-<p>
-  <strong>Page (Start):</strong>
-  <%= @document.pubpagefirst %>
-</p>
+  <p>
+    <strong>Page (Start):</strong>
+    <%= @document.pubpagefirst %>
+  </p>
 <% end %>
 
 <% if @document.pubpagelast.present? %>
@@ -128,104 +128,104 @@
 <% end %>
 
 <% if @document.pubpagecount.present? && @document.pubpagecount!="0" %>
-<p>
-  <strong>Page (Count):</strong>
-  <%= @document.pubpagecount %>
-</p>
+  <p>
+    <strong>Page (Count):</strong>
+    <%= @document.pubpagecount %>
+  </p>
 <% end %>
 
 <% if @document.pubdate.present? %>
-<p>
-  <strong>Date:</strong>
-  <%= @document.pubdate %>
-</p>
+  <p>
+    <strong>Date:</strong>
+    <%= @document.pubdate %>
+  </p>
 <% end %>
 
 <% if @document.pubplace.present? %>
-<p>
-  <strong>Place:</strong>
-  <%= @document.pubplace %>
-</p>
+  <p>
+    <strong>Place:</strong>
+    <%= @document.pubplace %>
+  </p>
 <% end %>
 
 <% if @document.publisher.present? %>
-<p>
-  <strong>Publisher:</strong>
-  <%= @document.publisher %>
-</p>
+  <p>
+    <strong>Publisher:</strong>
+    <%= @document.publisher %>
+  </p>
 <% end %>
 
 <% if @document.ispublic.present? %>
-<p>
-  <strong>Public Document?:</strong>
-  <%= @document.ispublic ? "Yes" : "No" %>
-</p>
+  <p>
+    <strong>Public Document?:</strong>
+    <%= @document.ispublic ? "Yes" : "No" %>
+  </p>
 <% end %>
 
 <% if @document.islabdocument.present? %>
-<p>
-  <strong><%= ENV["LABACRONYM"] %> Document?:</strong>
-  <%= @document.islabdocument ? "Yes" : "No" %>
-</p>
+  <p>
+    <strong><%= ENV["LABACRONYM"] %> Document?:</strong>
+    <%= @document.islabdocument ? "Yes" : "No" %>
+  </p>
 <% end %>
 
 <% if @document.miscattributes.present? %>
-<p>
-  <strong>Other Attributes:</strong>
-  <%= @document.miscattributes %>
-</p>
+  <p>
+    <strong>Other Attributes:</strong>
+    <%= @document.miscattributes %>
+  </p>
 <% end %>
 
 <% if @document.document_category.present? %>
-<p>
-  <strong>Document category:</strong>
-  <%= @document.document_category.name %>
-</p>
+  <p>
+    <strong>Document category:</strong>
+    <%= @document.document_category.name %>
+  </p>
 <% end %>
 
 <% if @document.main_research_area.present? %>
-<p>
-  <strong>Primary Research Area:</strong>
-  <%= @document.main_research_area %>
-</p>
+  <p>
+    <strong>Primary Research Area:</strong>
+    <%= @document.main_research_area.name %>
+  </p>
 <% end %>
 
-<p>
-  <% if @document.projects.length > 0 %>
+<% if @document.projects.length > 0 %>
+  <p>
     <strong>Projects:</strong>
     <ul>
       <% @document.projects.each do |p| %>
         <li> <%= link_to p.name, p %> </li>
       <% end %>
     </ul>
-  <% end %>
-</p>
+  </p>
+<% end %>
 
-<p>
-  <% if @document.grants.length > 0 %>
+<% if @document.grants.length > 0 %>
+  <p>
     <strong>Grants:</strong>
     <ul>
       <% @document.grants.each do |g| %>
         <li> <%= link_to g.name, g %> </li>
       <% end %>
     </ul>
-  <% end %>
-</p>
+  </p>
+<% end %>
 
-<p>
-  <% if @document.research_areas.length > 0 %>
+<% if @document.research_areas.length > 0 %>
+  <p>
     <strong>Research Areas:</strong>
     <ul>
       <% @document.research_areas.each do |ra| %>
         <li> <%= link_to ra.name, ra %> </li>
       <% end %>
     </ul>
-  <% end %>
-</p>
+  </p>
+<% end %>
   
 
 <% if user_signed_in? %>
-<%= link_to 'Edit', edit_document_path(@document) %> |
-<%= link_to 'Delete', document_path(@document), method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Edit', edit_document_path(@document) %> |
+  <%= link_to 'Delete', document_path(@document), method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
 <%= link_to 'Back', documents_path %>
