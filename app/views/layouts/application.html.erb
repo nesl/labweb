@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="<%= ENV["META_DESCRIPTION"] %>">
-  <meta name="author" content="<%= ENV["META_AUTHOR"] %>">
-  <meta name="Keywords" content="<%= ENV["META_KEYWORDS"] %>">
-  <link rel="icon" href="/assets/favicon.ico">
-  <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag "jumbotron", media: 'all', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%#= stylesheet_link_tag params[:controller] %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <%= render 'layouts/shim' %>
-  <a href="#Top"></a>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%= ENV["META_DESCRIPTION"] %>">
+    <meta name="author" content="<%= ENV["META_AUTHOR"] %>">
+    <meta name="Keywords" content="<%= ENV["META_KEYWORDS"] %>">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title><%= full_title(yield(:title)) %></title>
+    <%= stylesheet_link_tag 'jumbotron', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%#= stylesheet_link_tag params[:controller] %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+    <a href="#Top"></a>
+  </head>
 
-<body <% if content_for?(:scrollspytag) %> data-spy="scroll" data-target="#<%= yield :scrollspytag %>" <% end %>>
+  <body <% if content_for?(:scrollspytag) %> data-spy="scroll" data-target="#<%= yield :scrollspytag %>" <% end %>>
 
-<%= render 'layouts/header' %>
+    <%= render 'layouts/header' %>
 
-<% if current_page?(root_path) %>
-  <% if content_for?(:carousel) %>
-    <div class="carousel">
-      <div class="container-fluid">
-        <%= yield :carousel %>
+    <% if current_page?(root_path) %>
+      <% if content_for?(:carousel) %>
+        <div class="carousel">
+          <div class="container-fluid">
+            <%= yield :carousel %>
+          </div>
+        </div>
+      <% end %>
+      <% if content_for?(:jumbotron) %>
+        <div class="jumbotron">
+          <div class="container-fluid">
+            <%= yield :jumbotron %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-danger globalmessage" id="globalmsg">
+        <%= flash[:alert] %>
       </div>
-    </div>
-	<% end %>
-  <% if content_for?(:jumbotron) %>
-    <div class="jumbotron">
-      <div class="container-fluid">
-        <%= yield :jumbotron %>
+      <script>setTimeout(function(){ $("#globalmsg").fadeOut(2000) }, 3000);</script>
+    <% elsif flash[:notice] %>
+      <div class="alert alert-success globalmessage" id="globalmsg">
+        <%= flash[:notice] %>
       </div>
+      <script>setTimeout(function(){ $("#globalmsg").fadeOut(2000) }, 3000);</script>
+    <% end %>
+
+    <div class="container lw-content">
+      <%= yield %>
     </div>
-  <% end %>
-<% end %>
 
-<% if flash[:alert] %>
-  <div class="alert alert-danger globalmessage" id="globalmsg">
-    <%= flash[:alert] %>
-  </div>
-  <script>setTimeout(function(){ $("#globalmsg").fadeOut(2000) }, 3000);</script>
-<% elsif flash[:notice] %>
-  <div class="alert alert-success globalmessage" id="globalmsg">
-    <%= flash[:notice] %>
-  </div>
-  <script>setTimeout(function(){ $("#globalmsg").fadeOut(2000) }, 3000);</script>
-<% end %>
+    <div class="container lw-content">
+      <%= render 'layouts/footer' %>
+    </div>
 
-<div class="container lw-content">
-  <%= yield %>
-</div>
+    <%= debug(params) if Rails.env.development? %>
 
-<div class="container lw-content">
-  <%= render 'layouts/footer' %>
-</div>
-
-<%= debug(params) if Rails.env.development? %>
-
-</body>
+  </body>
 
 </html>
