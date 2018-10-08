@@ -39,7 +39,12 @@ Rails.application.routes.draw do
 
   resources :documents
 
-  resources :document_categories
+  resources :document_categories do
+    collection do
+      get :reorder
+      post :reorder_submit
+    end
+  end
 
   resources :people
 

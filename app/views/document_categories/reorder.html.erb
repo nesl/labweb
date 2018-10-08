@@ -1,0 +1,39 @@
+<% provide(:title, 'Document Categories') %>
+
+<div class="panel panel-default lw-content-without-second-nav">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title">Reorder Document Categories</h1>
+  </div>
+  
+  <div class="panel-body">
+    <strong>Please drag the items to rearrange the order of the document categories:</strong>
+
+    <ul id="category-order" class="sortable-lis" style="padding:20px 0 20px 30px">
+      <% @document_categories.each do |dc| %>
+        <li id="item<%= dc.id %>" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><%= dc.name %></li>
+      <% end %>
+    </ul>
+
+    <%= form_tag(reorder_submit_document_categories_path) do %>
+      <input type="hidden" name="order" value="" />
+      <input type="submit" name="commit" value="Change order" class="btn btn-primary" onclick="submit_form()" />
+      <a class="btn btn-primary" onclick="submit_form()">Change Order</a>
+    <% end %>
+  </div>
+
+  <div class="panel-footer">&nbsp;</div>
+  
+</div>
+
+<script>
+  $("#category-order").sortable();
+  $("#category-order").disableSelection();
+
+  function submit_form() {
+    var ids = $("#category-order li").map(function(index) {
+      return $(this).attr('id').substring(4);
+    }).get();
+    $('input[name="order"]').val(ids.join(','));
+  }
+</script>

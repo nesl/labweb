@@ -62,6 +62,36 @@ class DocumentCategoriesController < ApplicationController
     end
   end
 
+  # GET /document_categories/reorder
+  def reorder
+    @document_categories = DocumentCategory.order(:priority)
+  end
+  
+  # POST /document_categories/reorder_submit
+  def reorder_submit
+    ids = params['order'].split(",").map { |s| s.to_i }
+    if !check_document_category_id_coverage(ids)
+      respond_to do |format|
+        Rails.logger.debug("block due to bad coverage")
+        format.html { redirect_to action: :index, error: 'Internal error, order update failed' }
+        format.json { render :index, status: :ok }
+      end
+      return
+    end
+
+    ids.each_with_index {|id, index|
+      dc = DocumentCategory.find(id)
+      dc.priority = index
+      dc.save()
+    }
+
+    respond_to do |format|
+      Rails.logger.debug("Still come to good part")
+      format.html { redirect_to action: :index, notice: 'Document category order updated' }
+      format.json { render :index, status: :ok }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_document_category
@@ -71,5 +101,19 @@ class DocumentCategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_category_params
       params.require(:document_category).permit(:name, :priority)
+    end
+
+    def check_document_category_id_coverage(ids)
+      existing_document_category_ids = Set[]
+      DocumentCategory.all.each do |dc|
+        existing_document_category_ids.add(dc.id)
+      end
+
+      passed_ids = Set[]
+      ids.each do |id|
+        passed_ids.add(id)
+      end
+
+      return existing_document_category_ids == passed_ids
     end
 end

@@ -271,3 +271,23 @@ a.anchorwithoffset {
   position: absolute;
   bottom: -40px;
 }
+
+.sortable-lis {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 60%;
+}
+
+.sortable-lis li {
+  margin: 0 3px 3px 3px;
+  padding-left: 1.5em;
+  font-size: 1.4em;
+  height: 1.6em;
+}
+
+.sortable-lis li span {
+  position: absolute;
+  margin-left: -1.3em;
+  margin-top: 0.3em;
+}
