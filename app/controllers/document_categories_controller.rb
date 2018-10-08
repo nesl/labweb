@@ -25,11 +25,13 @@ class DocumentCategoriesController < ApplicationController
   # POST /document_categories
   # POST /document_categories.json
   def create
-    @document_category = DocumentCategory.new(document_category_params)
+    model_attributes = document_category_params
+    model_attributes['priority'] = DocumentCategory.count()
+    @document_category = DocumentCategory.new(model_attributes)
 
     respond_to do |format|
       if @document_category.save
-        format.html { redirect_to @document_category, notice: 'Document category was successfully created.' }
+        format.html { redirect_to document_categories_url, notice: 'Document category was successfully created.' }
         format.json { render :show, status: :created, location: @document_category }
       else
         format.html { render :new }
@@ -73,7 +75,7 @@ class DocumentCategoriesController < ApplicationController
     if !check_document_category_id_coverage(ids)
       respond_to do |format|
         Rails.logger.debug("block due to bad coverage")
-        format.html { redirect_to action: :index, error: 'Internal error, order update failed' }
+        format.html { redirect_to document_categories_url, error: 'Internal error, order update failed' }
         format.json { render :index, status: :ok }
       end
       return
@@ -87,7 +89,7 @@ class DocumentCategoriesController < ApplicationController
 
     respond_to do |format|
       Rails.logger.debug("Still come to good part")
-      format.html { redirect_to action: :index, notice: 'Document category order updated' }
+      format.html { redirect_to document_categories_url, notice: 'Document category order updated' }
       format.json { render :index, status: :ok }
     end
   end
@@ -100,7 +102,7 @@ class DocumentCategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_category_params
-      params.require(:document_category).permit(:name, :priority)
+      params.require(:document_category).permit(:name)
     end
 
     def check_document_category_id_coverage(ids)

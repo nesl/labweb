@@ -26,12 +26,12 @@
 	  </table>
   </div>
 
-  <div class="panel-footer">
-    <% if current_user.admin? %>
+  <% if current_user.admin? %>
+    <div class="panel-footer">
       <%= link_to 'New Document Category', new_document_category_path %>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= link_to 'Rearrange Orders', reorder_document_categories_path %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
   
 </div>
