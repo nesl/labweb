@@ -13,14 +13,14 @@
 			    <tr>
 					<td><%= document_category.name %></td>
 					<td>
-						<% if user_signed_in? && current_user.admin? %>
+						<% if current_user.admin? %>
 						  &nbsp;&nbsp;&nbsp;&nbsp;[
 						  <%= link_to "Details,", document_category %>
 						  <%= link_to "Edit,", edit_document_category_path(document_category) %>
 						  <%= link_to 'Delete', document_category, method: :delete, data: { confirm: 'Are you sure?' } %>
 						  ]
 						<% else %>
-						  [
+						  &nbsp;&nbsp;&nbsp;&nbsp;[
 						  <%= link_to "Details", document_category %>
 						  ]
 						<% end %>
@@ -30,12 +30,10 @@
 	  </table>
   </div>
 
-   <% if user_signed_in? %>
-     <% if current_user.admin? %>
-	   <div class="panel-footer">
-       <%= link_to 'New Document Category', new_document_category_path %>
-	   </div>
-     <% end %>
+  <div class="panel-footer">
+    <% if current_user.admin? %>
+      <%= link_to 'New Document Category', new_document_category_path %>
     <% end %>
+  </div>
   
 </div>

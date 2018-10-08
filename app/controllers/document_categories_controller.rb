@@ -5,7 +5,7 @@ class DocumentCategoriesController < ApplicationController
   # GET /document_categories
   # GET /document_categories.json
   def index
-    @document_categories = DocumentCategory.all
+    @document_categories = DocumentCategory.order(:priority)
   end
 
   # GET /document_categories/1

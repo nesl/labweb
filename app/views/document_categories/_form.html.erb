@@ -10,25 +10,26 @@
       </ul>
     </div>
   <% end %>
+
   <table class="table-condensed lw-table">
-  <tbody>
-  <tr><td>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, size: 100 %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="field">
-    <%= f.label :priority %><br>
-    <%= f.number_field :priority %>
-  </div>
-  </td></tr>
-  <tr><td>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  </td></tr>
-  </tbody>
+    <tbody>
+      <tr><td>
+        <div class="field">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, size: 100 %>
+        </div>
+      </td></tr>
+      <tr><td>
+        <div class="field">
+          <%= f.label :priority %><br>
+          <%= f.number_field :priority %>
+        </div>
+      </td></tr>
+      <tr><td>
+        <div class="actions">
+          <%= f.submit :class => "btn btn-primary" %>
+        </div>
+      </td></tr>
+    </tbody>
   </table>
 <% end %>
