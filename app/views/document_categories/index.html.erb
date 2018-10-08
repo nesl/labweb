@@ -11,20 +11,16 @@
 		  <tbody>
 			  <% @document_categories.each do |document_category| %>
 			    <tr>
-					<td><%= document_category.name %></td>
-					<td>
-						<% if current_user.admin? %>
-						  &nbsp;&nbsp;&nbsp;&nbsp;[
-						  <%= link_to "Details,", document_category %>
-						  <%= link_to "Edit,", edit_document_category_path(document_category) %>
-						  <%= link_to 'Delete', document_category, method: :delete, data: { confirm: 'Are you sure?' } %>
-						  ]
-						<% else %>
-						  &nbsp;&nbsp;&nbsp;&nbsp;[
-						  <%= link_to "Details", document_category %>
-						  ]
-						<% end %>
+            <td><%= document_category.name %></td>
+            <td>
+              <% if current_user.admin? %>
+                &nbsp;&nbsp;&nbsp;&nbsp;[
+                <%= link_to "Edit", edit_document_category_path(document_category) %>,
+                <%= link_to 'Delete', document_category, method: :delete, data: { confirm: 'Are you sure?' } %>
+                ]
+              <% end %>
 				    </td>
+          </tr>
 			  <% end %>
 		  </tbody>
 	  </table>
