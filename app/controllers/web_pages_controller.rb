@@ -12,9 +12,9 @@ class WebPagesController < ApplicationController
   def home
     @overview = WebPage.where("pagetitle='Overview'").first
     @carousel_items = CarouselItem.where("position > 0")
-    @recent_pubs = Document.order(pubdate: :desc).first(ENV["RECENT_DOCS_COUNT"])
-    @recent_news = NewsEvent.order(date: :desc).first(ENV["RECENT_NEWS_COUNT"])
-    @select_projects = Project.where("isactive=true").order(id: :desc).first(ENV["RECENT_PROJS_COUNT"])
+    @recent_pubs = Document.order(pubdate: :desc).first(ENV["RECENT_DOCS_COUNT"].to_i)
+    @recent_news = NewsEvent.order(date: :desc).first(ENV["RECENT_NEWS_COUNT"].to_i)
+    @select_projects = Project.where("isactive=true").order(id: :desc).first(ENV["RECENT_PROJS_COUNT"].to_i)
   end
 
   # GET /web_pages/1
